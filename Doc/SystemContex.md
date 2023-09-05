@@ -9,8 +9,11 @@ C4Context
     }
 
     System_Ext(blob-storage, "Blob storage Sevice", "Sistema que oferece armazenamento de dados")
+    System_Ext(mail-system, "Serviço de E-mail", "Sistema de envio de e-mail")
     Person(pessoa, "Usuário do sistema", "Gerencia fluxo de caixa")
 
     Rel(pessoa, fluxo-de-caixa, "Usa o sistema")
     Rel(fluxo-de-caixa, blob-storage, "Gerencia arquivos no")
+    Rel(fluxo-de-caixa, mail-system, "Envia e-mail usando")
+    Rel(mail-system, pessoa, "Envia e-mail para")
 ```
