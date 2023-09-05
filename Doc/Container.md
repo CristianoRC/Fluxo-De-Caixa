@@ -35,7 +35,4 @@ C4Context
     Rel(pessoa, fluxo-de-caixa-app, "Usa o sistema", "HTTP")
     Rel(fluxo-de-caixa-report-api, mail-system, "Envia e-mails", "SMTP")
     Rel(mail-system, pessoa, "Envia e-mail para")
-
-
-
 ```

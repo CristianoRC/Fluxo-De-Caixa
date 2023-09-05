@@ -7,8 +7,8 @@
 
 ### Diagramas - C4 Model
 
-- [System Context](./)
-- [Container](./)
+- [System Context](./Doc/SystemContex.md)
+- [Container](./Doc/Container.md)
 
 ## Como Rodar o Projeto
 
