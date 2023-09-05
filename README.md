@@ -1,6 +1,6 @@
 # Fluxo De Caixa
 
-<img src="./images/money.svg" width="300px"/>
+<img src="./images/money.svg" width="250px"/>
 
 
 ## Documentação
