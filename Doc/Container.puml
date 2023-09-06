@@ -1,4 +1,4 @@
-@startuml container 
+@startuml container
 
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
@@ -7,5 +7,37 @@ LAYOUT_LANDSCAPE()
 LAYOUT_WITH_LEGEND()
 
 TITLE Customer Profile Center - Container
+
+Container_Boundary(boundary-fluxo-de-caixa, "Fluxo de caixa") {
+    Container(fluxoDeCaixaApi, "Fluxo de Caixa API", "ASP NET 7", "Sistema para gerenciamento de fluxo de caixa")
+    Container(fluxoDeCaixaApp, "Single-Page App", "JavaScript, Angular", "Permite usuários gerenciarem fluxo de caixa no browser")
+    Container(fluxoDeCaixaReportApi, "Fluxo de Caixa - Relatório Fechamento", "ASP NET 7 / Azure Functions", "Sistema para gerar relatório de fechamento de fluxo de caixa")
+    Container(fluxoDeCaixaBff, "Fluxo de Caixa BFF", "ASP NET 7", "Controla Auth e redireciona chamadas para os serviços de fluxo de caixa")
+
+    ContainerDb(mongodb, "Database", "Mongo DB", "Armazena dados de fluxo de caixa")
+    ContainerDb(sqlServer, "Database", "SQL Server", "Armazena dados de fluxo de caixa para relatórios")
+    ContainerQueue(transactionQueue, "Fila - RabbitMQ", "Todas as transações finalizadas")
+}
+
+Container_Ext(blobStorage, "Blob storage Sevice", "", "Sistema que oferece armazenamento de dados")
+Container_Ext(mailSystem, "Serviço de E-mail", "", "Sistema de envio de e-mail")
+Person(pessoa, "Usuário do sistema", "Gerencia fluxo de caixa")
+
+Rel(fluxoDeCaixaApi, mongodb, "Gerencia os dados no", "TCP")
+Rel(fluxoDeCaixaApi, transactionQueue, "Enfileira todas as transações criadas", "TCP")
+Rel(fluxoDeCaixaReportApi, mailSystem, "Envia e-mails", "SMTP")
+
+Rel(fluxoDeCaixaReportApi, transactionQueue, "Le as mensagens da fila", "TCP")
+Rel(fluxoDeCaixaReportApi, sqlServer, "Armazena dados para relatórios no", "TCP")
+Rel(fluxoDeCaixaReportApi, blobStorage, "Gerencia arquivos no", "TCP")
+
+
+Rel(fluxoDeCaixaApp, fluxoDeCaixaBff, "Faz chamadas para", "HTTP/JSON")
+
+Rel(fluxoDeCaixaBff, fluxoDeCaixaApi, "Faz chamadas para", "HTTP/JSON")
+Rel(fluxoDeCaixaBff, fluxoDeCaixaReportApi, "Faz chamadas para", "HTTP/JSON")
+
+Rel(pessoa, fluxoDeCaixaApp, "Usa o sistema", "HTTP")
+Rel(mailSystem, pessoa, "Envia e-mail para")
 
 @enduml
