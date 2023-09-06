@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluxoDeCaixa.Api", "FluxoDeCaixa.Api\FluxoDeCaixa.Api.csproj", "{9F796D94-C64D-4365-B30D-830C728EE660}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluxoDeCaixa.UnitTest", "FluxoDeCaixa.UnitTest\FluxoDeCaixa.UnitTest.csproj", "{8FE4F49C-6A13-41CF-9966-C8A0A519CF57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{9F796D94-C64D-4365-B30D-830C728EE660}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F796D94-C64D-4365-B30D-830C728EE660}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F796D94-C64D-4365-B30D-830C728EE660}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FE4F49C-6A13-41CF-9966-C8A0A519CF57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FE4F49C-6A13-41CF-9966-C8A0A519CF57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FE4F49C-6A13-41CF-9966-C8A0A519CF57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FE4F49C-6A13-41CF-9966-C8A0A519CF57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
