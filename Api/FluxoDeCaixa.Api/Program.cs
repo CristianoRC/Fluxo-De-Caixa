@@ -1,4 +1,6 @@
 using FluxoDeCaixa.Api;
+using FluxoDeCaixa.Domain;
+using FluxoDeCaixa.Infra;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
 
@@ -34,7 +36,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-
+builder.Services.AddDomain().AddInfra();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
@@ -42,6 +44,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
