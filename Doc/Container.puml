@@ -4,7 +4,7 @@
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
 LAYOUT_LANDSCAPE()
-SHOW_LEGEND()
+LAYOUT_WITH_LEGEND()
 
 TITLE Customer Profile Center - Container
 
