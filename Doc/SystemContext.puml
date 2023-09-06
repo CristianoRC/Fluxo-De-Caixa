@@ -1,0 +1,23 @@
+@startuml context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_LANDSCAPE()
+SHOW_LEGEND()
+
+TITLE Customer Profile Center - System Context
+
+    System_Boundary(boundary-fluxo-de-caixa, "Fluxo de caixa") {
+      System(fluxoDeCaixa, "Fluxo de Caixa", "Sistema para gerenciamento de fluxo de caixa")
+    }
+
+    System_Ext(blobStorage, "Blob storage Sevice", "Sistema que oferece armazenamento de dados")
+    System_Ext(mailSystem, "Serviço de E-mail", "Sistema de envio de e-mail")
+    Person(pessoa, "Usuário do sistema", "Gerencia fluxo de caixa")
+
+    Rel(pessoa, fluxoDeCaixa, "Usa o sistema")
+    Rel(fluxoDeCaixa, blobStorage, "Gerencia arquivos no")
+    Rel(fluxoDeCaixa, mailSystem, "Envia e-mail usando")
+    Rel(mailSystem, pessoa, "Envia e-mail para")
+
+@enduml
