@@ -1,4 +1,5 @@
 using FluxoDeCaixa.Domain.Repositories;
+using FluxoDeCaixa.Domain.ValueObjects;
 
 namespace FluxoDeCaixa.Domain.Services.BookEntry;
 
@@ -13,7 +14,21 @@ public class BookEntryService
         _bookEntryRepository = bookEntryRepository;
     }
 
-    //TODO: IMPLEMENTAR ESSE CARA!
-    //TODO: Precisamos atualizar também o amount dos dois balances!
-    //TODO: Ter o lock nesse cara aqui!
+    public async Task<Aggregations.BookEntry> Create(CreateBookEntry command)
+    {
+        //TODO: Balance existe?
+        //TODO: Ter ma mensagem para balance inexistente?
+        var entryBalance = await _balanceRepository.Get(command.EntryBalance);
+        var offsetBalance = await _balanceRepository.Get(command.OffsetBalance);
+        var transactionAmount = new TransactionAmount(command.Amount);
+        var bookEntry = new Aggregations.BookEntry(transactionAmount, entryBalance, offsetBalance, command.TransactionType);
+        if (bookEntry.Errors.Any())
+            return bookEntry;
+
+        await _bookEntryRepository.Save(bookEntry);
+        
+        //TODO: Atualiza os amounts dos balances também => uma única transaction no banco de dados?
+        //TODO: Testar isso com teste de integração!
+        return bookEntry;
+    }
 }
