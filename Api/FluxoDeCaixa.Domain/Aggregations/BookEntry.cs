@@ -5,6 +5,8 @@ namespace FluxoDeCaixa.Domain.Aggregations;
 
 public class BookEntry : IAggregate
 {
+    protected BookEntry(){ }
+    
     public BookEntry(TransactionAmount transactionAmount, Balance entryBalance, Balance offsetBalance, TransactionType entryTransactionType)
     {
         ArgumentNullException.ThrowIfNull(transactionAmount);
@@ -18,11 +20,11 @@ public class BookEntry : IAggregate
         Offset = new Transaction(GetOffsetTransactionType(entryTransactionType), transactionAmount, offsetBalance);
     }
 
-    public Guid Id { get; }
-    public Transaction Entry { get; }
-    public Transaction Offset { get; }
-    public IEnumerable<string> Errors { get; }
-    public DateTimeOffset CreatedAt { get; }
+    public Guid Id { get; protected set;}
+    public Transaction Entry { get; protected set; }
+    public Transaction Offset { get; protected set;}
+    public IEnumerable<string> Errors { get; } = Enumerable.Empty<string>();
+    public DateTimeOffset CreatedAt { get; protected set;}
 
     private static TransactionType GetOffsetTransactionType(TransactionType entryTransactionType)
     {
