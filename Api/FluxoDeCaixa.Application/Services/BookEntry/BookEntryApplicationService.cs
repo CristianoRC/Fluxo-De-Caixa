@@ -1,8 +1,7 @@
-using FluxoDeCaixa.Domain.Aggregations;
 using FluxoDeCaixa.Domain.Services.BookEntry;
 using RedLockNet;
 
-namespace FluxoDeCaixa.Application.Services;
+namespace FluxoDeCaixa.Application.Services.BookEntry;
 
 public class BookEntryApplicationService : IBookEntryApplicationService
 {
@@ -15,7 +14,7 @@ public class BookEntryApplicationService : IBookEntryApplicationService
         _bookEntryService = bookEntryService;
     }
 
-    public async Task<BookEntry> Create(CreateBookEntry command)
+    public async Task<Domain.Aggregations.BookEntry> Create(CreateBookEntry command)
     {
         var expiry = TimeSpan.FromSeconds(60);
         var wait = TimeSpan.FromSeconds(10);

@@ -1,4 +1,5 @@
 using FluxoDeCaixa.Application.Services;
+using FluxoDeCaixa.Application.Services.BookEntry;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RedLockNet;
