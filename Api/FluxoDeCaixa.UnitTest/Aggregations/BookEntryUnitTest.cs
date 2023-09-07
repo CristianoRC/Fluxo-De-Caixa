@@ -75,7 +75,7 @@ public class BookEntryUnitTest : BaseUnitTest
         bookEntry.Entry.TransactionAmount.Should().Be(amount);
         bookEntry.Offset.TransactionAmount.Should().Be(amount);
     }
-
+    
     [Fact(DisplayName = "Ao criar um novo book entry, caso seja passado o mesmo balance para partida e contrapartida, deve retornar erro")]
     public void TheSameBalance()
     {

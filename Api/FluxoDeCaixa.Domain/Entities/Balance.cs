@@ -32,8 +32,13 @@ public class Balance : IEntity
 
     public Guid Id { get; }
     public string Name { get; }
-    public BalanceAmount Amount { get; }
+    public BalanceAmount Amount { get; private set; }
     public DateTimeOffset CreatedAt { get; }
+
+    public void UpdateAmount(BalanceAmount balanceAmount)
+    {
+        Amount = balanceAmount;
+    }
 
     public bool IsValid
     {

@@ -35,5 +35,6 @@ public class Transaction : IEntity
             ? TransactionAmount.Value
             : decimal.Negate(TransactionAmount.Value);
         BalanceAfterTransaction = new BalanceAmount(currentBalanceAmount + transactionAmount);
+        Balance.UpdateAmount(BalanceAfterTransaction);
     }
 }

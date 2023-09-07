@@ -26,8 +26,6 @@ public class BookEntryService : IBookEntryService
             return bookEntry;
 
         await _bookEntryRepository.Save(bookEntry);
-        //TODO: Atualiza os amounts dos balances também => uma única transaction no banco de dados?
-        //TODO: Testar isso com teste de integração!
         return bookEntry;
     }
 }

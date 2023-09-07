@@ -89,4 +89,21 @@ public class TransactionUnitTest : BaseUnitTest
         //Assert
         transaction.BalanceAfterTransaction.Value.Should().Be(expectedBalanceAfterTransaction);
     }
+
+    [Fact(DisplayName = "Ao criar uma transação, deve atualizar também o amount do balance")]
+    public void UpdateBalanceAmount()
+    {
+        //Arrange
+        var balanceAmount = Faker.Finance.Amount(-99999);
+        var transactionAmount = new TransactionAmount(Faker.Finance.Amount());
+        var transactionType = TransactionType.Debit;
+        var balance = BalanceFaker.GenerateValidBalance(balanceAmount);
+        var expectedBalanceAfterTransaction = balanceAmount - transactionAmount.Value;
+        
+        //Act
+        var transaction = new Transaction(transactionType, transactionAmount, balance);
+
+        //Assert
+        transaction.Balance.Amount.Value.Should().Be(expectedBalanceAfterTransaction);
+    }
 }
