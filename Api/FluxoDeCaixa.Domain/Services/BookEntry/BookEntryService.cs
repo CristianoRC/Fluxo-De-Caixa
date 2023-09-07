@@ -12,6 +12,8 @@ public class BookEntryService
         _balanceRepository = balanceRepository;
         _bookEntryRepository = bookEntryRepository;
     }
-    
+
     //TODO: IMPLEMENTAR ESSE CARA!
+    //TODO: Precisamos atualizar também o amount dos dois balances!
+    //TODO: Ter o lock nesse cara aqui!
 }

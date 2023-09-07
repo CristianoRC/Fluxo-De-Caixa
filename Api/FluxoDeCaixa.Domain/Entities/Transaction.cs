@@ -16,6 +16,7 @@ public class Transaction : IEntity
     public Guid Id { get; }
     public TransactionType Type { get; }
     public TransactionAmount TransactionAmount { get; }
+    public BalanceAmount BalanceAfterTransaction { get; set; }
     public Balance Balance { get; set; }
     public DateTimeOffset CreatedAt { get; }
 
