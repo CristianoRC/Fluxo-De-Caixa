@@ -8,14 +8,14 @@ public class BookEntry : IAggregate
     public BookEntry(TransactionAmount transactionAmount, Balance entryBalance, Balance offsetBalance, TransactionType entryTransactionType)
     {
         ArgumentNullException.ThrowIfNull(transactionAmount);
-        ArgumentNullException.ThrowIfNull(entryBalance);
-        ArgumentNullException.ThrowIfNull(offsetBalance);
-        
+
         Id = Guid.NewGuid();
         CreatedAt = DateTimeOffset.UtcNow;
+        Errors = GetErrors(transactionAmount, entryBalance, offsetBalance);
+        if(Errors.Any())
+            return;
         Entry = new Transaction(entryTransactionType, transactionAmount, entryBalance);
         Offset = new Transaction(GetOffsetTransactionType(entryTransactionType), transactionAmount, offsetBalance);
-        Errors = GetErrors(transactionAmount, entryBalance, offsetBalance);
     }
 
     public Guid Id { get; }
@@ -29,18 +29,19 @@ public class BookEntry : IAggregate
         return entryTransactionType is TransactionType.Credit ? TransactionType.Debit : TransactionType.Credit;
     }
 
-    private static IEnumerable<string> GetErrors(TransactionAmount transactionAmount, Balance entryBalance, Balance offsetBalance)
+    private static IEnumerable<string> GetErrors(TransactionAmount transactionAmount, Balance? entryBalance,
+        Balance? offsetBalance)
     {
         if (transactionAmount.IsValid is false)
             yield return "Valor do amount inválido";
 
-        if (entryBalance == offsetBalance)
-            yield return "Balance duplicado";
-
-        if (entryBalance.IsValid is false)
+        if (entryBalance?.IsValid is false)
             yield return "Balance de partida inválido";
 
-        if (offsetBalance.IsValid is false)
+        if (offsetBalance?.IsValid is false)
             yield return "Balance de contrapartida inválido";
+
+        if (entryBalance == offsetBalance)
+            yield return "Balance duplicado";
     }
 }

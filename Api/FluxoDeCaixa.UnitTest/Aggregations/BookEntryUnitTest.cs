@@ -7,8 +7,7 @@ namespace FluxoDeCaixa.UnitTest.Aggregations;
 
 public class BookEntryUnitTest : BaseUnitTest
 {
-    [Theory(DisplayName =
-        "Ao criar um novo book entry válido, deve ser criado uma transaction de partida (entry) com com o tipo enviado por parâmetro")]
+    [Theory(DisplayName = "Ao criar um novo book entry válido, deve ser criado uma transaction de partida (entry) com com o tipo enviado por parâmetro")]
     [InlineData(TransactionType.Credit)]
     [InlineData(TransactionType.Debit)]
     public void Entry(TransactionType transactionType)
@@ -25,8 +24,7 @@ public class BookEntryUnitTest : BaseUnitTest
         bookEntry.Entry.Type.Should().Be(transactionType);
     }
 
-    [Theory(DisplayName =
-        "Ao criar um novo book entry válido, deve ser criado uma transaction de contrapartida (offset) com com o tipo contrario ao enviado por parâmetro")]
+    [Theory(DisplayName = "Ao criar um novo book entry válido, deve ser criado uma transaction de contrapartida (offset) com com o tipo contrario ao enviado por parâmetro")]
     [InlineData(TransactionType.Credit, TransactionType.Debit)]
     [InlineData(TransactionType.Debit, TransactionType.Credit)]
     public void Offset(TransactionType transactionType, TransactionType offsetTransactionType)
@@ -78,8 +76,7 @@ public class BookEntryUnitTest : BaseUnitTest
         bookEntry.Offset.TransactionAmount.Should().Be(amount);
     }
 
-    [Fact(DisplayName =
-        "Ao criar um novo book entry, caso seja passado o mesmo balance para partida e contrapartida, deve retornar erro")]
+    [Fact(DisplayName = "Ao criar um novo book entry, caso seja passado o mesmo balance para partida e contrapartida, deve retornar erro")]
     public void TheSameBalance()
     {
         //Arrange
@@ -96,8 +93,7 @@ public class BookEntryUnitTest : BaseUnitTest
         error.Should().Be("Balance duplicado");
     }
 
-    [Fact(DisplayName =
-        "Ao criar um novo book entry, caso seja passado um balance invalido para partida, deve retornar erro")]
+    [Fact(DisplayName = "Ao criar um novo book entry, caso seja passado um balance invalido para partida, deve retornar erro")]
     public void InvalidBalanceEntry()
     {
         //Arrange
@@ -115,8 +111,7 @@ public class BookEntryUnitTest : BaseUnitTest
         error.Should().Be("Balance de partida inválido");
     }
 
-    [Fact(DisplayName =
-        "Ao criar um novo book entry, caso seja passado um balance invalido para contrapartida, deve retornar erro")]
+    [Fact(DisplayName = "Ao criar um novo book entry, caso seja passado um balance invalido para contrapartida, deve retornar erro")]
     public void InvalidBalanceOffset()
     {
         //Arrange
@@ -168,5 +163,52 @@ public class BookEntryUnitTest : BaseUnitTest
         bookEntry.Errors.Count().Should().Be(1);
         var error = bookEntry.Errors.First();
         error.Should().Be("Valor do amount inválido");
+    }
+    
+    [Fact(DisplayName = "Ao criar um novo book entry, deve retornar erro caso o balance da partida seja nulo")]
+    public void NullEntryBalance()
+    {
+        //Arrange
+        var amount = new TransactionAmount(Faker.Finance.Amount());
+        var offsetBalance = BalanceFaker.GenerateValidBalance();
+
+        //Act
+        var bookEntry = new BookEntry(amount, null!, offsetBalance, TransactionTypeFaker.GenerateRandomTransactionType());
+
+        //Assert
+        bookEntry.Errors.Count().Should().Be(1);
+        var error = bookEntry.Errors.First();
+        error.Should().Be("Balance de partida inválido");
+    }
+    
+    [Fact(DisplayName = "Ao criar um novo book entry, deve retornar erro caso o balance da contrapartida seja nulo")]
+    public void NullOffsetBalance()
+    {
+        //Arrange
+        var amount = new TransactionAmount(Faker.Finance.Amount());
+        var entryBalance = BalanceFaker.GenerateValidBalance();
+
+        //Act
+        var bookEntry = new BookEntry(amount, entryBalance, null!, TransactionTypeFaker.GenerateRandomTransactionType());
+
+        //Assert
+        bookEntry.Errors.Count().Should().Be(1);
+        var error = bookEntry.Errors.First();
+        error.Should().Be("Balance de contrapartida inválido");
+    }
+
+    [Fact(DisplayName = "Ao criar um novo book entry, não deve criar as transações caso tenha algum erro")]
+    public void ShouldNotCreateTransaction()
+    {
+        //Arrange
+        var amount = new TransactionAmount(Faker.Finance.Amount());
+        var entryBalance = BalanceFaker.GenerateValidBalance();
+
+        //Act
+        var bookEntry = new BookEntry(amount, entryBalance, null!, TransactionTypeFaker.GenerateRandomTransactionType());
+
+        //Assert
+        bookEntry.Entry.Should().BeNull();
+        bookEntry.Offset.Should().BeNull();
     }
 }

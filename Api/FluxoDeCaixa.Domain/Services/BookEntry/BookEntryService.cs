@@ -16,8 +16,6 @@ public class BookEntryService
 
     public async Task<Aggregations.BookEntry> Create(CreateBookEntry command)
     {
-        //TODO: Balance existe?
-        //TODO: Ter ma mensagem para balance inexistente?
         var entryBalance = await _balanceRepository.Get(command.EntryBalance);
         var offsetBalance = await _balanceRepository.Get(command.OffsetBalance);
         
@@ -27,7 +25,6 @@ public class BookEntryService
             return bookEntry;
 
         await _bookEntryRepository.Save(bookEntry);
-        
         //TODO: Atualiza os amounts dos balances também => uma única transaction no banco de dados?
         //TODO: Testar isso com teste de integração!
         return bookEntry;
