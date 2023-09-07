@@ -1,4 +1,5 @@
 using FluxoDeCaixa.Application.Services.Balance;
+using FluxoDeCaixa.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FluxoDeCaixa.Api.Controllers;

@@ -1,22 +1,33 @@
 using FluxoDeCaixa.Domain.Entities;
 using FluxoDeCaixa.Domain.Repositories;
+using FluxoDeCaixa.Infra.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace FluxoDeCaixa.Infra.Repositories;
 
 public class BalanceRepository : IBalanceRepository
 {
-    public Task<IEnumerable<Balance>> Get()
+    private readonly FluxoDeCaixaDataContext _dataContext;
+
+    public BalanceRepository(FluxoDeCaixaDataContext dataContext)
     {
-        throw new NotImplementedException();
+        _dataContext = dataContext;
     }
 
-    public Task<Balance> Get(Guid id)
+    public async Task<IEnumerable<Balance>> Get()
     {
-        throw new NotImplementedException();
+        return await _dataContext.Balances.AsNoTracking().ToListAsync();
     }
 
-    public Task<Balance> Create(Balance balance)
+    public async Task<Balance?> Get(Guid id)
     {
-        throw new NotImplementedException();
+        return await _dataContext.Balances.FirstOrDefaultAsync(x => x.Id == id);
+    }
+
+    public async Task<Balance> Create(Balance balance)
+    {
+        await _dataContext.Balances.AddAsync(balance);
+        await _dataContext.SaveChangesAsync();
+        return balance;
     }
 }

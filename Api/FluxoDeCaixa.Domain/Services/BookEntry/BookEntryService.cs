@@ -1,3 +1,4 @@
+using FluxoDeCaixa.Domain.Entities;
 using FluxoDeCaixa.Domain.Repositories;
 using FluxoDeCaixa.Domain.ValueObjects;
 
