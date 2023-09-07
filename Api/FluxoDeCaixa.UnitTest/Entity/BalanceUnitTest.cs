@@ -31,4 +31,33 @@ public class BalanceUnitTest : BaseUnitTest
         balance.Id.Should().NotBe(Guid.Empty);
         balance.CreatedAt.Should().NotBe(default);
     }
+
+    [Fact(DisplayName = "Balances devem ser considerados iguais se seus ids forem os mesmo")]
+    public void TheSameId()
+    {
+        //Arrange
+        var id = Guid.NewGuid();
+        var firstBalance = new Balance(id, Faker.Random.Word(), Faker.Date.PastOffset());
+        var secondBalance = new Balance(id, Faker.Random.Word(), Faker.Date.PastOffset());
+
+        //Act
+        var balancesAreEqual = firstBalance == secondBalance;
+
+        //Assert
+        balancesAreEqual.Should().BeTrue();
+    }
+
+    [Fact(DisplayName = "Balances devem ser considerados diferentes se seus ids não forem os mesmo")]
+    public void DifferentId()
+    {
+        //Arrange
+        var firstBalance = new Balance(Guid.NewGuid(), Faker.Random.Word(), Faker.Date.PastOffset());
+        var secondBalance = new Balance(Guid.NewGuid(), Faker.Random.Word(), Faker.Date.PastOffset());
+
+        //Act
+        var balancesAreEqual = firstBalance == secondBalance;
+
+        //Assert
+        balancesAreEqual.Should().BeFalse();
+    }
 }
