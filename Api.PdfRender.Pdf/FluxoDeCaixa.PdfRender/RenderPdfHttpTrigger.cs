@@ -9,7 +9,10 @@ namespace FluxoDeCaixa.PdfRender;
 public static class RenderPdfHttpTrigger
 {
     [Function("RenderPdfHttpTrigger")]
-    public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req, FunctionContext executionContext)
+    public static HttpResponseData Run(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Render")]
+        HttpRequestData req,
+        FunctionContext executionContext)
     {
         var logger = executionContext.GetLogger("RenderPdfHttpTrigger");
         logger.LogInformation("C# HTTP trigger function processed a request.");
@@ -20,6 +23,5 @@ public static class RenderPdfHttpTrigger
         response.WriteString("Welcome to Azure Functions!");
 
         return response;
-        
     }
 }
