@@ -20,6 +20,7 @@ public class BookEntryService
         //TODO: Ter ma mensagem para balance inexistente?
         var entryBalance = await _balanceRepository.Get(command.EntryBalance);
         var offsetBalance = await _balanceRepository.Get(command.OffsetBalance);
+        
         var transactionAmount = new TransactionAmount(command.Amount);
         var bookEntry = new Aggregations.BookEntry(transactionAmount, entryBalance, offsetBalance, command.TransactionType);
         if (bookEntry.Errors.Any())
