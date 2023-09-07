@@ -112,8 +112,8 @@ public class BookEntryUnitTest : BaseUnitTest
     {
         //Arrange
         var amount = new Amount(Faker.Finance.Amount());
-        var entryBalance = new Balance(string.Empty);
-        var offsetBalance = BalanceFaker.GenerateValidBalance();
+        var entryBalance = BalanceFaker.GenerateValidBalance(); 
+        var offsetBalance = new Balance(string.Empty);
         
         //Act
         var bookEntry = new BookEntry(amount, entryBalance, offsetBalance, TransactionTypeFaker.GenerateRandomTransactionType());

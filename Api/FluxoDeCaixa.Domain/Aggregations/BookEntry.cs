@@ -29,5 +29,14 @@ public class BookEntry : IAggregate
     {
         if (amount.IsValid is false)
             yield return "Valor do amount inválido";
+
+        if (entryBalance == offsetBalance)
+            yield return "Balance duplicado";
+
+        if (entryBalance.IsValid is false)
+            yield return "Balance de partida inválido";
+
+        if (offsetBalance.IsValid is false)
+            yield return "Balance de contrapartida inválido";
     }
 }
