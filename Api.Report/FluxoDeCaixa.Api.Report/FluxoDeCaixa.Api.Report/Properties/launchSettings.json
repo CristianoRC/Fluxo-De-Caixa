@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "FluxoDeCaixa.Api.Report": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7004",
+      "launchBrowser": false
+    }
+  }
+}
