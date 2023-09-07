@@ -11,14 +11,23 @@ public class Transaction : IEntity
         TransactionAmount = transactionAmount;
         Balance = balance;
         CreatedAt = DateTimeOffset.UtcNow;
+        UpdateBalanceAfterTransaction();
     }
 
     public Guid Id { get; }
     public TransactionType Type { get; }
     public TransactionAmount TransactionAmount { get; }
-    public BalanceAmount BalanceAfterTransaction { get; set; }
-    public Balance Balance { get; set; }
+    public BalanceAmount BalanceAfterTransaction { get; private set; }
+    public Balance Balance { get; }
     public DateTimeOffset CreatedAt { get; }
-
     public bool IsValid => Balance.IsValid && TransactionAmount.IsValid;
+
+    private void UpdateBalanceAfterTransaction()
+    {
+        if (IsValid is false)
+            return;
+        var currentBalanceAmount = Balance.Amount.Value;
+        var transactionAmount = Type == TransactionType.Credit ? TransactionAmount.Value : decimal.Negate(TransactionAmount.Value);
+        BalanceAfterTransaction = new BalanceAmount(currentBalanceAmount + transactionAmount);
+    }
 }
