@@ -7,6 +7,10 @@ public class BookEntry : IAggregate
 {
     public BookEntry(Amount amount, Balance entryBalance, Balance offsetBalance, TransactionType entryTransactionType)
     {
+        ArgumentNullException.ThrowIfNull(amount);
+        ArgumentNullException.ThrowIfNull(entryBalance);
+        ArgumentNullException.ThrowIfNull(offsetBalance);
+        
         Id = Guid.NewGuid();
         CreatedAt = DateTimeOffset.UtcNow;
         Entry = new Transaction(entryTransactionType, amount, entryBalance);
@@ -27,16 +31,16 @@ public class BookEntry : IAggregate
 
     private static IEnumerable<string> GetErrors(Amount amount, Balance entryBalance, Balance offsetBalance)
     {
-        if (amount?.IsValid is false)
+        if (amount.IsValid is false)
             yield return "Valor do amount inválido";
 
         if (entryBalance == offsetBalance)
             yield return "Balance duplicado";
 
-        if (entryBalance?.IsValid is false)
+        if (entryBalance.IsValid is false)
             yield return "Balance de partida inválido";
 
-        if (offsetBalance?.IsValid is false)
+        if (offsetBalance.IsValid is false)
             yield return "Balance de contrapartida inválido";
     }
 }
