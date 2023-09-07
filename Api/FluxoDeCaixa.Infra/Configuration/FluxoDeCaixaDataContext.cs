@@ -1,3 +1,4 @@
+using FluxoDeCaixa.Domain.Aggregations;
 using FluxoDeCaixa.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +11,7 @@ public class FluxoDeCaixaDataContext : DbContext
     }
 
     public DbSet<Balance> Balances { get; set; }
-    //public DbSet<BookEntry> BookEntries { get; set; }
+    public DbSet<BookEntry> BookEntries { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

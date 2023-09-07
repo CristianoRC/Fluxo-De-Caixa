@@ -15,6 +15,5 @@ public class TransactionConfiguration : IEntityTypeConfiguration<Transaction>
         builder.Property(x => x.TransactionAmount).HasConversion(x => x.Value, amount => new TransactionAmount(amount));
         builder.Property(x => x.BalanceAfterTransaction).HasConversion(x => x.Value, amount => new BalanceAmount(amount));
         builder.HasOne(x => x.Balance);
-
     }
 }
