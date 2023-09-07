@@ -13,8 +13,6 @@ public class BalanceApplicationService : IBalanceApplicationService
 
     public async Task<Domain.Entities.Balance> Create(CreateBalanceCommand createBalanceCommand)
     {
-        //TODO: Ter um service domain?
-        //TODO: Ou manter aqui e ter as regras / exceptions!
         return await _balanceRepository.Create(new Domain.Entities.Balance(createBalanceCommand.Name));
     }
 
