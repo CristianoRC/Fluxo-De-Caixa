@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluxoDeCaixa.Domain", "Flux
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluxoDeCaixa.Infra", "FluxoDeCaixa.Infra\FluxoDeCaixa.Infra.csproj", "{A44C9780-36E3-41E6-8A90-740D14BE7805}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluxoDeCaixa.Application", "FluxoDeCaixa.Application\FluxoDeCaixa.Application.csproj", "{62C9AA52-7F2C-4162-A59F-40409EC5FACB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{A44C9780-36E3-41E6-8A90-740D14BE7805}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A44C9780-36E3-41E6-8A90-740D14BE7805}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A44C9780-36E3-41E6-8A90-740D14BE7805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62C9AA52-7F2C-4162-A59F-40409EC5FACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62C9AA52-7F2C-4162-A59F-40409EC5FACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62C9AA52-7F2C-4162-A59F-40409EC5FACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62C9AA52-7F2C-4162-A59F-40409EC5FACB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
