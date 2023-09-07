@@ -37,7 +37,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Services.AddApplication(builder.Configuration).AddDomain().AddInfra();
+builder.Services.AddApplication(builder.Configuration).AddDomain().AddInfra(builder.Configuration);
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

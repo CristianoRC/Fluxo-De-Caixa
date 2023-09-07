@@ -24,6 +24,7 @@ public static class Setup
         var redlockFactory = RedLockFactory.Create(endPoints);
         service.AddSingleton<IDistributedLockFactory>(redlockFactory);
         
+        
         return service;
     }
 }
