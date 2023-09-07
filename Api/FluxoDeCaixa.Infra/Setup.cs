@@ -16,6 +16,7 @@ public static class Setup
 
         service.AddDbContext<FluxoDeCaixaDataContext>(options =>
             options.UseNpgsql(config.GetConnectionString("Sql")));
+        
         return service;
     }
 }

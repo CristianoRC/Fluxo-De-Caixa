@@ -37,7 +37,12 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Services.AddApplication(builder.Configuration).AddDomain().AddInfra(builder.Configuration);
+
+builder.Services
+    .AddApplication(builder.Configuration)
+    .AddDomain()
+    .AddInfra(builder.Configuration);
+
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
@@ -46,6 +51,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.RunMigrations();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
