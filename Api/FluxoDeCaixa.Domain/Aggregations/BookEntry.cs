@@ -25,7 +25,7 @@ public class BookEntry : IAggregate
         return entryTransactionType is TransactionType.Credit ? TransactionType.Debit : TransactionType.Credit;
     }
 
-    private IEnumerable<string> GetErrors(Amount amount, Balance entryBalance, Balance offsetBalance)
+    private static IEnumerable<string> GetErrors(Amount amount, Balance entryBalance, Balance offsetBalance)
     {
         if (amount.IsValid is false)
             yield return "Valor do amount inválido";
