@@ -4,7 +4,7 @@ namespace FluxoDeCaixa.Domain.Repositories;
 
 public interface IBalanceRepository
 {
-    Task<IEnumerable<Balance>> GetBalances();
-    Task<Balance> GetBalance(Guid id);
-    Task CreateBalance(Balance balance);
+    Task<IEnumerable<Balance>> Get();
+    Task<Balance> Get(Guid id);
+    Task Create(Balance balance);
 }
