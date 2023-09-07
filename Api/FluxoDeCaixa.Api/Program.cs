@@ -40,8 +40,9 @@ builder.Services.AddCors(options =>
 
 builder.Services
     .AddApplication(builder.Configuration)
-    .AddDomain()
-    .AddInfra(builder.Configuration);
+    .AddInfra(builder.Configuration)
+    .AddMessageBus(builder.Configuration)
+    .AddDomain();
 
 
 var app = builder.Build();
