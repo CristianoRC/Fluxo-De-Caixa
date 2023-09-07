@@ -12,4 +12,6 @@ public class BookEntryService
         _balanceRepository = balanceRepository;
         _bookEntryRepository = bookEntryRepository;
     }
+    
+    //TODO: IMPLEMENTAR ESSE CARA!
 }

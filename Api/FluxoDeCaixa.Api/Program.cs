@@ -1,4 +1,5 @@
 using FluxoDeCaixa.Api;
+using FluxoDeCaixa.Application;
 using FluxoDeCaixa.Domain;
 using FluxoDeCaixa.Infra;
 using Serilog;
@@ -36,7 +37,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Services.AddDomain().AddInfra();
+builder.Services.AddApplication().AddDomain().AddInfra();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
