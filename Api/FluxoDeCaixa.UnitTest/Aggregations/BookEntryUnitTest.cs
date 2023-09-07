@@ -58,7 +58,7 @@ public class BookEntryUnitTest : BaseUnitTest
         bookEntry.CreatedAt.Should().NotBe(default);
     }
     
-    [Fact(DisplayName = "Ao criar um novo book entry, o entry e offset devem ter o mesmo ammount")]
+    [Fact(DisplayName = "Ao criar um novo book entry válido, o entry e offset devem ter o mesmo ammount")]
     public void EntryAndOffsetAmount()
     {
         //Arrange

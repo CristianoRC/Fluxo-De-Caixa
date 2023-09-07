@@ -9,11 +9,18 @@ public class BookEntry : IAggregate
     {
         Id = Guid.NewGuid();
         CreatedAt = DateTimeOffset.UtcNow;
+        Entry = new Transaction(entryTransactionType, amount, entryBalance);
+        Offset = new Transaction(GetOffsetTransactionType(entryTransactionType), amount, offsetBalance);
     }
 
     public Guid Id { get; }
-    public Transaction Entry { get; set; }
-    public Transaction Offset { get; set; }
-    public IEnumerable<string> Errors { get; }
-    public DateTimeOffset CreatedAt { get; set; }
+    public Transaction Entry { get; }
+    public Transaction Offset { get; }
+    public IEnumerable<string> Errors { get; } = Enumerable.Empty<string>();
+    public DateTimeOffset CreatedAt { get; }
+
+    private static TransactionType GetOffsetTransactionType(TransactionType entryTransactionType)
+    {
+        return entryTransactionType is TransactionType.Credit ? TransactionType.Debit : TransactionType.Credit;
+    }
 }
