@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FluxoDeCaixa.Infra.Configuration;
 
-internal class FluxoDeCaixaDataContext : DbContext
+public class FluxoDeCaixaDataContext : DbContext
 {
     public FluxoDeCaixaDataContext(DbContextOptions<FluxoDeCaixaDataContext> options) : base(options)
     {
     }
-    
+
     public DbSet<Balance> Balances { get; set; }
     //public DbSet<BookEntry> BookEntries { get; set; }
 

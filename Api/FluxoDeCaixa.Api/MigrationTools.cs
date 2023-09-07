@@ -1,9 +1,7 @@
 using FluxoDeCaixa.Infra.Configuration;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace FluxoDeCaixa.Infra;
+namespace FluxoDeCaixa.Api;
 
 public static class MigrationTools
 {
