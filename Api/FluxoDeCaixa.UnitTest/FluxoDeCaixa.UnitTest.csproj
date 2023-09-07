@@ -29,4 +29,6 @@
       <ProjectReference Include="..\FluxoDeCaixa.Domain\FluxoDeCaixa.Domain.csproj" />
     </ItemGroup>
 
+
+
 </Project>
