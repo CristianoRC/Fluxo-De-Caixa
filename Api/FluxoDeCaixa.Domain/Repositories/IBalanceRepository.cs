@@ -6,5 +6,5 @@ public interface IBalanceRepository
 {
     Task<IEnumerable<Balance>> Get();
     Task<Balance> Get(Guid id);
-    Task Create(Balance balance);
+    Task<Balance> Create(Balance balance);
 }

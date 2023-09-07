@@ -1,4 +1,5 @@
 using FluxoDeCaixa.Application.Services;
+using FluxoDeCaixa.Application.Services.Balance;
 using FluxoDeCaixa.Application.Services.BookEntry;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,7 @@ public static class Setup
     public static IServiceCollection AddApplication(this IServiceCollection service, IConfiguration config)
     {
         service.AddScoped<IBookEntryApplicationService, BookEntryApplicationService>();
+        service.AddScoped<IBalanceApplicationService, BalanceApplicationService>();
         
         var endPoints = new List<RedLockMultiplexer>
         {
