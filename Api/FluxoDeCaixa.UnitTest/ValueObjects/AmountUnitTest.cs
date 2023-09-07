@@ -8,7 +8,7 @@ public class AmountUnitTest : BaseUnitTest
     public void NegativeAmount()
     {
         //Arrange
-        var value = Faker.Finance.Amount(max: decimal.Zero - 1);
+        var value = Faker.Finance.Amount(max: decimal.MinusOne);
 
         //Act
         var amount = new Amount(value);
