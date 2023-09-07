@@ -42,7 +42,7 @@ public class BookEntryUnitTest : BaseUnitTest
     }
     
     [Fact(DisplayName = "Ao criar um novo book entry válido, não deve conter erros na lista")]
-    public void ValidBookentry()
+    public void ValidBookEntry()
     {
         //Arrange
         var amount = new Amount(Faker.Finance.Amount());

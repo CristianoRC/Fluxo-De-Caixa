@@ -11,16 +11,23 @@ public class BookEntry : IAggregate
         CreatedAt = DateTimeOffset.UtcNow;
         Entry = new Transaction(entryTransactionType, amount, entryBalance);
         Offset = new Transaction(GetOffsetTransactionType(entryTransactionType), amount, offsetBalance);
+        Errors = GetErrors(amount, entryBalance, offsetBalance);
     }
 
     public Guid Id { get; }
     public Transaction Entry { get; }
     public Transaction Offset { get; }
-    public IEnumerable<string> Errors { get; } = Enumerable.Empty<string>();
+    public IEnumerable<string> Errors { get; }
     public DateTimeOffset CreatedAt { get; }
 
     private static TransactionType GetOffsetTransactionType(TransactionType entryTransactionType)
     {
         return entryTransactionType is TransactionType.Credit ? TransactionType.Debit : TransactionType.Credit;
+    }
+
+    private IEnumerable<string> GetErrors(Amount amount, Balance entryBalance, Balance offsetBalance)
+    {
+        if (amount.IsValid is false)
+            yield return "Valor do amount inválido";
     }
 }
