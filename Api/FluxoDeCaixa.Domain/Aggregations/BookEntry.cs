@@ -7,6 +7,8 @@ public class BookEntry : IAggregate
 {
     public BookEntry(Amount amount, Balance entryBalance, Balance offsetBalance, TransactionType entryTransactionType)
     {
+        Id = Guid.NewGuid();
+        CreatedAt = DateTimeOffset.UtcNow;
     }
 
     public Guid Id { get; }

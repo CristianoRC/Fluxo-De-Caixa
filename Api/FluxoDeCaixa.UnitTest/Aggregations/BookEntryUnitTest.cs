@@ -7,7 +7,7 @@ namespace FluxoDeCaixa.UnitTest.Aggregations;
 
 public class BookEntryUnitTest : BaseUnitTest
 {
-    [Theory(DisplayName = "Ao criar um novo book entry, deve ser criado uma transaction de partida (entry) com com o tipo enviado por parâmetro")]
+    [Theory(DisplayName = "Ao criar um novo book entry válido, deve ser criado uma transaction de partida (entry) com com o tipo enviado por parâmetro")]
     [InlineData(TransactionType.Credit)]
     [InlineData(TransactionType.Debit)]
     public void Entry(TransactionType transactionType)
@@ -24,7 +24,7 @@ public class BookEntryUnitTest : BaseUnitTest
         bookEntry.Entry.Type.Should().Be(transactionType);
     }
     
-    [Theory(DisplayName = "Ao criar um novo book entry, deve ser criado uma transaction de contrapartida (offset) com com o tipo contrario ao enviado por parâmetro")]
+    [Theory(DisplayName = "Ao criar um novo book entry válido, deve ser criado uma transaction de contrapartida (offset) com com o tipo contrario ao enviado por parâmetro")]
     [InlineData(TransactionType.Credit,TransactionType.Debit)]
     [InlineData(TransactionType.Debit, TransactionType.Credit)]
     public void Offset(TransactionType transactionType, TransactionType offsetTransactionType)
@@ -40,7 +40,24 @@ public class BookEntryUnitTest : BaseUnitTest
         //Assert
         bookEntry.Offset.Type.Should().Be(offsetTransactionType);
     }
+    
+    [Fact(DisplayName = "Ao criar um novo book entry válido, não deve conter erros na lista")]
+    public void ValidBookentry()
+    {
+        //Arrange
+        var amount = new Amount(Faker.Finance.Amount());
+        var entryBalance = BalanceFaker.GenerateValidBalance();
+        var offsetBalance = BalanceFaker.GenerateValidBalance();
+        
+        //Act
+        var bookEntry = new BookEntry(amount, entryBalance, offsetBalance, TransactionTypeFaker.GenerateRandomTransactionType());
 
+        //Assert
+        bookEntry.Errors.Should().BeEmpty();
+        bookEntry.Id.Should().NotBe(Guid.Empty);
+        bookEntry.CreatedAt.Should().NotBe(default);
+    }
+    
     [Fact(DisplayName = "Ao criar um novo book entry, o entry e offset devem ter o mesmo ammount")]
     public void EntryAndOffsetAmount()
     {
