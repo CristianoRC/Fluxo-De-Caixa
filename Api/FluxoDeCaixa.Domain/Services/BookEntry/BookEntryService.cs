@@ -3,7 +3,7 @@ using FluxoDeCaixa.Domain.ValueObjects;
 
 namespace FluxoDeCaixa.Domain.Services.BookEntry;
 
-public class BookEntryService
+public class BookEntryService : IBookEntryService
 {
     private readonly IBalanceRepository _balanceRepository;
     private readonly IBookEntryRepository _bookEntryRepository;

@@ -7,7 +7,7 @@ public static class Setup
 {
     public static IServiceCollection AddDomain(this IServiceCollection service)
     {
-        service.AddScoped<BookEntryService>();
+        service.AddScoped<IBookEntryService, BookEntryService>();
         return service;
     }
 }
