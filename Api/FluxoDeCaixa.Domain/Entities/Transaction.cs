@@ -4,6 +4,16 @@ namespace FluxoDeCaixa.Domain.Entities;
 
 public class Transaction : IEntity
 {
+    public Transaction(Guid id, TransactionType type, TransactionAmount transactionAmount, BalanceAmount balanceAfterTransaction, Balance balance, DateTimeOffset createdAt)
+    {
+        Id = id;
+        Type = type;
+        TransactionAmount = transactionAmount;
+        BalanceAfterTransaction = balanceAfterTransaction;
+        Balance = balance;
+        CreatedAt = createdAt;  
+    }
+    
     public Transaction(TransactionType transactionType, TransactionAmount transactionAmount, Balance balance)
     {
         Id = Guid.NewGuid();
