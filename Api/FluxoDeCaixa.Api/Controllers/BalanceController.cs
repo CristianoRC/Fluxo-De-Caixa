@@ -23,8 +23,8 @@ public class BalanceController : Controller
         {
             var balance = await _service.Create(command);
             if (balance.IsValid)
-                return BadRequest(balance);
-            return Created(string.Empty, balance);
+                return Created(string.Empty, balance);
+            return BadRequest(balance);
         }
         catch (Exception e)
         {
