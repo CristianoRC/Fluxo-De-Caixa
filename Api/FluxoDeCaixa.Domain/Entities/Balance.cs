@@ -1,12 +1,15 @@
+using FluxoDeCaixa.Domain.ValueObjects;
+
 namespace FluxoDeCaixa.Domain.Entities;
 
 public class Balance : IEntity
 {
-    public Balance(Guid id, string name, DateTimeOffset createdAt)
+    public Balance(Guid id, string name, DateTimeOffset createdAt, BalanceAmount amount)
     {
         Id = id;
         Name = name;
         CreatedAt = createdAt;
+        Amount = amount;
     }
 
     public Balance(string name)
@@ -14,6 +17,7 @@ public class Balance : IEntity
         Id = Guid.NewGuid();
         Name = name;
         CreatedAt = DateTimeOffset.UtcNow;
+        Amount = new BalanceAmount(decimal.Zero);
     }
 
     public static bool operator ==(Balance firstBalance, Balance secondBalance)
@@ -28,6 +32,7 @@ public class Balance : IEntity
 
     public Guid Id { get; }
     public string Name { get; }
+    public BalanceAmount Amount { get; }
     public DateTimeOffset CreatedAt { get; }
 
     public bool IsValid
