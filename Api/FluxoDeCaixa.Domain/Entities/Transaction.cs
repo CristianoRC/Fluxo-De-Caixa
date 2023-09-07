@@ -4,20 +4,20 @@ namespace FluxoDeCaixa.Domain.Entities;
 
 public class Transaction : IEntity
 {
-    public Transaction(TransactionType transactionType, Amount amount, Balance balance)
+    public Transaction(TransactionType transactionType, TransactionAmount transactionAmount, Balance balance)
     {
         Id = Guid.NewGuid();
         Type = transactionType;
-        Amount = amount;
+        TransactionAmount = transactionAmount;
         Balance = balance;
         CreatedAt = DateTimeOffset.UtcNow;
     }
 
     public Guid Id { get; }
     public TransactionType Type { get; }
-    public Amount Amount { get; }
+    public TransactionAmount TransactionAmount { get; }
     public Balance Balance { get; set; }
     public DateTimeOffset CreatedAt { get; }
 
-    public bool IsValid => Balance.IsValid && Amount.IsValid;
+    public bool IsValid => Balance.IsValid && TransactionAmount.IsValid;
 }

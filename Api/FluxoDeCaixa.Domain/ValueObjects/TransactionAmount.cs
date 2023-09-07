@@ -1,8 +1,8 @@
 namespace FluxoDeCaixa.Domain.ValueObjects;
 
-public record Amount : IValueObject
+public record TransactionAmount : IValueObject
 {
-    public Amount(decimal value)
+    public TransactionAmount(decimal value)
     {
         Value = value;
     }

@@ -10,7 +10,7 @@ public class TransactionUnitTest : BaseUnitTest
     public void InvalidAmount()
     {
         //Arrange
-        var amount = new Amount(Faker.Finance.Amount(max: decimal.MinusOne));
+        var amount = new TransactionAmount(Faker.Finance.Amount(max: decimal.MinusOne));
         var transactionType = TransactionTypeFaker.GenerateRandomTransactionType();
         var balance = BalanceFaker.GenerateValidBalance();
 
@@ -25,7 +25,7 @@ public class TransactionUnitTest : BaseUnitTest
     public void InvalidBalance()
     {
         //Arrange
-        var amount = new Amount(Faker.Finance.Amount());
+        var amount = new TransactionAmount(Faker.Finance.Amount());
         var transactionType = TransactionTypeFaker.GenerateRandomTransactionType();
         var balance = new Balance(string.Empty);
 
@@ -40,7 +40,7 @@ public class TransactionUnitTest : BaseUnitTest
     public void ValidBalance()
     {
         //Arrange
-        var amount = new Amount(Faker.Finance.Amount());
+        var amount = new TransactionAmount(Faker.Finance.Amount());
         var transactionType = TransactionTypeFaker.GenerateRandomTransactionType();
         var balance = BalanceFaker.GenerateValidBalance();
 
@@ -52,7 +52,7 @@ public class TransactionUnitTest : BaseUnitTest
         transaction.Id.Should().NotBe(Guid.Empty);
         transaction.CreatedAt.Should().NotBe(default);
         transaction.Type.Should().Be(transactionType);
-        transaction.Amount.Should().Be(amount);
+        transaction.TransactionAmount.Should().Be(amount);
         transaction.Balance.Should().Be(balance);
     }
 }

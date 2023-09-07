@@ -14,7 +14,7 @@ public class BookEntryUnitTest : BaseUnitTest
     public void Entry(TransactionType transactionType)
     {
         //Arrange
-        var amount = new Amount(Faker.Finance.Amount());
+        var amount = new TransactionAmount(Faker.Finance.Amount());
         var entryBalance = BalanceFaker.GenerateValidBalance();
         var offsetBalance = BalanceFaker.GenerateValidBalance();
 
@@ -32,7 +32,7 @@ public class BookEntryUnitTest : BaseUnitTest
     public void Offset(TransactionType transactionType, TransactionType offsetTransactionType)
     {
         //Arrange
-        var amount = new Amount(Faker.Finance.Amount());
+        var amount = new TransactionAmount(Faker.Finance.Amount());
         var entryBalance = BalanceFaker.GenerateValidBalance();
         var offsetBalance = BalanceFaker.GenerateValidBalance();
 
@@ -47,7 +47,7 @@ public class BookEntryUnitTest : BaseUnitTest
     public void ValidBookEntry()
     {
         //Arrange
-        var amount = new Amount(Faker.Finance.Amount());
+        var amount = new TransactionAmount(Faker.Finance.Amount());
         var entryBalance = BalanceFaker.GenerateValidBalance();
         var offsetBalance = BalanceFaker.GenerateValidBalance();
 
@@ -65,7 +65,7 @@ public class BookEntryUnitTest : BaseUnitTest
     public void EntryAndOffsetAmount()
     {
         //Arrange
-        var amount = new Amount(Faker.Finance.Amount());
+        var amount = new TransactionAmount(Faker.Finance.Amount());
         var entryBalance = BalanceFaker.GenerateValidBalance();
         var offsetBalance = BalanceFaker.GenerateValidBalance();
 
@@ -74,8 +74,8 @@ public class BookEntryUnitTest : BaseUnitTest
             TransactionTypeFaker.GenerateRandomTransactionType());
 
         //Assert
-        bookEntry.Entry.Amount.Should().Be(amount);
-        bookEntry.Offset.Amount.Should().Be(amount);
+        bookEntry.Entry.TransactionAmount.Should().Be(amount);
+        bookEntry.Offset.TransactionAmount.Should().Be(amount);
     }
 
     [Fact(DisplayName =
@@ -83,7 +83,7 @@ public class BookEntryUnitTest : BaseUnitTest
     public void TheSameBalance()
     {
         //Arrange
-        var amount = new Amount(Faker.Finance.Amount());
+        var amount = new TransactionAmount(Faker.Finance.Amount());
         var entryBalance = BalanceFaker.GenerateValidBalance();
 
         //Act
@@ -101,7 +101,7 @@ public class BookEntryUnitTest : BaseUnitTest
     public void InvalidBalanceEntry()
     {
         //Arrange
-        var amount = new Amount(Faker.Finance.Amount());
+        var amount = new TransactionAmount(Faker.Finance.Amount());
         var entryBalance = new Balance(string.Empty);
         var offsetBalance = BalanceFaker.GenerateValidBalance();
 
@@ -120,7 +120,7 @@ public class BookEntryUnitTest : BaseUnitTest
     public void InvalidBalanceOffset()
     {
         //Arrange
-        var amount = new Amount(Faker.Finance.Amount());
+        var amount = new TransactionAmount(Faker.Finance.Amount());
         var entryBalance = BalanceFaker.GenerateValidBalance();
         var offsetBalance = new Balance(string.Empty);
 
@@ -138,7 +138,7 @@ public class BookEntryUnitTest : BaseUnitTest
     public void InvalidAmount()
     {
         //Arrange
-        var amount = new Amount(decimal.MinusOne);
+        var amount = new TransactionAmount(decimal.MinusOne);
         var entryBalance = BalanceFaker.GenerateValidBalance();
         var offsetBalance = BalanceFaker.GenerateValidBalance();
 
@@ -156,7 +156,7 @@ public class BookEntryUnitTest : BaseUnitTest
     public void NullAmount()
     {
         //Arrange
-        var amount = new Amount(decimal.MinusOne);
+        var amount = new TransactionAmount(decimal.MinusOne);
         var entryBalance = BalanceFaker.GenerateValidBalance();
         var offsetBalance = BalanceFaker.GenerateValidBalance();
 

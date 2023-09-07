@@ -5,17 +5,17 @@ namespace FluxoDeCaixa.Domain.Aggregations;
 
 public class BookEntry : IAggregate
 {
-    public BookEntry(Amount amount, Balance entryBalance, Balance offsetBalance, TransactionType entryTransactionType)
+    public BookEntry(TransactionAmount transactionAmount, Balance entryBalance, Balance offsetBalance, TransactionType entryTransactionType)
     {
-        ArgumentNullException.ThrowIfNull(amount);
+        ArgumentNullException.ThrowIfNull(transactionAmount);
         ArgumentNullException.ThrowIfNull(entryBalance);
         ArgumentNullException.ThrowIfNull(offsetBalance);
         
         Id = Guid.NewGuid();
         CreatedAt = DateTimeOffset.UtcNow;
-        Entry = new Transaction(entryTransactionType, amount, entryBalance);
-        Offset = new Transaction(GetOffsetTransactionType(entryTransactionType), amount, offsetBalance);
-        Errors = GetErrors(amount, entryBalance, offsetBalance);
+        Entry = new Transaction(entryTransactionType, transactionAmount, entryBalance);
+        Offset = new Transaction(GetOffsetTransactionType(entryTransactionType), transactionAmount, offsetBalance);
+        Errors = GetErrors(transactionAmount, entryBalance, offsetBalance);
     }
 
     public Guid Id { get; }
@@ -29,9 +29,9 @@ public class BookEntry : IAggregate
         return entryTransactionType is TransactionType.Credit ? TransactionType.Debit : TransactionType.Credit;
     }
 
-    private static IEnumerable<string> GetErrors(Amount amount, Balance entryBalance, Balance offsetBalance)
+    private static IEnumerable<string> GetErrors(TransactionAmount transactionAmount, Balance entryBalance, Balance offsetBalance)
     {
-        if (amount.IsValid is false)
+        if (transactionAmount.IsValid is false)
             yield return "Valor do amount inválido";
 
         if (entryBalance == offsetBalance)

@@ -11,7 +11,7 @@ public class AmountUnitTest : BaseUnitTest
         var value = Faker.Finance.Amount(max: decimal.MinusOne);
 
         //Act
-        var amount = new Amount(value);
+        var amount = new TransactionAmount(value);
 
         //Assert
         amount.IsValid.Should().BeFalse();
@@ -25,7 +25,7 @@ public class AmountUnitTest : BaseUnitTest
         const decimal value = decimal.Zero;
 
         //Act
-        var amount = new Amount(value);
+        var amount = new TransactionAmount(value);
 
         //Assert
         amount.IsValid.Should().BeTrue();
@@ -39,7 +39,7 @@ public class AmountUnitTest : BaseUnitTest
         var value = Faker.Finance.Amount(min: 0.00000001m);
 
         //Act
-        var amount = new Amount(value);
+        var amount = new TransactionAmount(value);
 
         //Assert
         amount.IsValid.Should().BeTrue();
