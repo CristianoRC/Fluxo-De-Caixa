@@ -1,0 +1,74 @@
+version: "3.9"
+
+services:
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: SuperSenha123
+    ports:
+      - "8080:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+  mongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Super@Senha321
+  
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: Super#Senha
+  
+  redis:
+    image: redis
+  
+  api:
+    build:
+      context: ./Api
+      dockerfile: dockerfile
+    container_name: customer-profile-api
+    ports:
+      - "8081:80"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongodb:
+        condition: service_started
+      redis:
+        condition: service_started
+      configure-rabbit:
+        condition: service_completed_successfully
+    environment:
+      ConnectionStrings__RabbitMQ: "amqp://root:SuperSenha123@rabbitmq:5672"
+      ConnectionStrings__Redis: "redis:6379"
+      ConnectionStrings__Sql: "Host=postgres;Database=fluxo-de-caixa;Username=postgres;Password=Super#Senha"
+
+  azure-storage:
+    image: "mcr.microsoft.com/azure-storage/azurite:latest"
+    container_name: azure-storage
+    ports:
+        - 10000:10000
+        - 10001:10001      
+
+  configure-rabbit:
+    build:
+      context: ./Configuration
+      dockerfile: dockerfile
+    container_name: configure-rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      user: "root"
+      password: "SuperSenha123"
+      host: rabbitmq
+      port: 5672           
