@@ -22,11 +22,11 @@ Enterprise_Boundary(boundaryEmpersa, "Empresa") {
         ContainerQueue(transactionQueue, "Fila - RabbitMQ", "Todas as transações finalizadas")
     }
     
-    Container(pdfApi, "PDF API", "ASP NET 7 / Azure Functions", "Transforma HTML em PDF")
     Container(authApi, "Auth API", "ASP NET 7", "Controla Auth e redireciona chamadas para os serviços de fluxo de caixa")
 }
 
-Container_Ext(blobStorage, "Blob storage Sevice", "", "Sistema que oferece armazenamento de dados")
+Container_Ext(gotenberg, "gotenberg", "Go Lang", "Sistema de renderização de HTML em PDF")
+Container_Ext(blobStorage, "Blob storage Sevice", "", "Sistema que oferece armazenamento de arquivos")
 Container_Ext(mailSystem, "Serviço de E-mail", "", "Sistema de envio de e-mail")
 Person(pessoa, "Usuário do sistema", "Gerencia fluxo de caixa")
 
@@ -39,8 +39,8 @@ Rel(fluxoDeCaixaApi, redis, "Controla lock distribuído no", "TCP")
 Rel(fluxoDeCaixaReportApi, mailSystem, "Envia e-mails", "SMTP")
 Rel_D(fluxoDeCaixaReportApi, transactionQueue, "Le as mensagens da fila", "TCP")
 Rel(fluxoDeCaixaReportApi, sqlServer, "Armazena dados para relatórios no", "TCP")
-Rel(fluxoDeCaixaReportApi, blobStorage, "Gerencia arquivos no", "TCP")
-Rel_D(fluxoDeCaixaReportApi, pdfApi, "Gera arquivos PDF usando", "HTTP/JSON")
+Rel(fluxoDeCaixaReportApi, blobStorage, "Armazena relatórios no", "TCP")
+Rel(fluxoDeCaixaReportApi, gotenberg, "Gera arquivos PDF usando", "HTTP/JSON")
 
 'App
 Rel(fluxoDeCaixaApp, fluxoDeCaixaBff, "Faz chamadas para", "HTTP/JSON")
