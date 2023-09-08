@@ -1,6 +1,6 @@
-using FluxoDeCaixa.Application.Services;
 using FluxoDeCaixa.Application.Services.Balance;
 using FluxoDeCaixa.Application.Services.BookEntry;
+using FluxoDeCaixa.Application.Services.Notification;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RedLockNet;
@@ -16,6 +16,7 @@ public static class Setup
     {
         service.AddScoped<IBookEntryApplicationService, BookEntryApplicationService>();
         service.AddScoped<IBalanceApplicationService, BalanceApplicationService>();
+        service.AddScoped<IBookEntryNotificationService, BookEntryNotificationService>();
         
         var endPoints = new List<RedLockMultiplexer>
         {

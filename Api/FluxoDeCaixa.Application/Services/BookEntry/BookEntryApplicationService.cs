@@ -1,5 +1,4 @@
 using FluxoDeCaixa.Domain.Services.BookEntry;
-using FluxoDeCaixa.Infra.MessageBus.Configuration;
 using RedLockNet;
 
 namespace FluxoDeCaixa.Application.Services.BookEntry;
@@ -8,13 +7,13 @@ public class BookEntryApplicationService : IBookEntryApplicationService
 {
     private readonly IDistributedLockFactory _distributedLockFactory;
     private readonly IBookEntryService _bookEntryService;
-    private readonly ISendMessageService _sendMessageService;
+    private readonly IBookEntryNotificationService _notificationService;
 
-    public BookEntryApplicationService(IDistributedLockFactory distributedLockFactory, IBookEntryService bookEntryService, ISendMessageService sendMessageService)
+    public BookEntryApplicationService(IDistributedLockFactory distributedLockFactory, IBookEntryService bookEntryService, IBookEntryNotificationService notificationService)
     {
         _distributedLockFactory = distributedLockFactory;
         _bookEntryService = bookEntryService;
-        _sendMessageService = sendMessageService;
+        _notificationService = notificationService;
     }
 
     public async Task<Domain.Aggregations.BookEntry> Create(CreateBookEntry command)
@@ -42,7 +41,7 @@ public class BookEntryApplicationService : IBookEntryApplicationService
         await lockOffset.DisposeAsync();
         
         if (bookEntry.Errors.Any() is false)
-            _sendMessageService.SendMessage(bookEntry, "book-entry", string.Empty);
+            _notificationService.NewBookEntryCreates(bookEntry, command.CorrelationId);
         
         return bookEntry;
     }
