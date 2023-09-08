@@ -13,11 +13,14 @@ Enterprise_Boundary(boundary-fluxo-de-caixa, "Fluxo de caixa") {
 
 System_Ext(blobStorage, "Blob storage Sevice", "Sistema que oferece armazenamento de dados")
 System_Ext(mailSystem, "Serviço de E-mail", "Sistema de envio de e-mail")
+System_Ext(gotenberg, "gotenberg", "Sistema de renderização de HTML em PDF")
 Person(pessoa, "Usuário do sistema", "Gerencia fluxo de caixa")
 
 Rel(pessoa, fluxoDeCaixa, "Usa o sistema")
 Rel(fluxoDeCaixa, blobStorage, "Gerencia arquivos no")
 Rel(fluxoDeCaixa, mailSystem, "Envia e-mail usando")
+Rel(fluxoDeCaixa, gotenberg, "Renderiza PDF com")
 Rel(mailSystem, pessoa, "Envia e-mail para")
+
 
 @enduml
