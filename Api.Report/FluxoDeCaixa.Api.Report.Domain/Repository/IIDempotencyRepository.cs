@@ -1,6 +1,6 @@
 namespace FluxoDeCaixa.Api.Report.Domain.Repository;
 
-public class IIdempotencyRepository
+public interface IIdempotencyRepository
 {
-    
+    public Task<bool> AlreadyProcess(Guid key);
 }

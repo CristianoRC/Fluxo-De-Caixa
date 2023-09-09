@@ -5,15 +5,20 @@ namespace FluxoDeCaixa.Api.Report.Domain.Service;
 
 public class IdempotencyService : IIdempotencyService
 {
-    public IIdempotencyRepository Repository { get; }
+    private readonly IIdempotencyRepository _repository;
 
     public IdempotencyService(IIdempotencyRepository repository)
     {
-        Repository = repository;
+        _repository = repository;
     }
 
     public async Task<bool> MessageAlreadyProcessed(Idempotency idempotency)
     {
-        throw new NotImplementedException();
+        if (idempotency is null)
+            return true;
+        if (idempotency.IdempotencyKey == Guid.Empty)
+            return true;
+
+        return await _repository.AlreadyProcess(idempotency.IdempotencyKey);
     }
 }

@@ -2,8 +2,8 @@ namespace FluxoDeCaixa.Api.Report.Domain.Entities;
 
 public record BookEntry : Idempotency
 {
-    public string IdempotencyKey { get; set; }
-    public string CorrelationId { get; set; }
+    public Guid IdempotencyKey { get; set; }
+    public Guid CorrelationId { get; set; }
     public BookEntryData BookEntryData { get; set; }
 }
 
