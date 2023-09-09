@@ -30,7 +30,7 @@ public static class Setup
 
     private static void ConfigureMongoDb(IServiceCollection services, IConfiguration configuration)
     {
-        var client = new MongoClient(configuration["MongoDb"]);
+        var client = new MongoClient(configuration["mongoDb"]);
         services.AddSingleton<IMongoClient>(client);
 
         var objectDiscriminatorConvention = BsonSerializer.LookupDiscriminatorConvention(typeof(object));
