@@ -26,4 +26,23 @@ public class BookEntryServiceUnitTest
         //Assert
         bookEntryRepository.Verify(x => x.SaveTransaction(It.IsAny<IEnumerable<Transaction>>()), Times.Never);
     }
+
+    [Fact(DisplayName = "Se ainda não tiver sido processada, deve salvar a partida e a contrapartida")]
+    public async Task SaveTransactions()
+    {
+        //Arrange
+        var bookEntry = BookEntryFaker.GenerateValidBookEntry();
+        var idempotencyService = new Mock<IIdempotencyService>();
+        idempotencyService.Setup(x => x.MessageAlreadyProcessed(bookEntry))
+            .ReturnsAsync(false);
+        var bookEntryRepository = new Mock<IBookEntryRepository>();
+        var bookEntryService = new BookEntryService(idempotencyService.Object, bookEntryRepository.Object);
+
+        //Act
+        await bookEntryService.Create(bookEntry);
+
+        //Assert
+        var transactions = new[] {bookEntry.BookEntryData.Entry, bookEntry.BookEntryData.Offset};
+        bookEntryRepository.Verify(x => x.SaveTransaction(transactions), Times.Once);
+    }
 }

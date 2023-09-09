@@ -18,7 +18,8 @@ public class BookEntryService : IBookEntryService
         var alreadyProcess = await _idempotencyService.MessageAlreadyProcessed(createBookEntry);
         if (alreadyProcess)
             return;
-        
-        throw new NotImplementedException();
+
+        var transactions = new[] {createBookEntry.BookEntryData.Entry, createBookEntry.BookEntryData.Offset};
+        await _repository.SaveTransaction(transactions);
     }
 }
