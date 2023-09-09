@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluxoDeCaixa.Api.Report", "FluxoDeCaixa.Api.Report\FluxoDeCaixa.Api.Report.csproj", "{2B3D9954-7CE3-4880-AD69-AEBA163FE93C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluxoDeCaixa.Api.Report.Domain", "FluxoDeCaixa.Api.Report.Domain\FluxoDeCaixa.Api.Report.Domain.csproj", "{D4B23C8A-6459-4C58-A606-2EB4CAB8F95C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluxoDeCaixa.Api.Report.Infra", "FluxoDeCaixa.Api.Report.Infra\FluxoDeCaixa.Api.Report.Infra.csproj", "{E4ADFFA1-43F1-4343-BA23-73618DCAD207}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{2B3D9954-7CE3-4880-AD69-AEBA163FE93C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B3D9954-7CE3-4880-AD69-AEBA163FE93C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B3D9954-7CE3-4880-AD69-AEBA163FE93C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4B23C8A-6459-4C58-A606-2EB4CAB8F95C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4B23C8A-6459-4C58-A606-2EB4CAB8F95C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4B23C8A-6459-4C58-A606-2EB4CAB8F95C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4B23C8A-6459-4C58-A606-2EB4CAB8F95C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4ADFFA1-43F1-4343-BA23-73618DCAD207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4ADFFA1-43F1-4343-BA23-73618DCAD207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4ADFFA1-43F1-4343-BA23-73618DCAD207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4ADFFA1-43F1-4343-BA23-73618DCAD207}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
