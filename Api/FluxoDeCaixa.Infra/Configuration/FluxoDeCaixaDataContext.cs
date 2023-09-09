@@ -6,6 +6,10 @@ namespace FluxoDeCaixa.Infra.Configuration;
 
 public class FluxoDeCaixaDataContext : DbContext
 {
+    public FluxoDeCaixaDataContext()
+    {
+    }
+    
     public FluxoDeCaixaDataContext(DbContextOptions<FluxoDeCaixaDataContext> options) : base(options)
     {
     }
