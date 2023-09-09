@@ -14,4 +14,11 @@
       <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <ProjectReference Include="..\FluxoDeCaixa.Api.Report.Domain\FluxoDeCaixa.Api.Report.Domain.csproj" />
+    </ItemGroup>
+
+
+
 </Project>

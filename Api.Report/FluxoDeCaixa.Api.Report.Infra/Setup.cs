@@ -1,3 +1,5 @@
+using FluxoDeCaixa.Api.Report.Domain.Repository;
+using FluxoDeCaixa.Api.Report.Infra.Repositories;
 using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +14,9 @@ public static class Setup
 {
     public static IServiceCollection AddInfra(this IServiceCollection service, IConfiguration configuration)
     {
+        service.AddTransient<IIdempotencyRepository, IdempotencyRepository>();
         ConfigureMongoDb(service, configuration);
+        ConfigureBlobStorage(service, configuration);
         return service;
     }
 
@@ -20,7 +24,7 @@ public static class Setup
     {
         services.AddAzureClients(clientBuilder =>
         {
-            clientBuilder.AddBlobServiceClient(new Uri(configuration["bloblStorage"]));
+            clientBuilder.AddBlobServiceClient(new Uri(configuration["blobStorage"]));
         });
     }
 
