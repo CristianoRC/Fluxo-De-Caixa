@@ -48,12 +48,30 @@ public class TransactionDbModelUnitTest : BaseUnitTest
     {
         //Arrange
         var transaction = TransactionFaker.GenerateFakeTransaction();
+        transaction.Type = 1;
         
         //Act
         var transactionDbModel = new TransactionDbModel(transaction);
 
         //Assert
         transactionDbModel.TransactionAmount.Should().Be(transaction.TransactionAmount.Value);
+        transactionDbModel.BalanceAfterTransaction.Should().Be(transaction.BalanceAfterTransaction.Value);
+        transactionDbModel.BalanceName.Should().Be(transaction.Balance.Name);
+        transactionDbModel.BalanceId.Should().Be(transaction.Balance.Id);
+    }
+    
+    [Fact(DisplayName = "Ao converter uma transação em DbModel, o valor de transaction amount deve ser convertido para pegativo quando for Débito")]
+    public void TransactionAmount()
+    {
+        //Arrange
+        var transaction = TransactionFaker.GenerateFakeTransaction();
+        transaction.Type = 0;
+        
+        //Act
+        var transactionDbModel = new TransactionDbModel(transaction);
+
+        //Assert
+        transactionDbModel.TransactionAmount.Should().Be(decimal.Negate(transaction.TransactionAmount.Value));
         transactionDbModel.BalanceAfterTransaction.Should().Be(transaction.BalanceAfterTransaction.Value);
         transactionDbModel.BalanceName.Should().Be(transaction.Balance.Name);
         transactionDbModel.BalanceId.Should().Be(transaction.Balance.Id);

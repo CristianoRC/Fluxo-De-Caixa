@@ -13,7 +13,7 @@ public class TransactionDbModel
         Id = transaction.Id;
         Description = transaction.Description;
         TypeId = transaction.Type;
-        TransactionAmount = transaction.TransactionAmount.Value;
+        TransactionAmount = transaction.Type == Debit ? decimal.Negate(transaction.TransactionAmount.Value) : transaction.TransactionAmount.Value;
         BalanceAfterTransaction = transaction.BalanceAfterTransaction.Value;
         BalanceName = transaction.Balance.Name;
         BalanceId = transaction.Balance.Id;
@@ -21,6 +21,7 @@ public class TransactionDbModel
         TypeId = transaction.Type;
     }
 
+    private const int Debit = 0;
     public Guid Id { get; set; }
     public string Description { get; set; }
     public string Type => TypeId == 0 ? "Débito" : "Crédito";
