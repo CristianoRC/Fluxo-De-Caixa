@@ -27,6 +27,11 @@ services:
     image: postgres
     environment:
       POSTGRES_PASSWORD: Super#Senha
+      healthcheck:
+        test: ["CMD-SHELL", "pg_isready"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
   
   redis:
     image: redis
@@ -41,8 +46,8 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
-      mongodb:
-        condition: service_started
+      postgres:
+        condition: service_healthy
       redis:
         condition: service_started
       configure-rabbit:
@@ -51,6 +56,7 @@ services:
       ConnectionStrings__RabbitMQ: "amqp://root:SuperSenha123@rabbitmq:5672"
       ConnectionStrings__Redis: "redis:6379"
       ConnectionStrings__Sql: "Host=postgres;Database=fluxo-de-caixa;Username=postgres;Password=Super#Senha"
+
 
   configure-rabbit:
     build:
