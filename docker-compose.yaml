@@ -61,7 +61,7 @@ services:
     build:
       context: ./Api
       dockerfile: dockerfile
-    container_name: customer-profile-api
+    container_name: customer-profile-api-report
     ports:
       - "8081:80"
     depends_on:
