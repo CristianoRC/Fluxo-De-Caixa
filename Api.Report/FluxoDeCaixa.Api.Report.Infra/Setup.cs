@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
@@ -14,12 +15,20 @@ public static class Setup
         ConfigureMongoDb(service, configuration);
         return service;
     }
-    
+
+    private static void ConfigureBlobStorage(IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddAzureClients(clientBuilder =>
+        {
+            clientBuilder.AddBlobServiceClient(new Uri(configuration["bloblStorage"]));
+        });
+    }
+
     private static void ConfigureMongoDb(IServiceCollection services, IConfiguration configuration)
     {
         var client = new MongoClient(configuration["MongoDb"]);
         services.AddSingleton<IMongoClient>(client);
-        
+
         var objectDiscriminatorConvention = BsonSerializer.LookupDiscriminatorConvention(typeof(object));
         var objectSerializer = new ObjectSerializer(objectDiscriminatorConvention, GuidRepresentation.Standard);
         BsonSerializer.RegisterSerializer(objectSerializer);
