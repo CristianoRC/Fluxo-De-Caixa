@@ -52,13 +52,6 @@ services:
       ConnectionStrings__Redis: "redis:6379"
       ConnectionStrings__Sql: "Host=postgres;Database=fluxo-de-caixa;Username=postgres;Password=Super#Senha"
 
-  azure-storage:
-    image: "mcr.microsoft.com/azure-storage/azurite:latest"
-    container_name: azure-storage
-    ports:
-        - 10000:10000
-        - 10001:10001      
-
   configure-rabbit:
     build:
       context: ./Configuration
@@ -71,4 +64,15 @@ services:
       user: "root"
       password: "SuperSenha123"
       host: rabbitmq
-      port: 5672           
+      port: 5672
+
+  gotenberg:
+    image: gotenberg/gotenberg:7
+
+  azure-storage:
+    image: "mcr.microsoft.com/azure-storage/azurite:latest"
+    container_name: azure-storage
+    ports:
+        - 10000:10000
+        - 10001:10001      
+
