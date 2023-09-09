@@ -1,3 +1,5 @@
+using FluxoDeCaixa.Api.Report.Domain.Entities;
+using FluxoDeCaixa.Api.Report.Domain.Service;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -11,7 +13,7 @@ public static class BookEntryTopicTrigger
         string message, FunctionContext context)
     {
         var bookEntryService = context.InstanceServices.GetService<IBookEntryService>();
-        var createBookEntry = JsonConvert.DeserializeObject<CreateBookEntry>(message);
+        var createBookEntry = JsonConvert.DeserializeObject<BookEntry>(message);
         await bookEntryService.Create(createBookEntry);
     }
 }

@@ -24,4 +24,7 @@
     <ItemGroup>
         <Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext"/>
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\FluxoDeCaixa.Api.Report.Domain\FluxoDeCaixa.Api.Report.Domain.csproj" />
+    </ItemGroup>
 </Project>
