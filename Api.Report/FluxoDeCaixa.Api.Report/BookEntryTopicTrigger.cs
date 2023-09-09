@@ -1,5 +1,6 @@
 using FluxoDeCaixa.Api.Report.Domain.Entities;
 using FluxoDeCaixa.Api.Report.Domain.Service;
+using FluxoDeCaixa.Api.Report.Domain.Service.BookEntry;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;

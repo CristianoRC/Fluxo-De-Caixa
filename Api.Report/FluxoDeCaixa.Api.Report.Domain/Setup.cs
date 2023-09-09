@@ -1,4 +1,5 @@
 using FluxoDeCaixa.Api.Report.Domain.Service;
+using FluxoDeCaixa.Api.Report.Domain.Service.BookEntry;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FluxoDeCaixa.Api.Report.Domain;

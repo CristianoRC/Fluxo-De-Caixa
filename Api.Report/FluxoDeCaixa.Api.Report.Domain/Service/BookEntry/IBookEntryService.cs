@@ -1,8 +1,6 @@
-using FluxoDeCaixa.Api.Report.Domain.Entities;
-
-namespace FluxoDeCaixa.Api.Report.Domain.Service;
+namespace FluxoDeCaixa.Api.Report.Domain.Service.BookEntry;
 
 public interface IBookEntryService
 {
-    Task Create(BookEntry createBookEntry);
+    Task Create(Entities.BookEntry createBookEntry);
 }
