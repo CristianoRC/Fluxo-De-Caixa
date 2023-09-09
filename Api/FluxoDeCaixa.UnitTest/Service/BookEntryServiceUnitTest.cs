@@ -45,7 +45,8 @@ public class BookEntryServiceUnitTest : BaseUnitTest
             Amount = Faker.Finance.Amount(),
             EntryBalance = Guid.NewGuid(),
             OffsetBalance = Guid.NewGuid(),
-            TransactionType = TransactionTypeFaker.GenerateRandomTransactionType()
+            TransactionType = TransactionTypeFaker.GenerateRandomTransactionType(),
+            Description = Faker.Lorem.Word()
         };
         var entryBalance = BalanceFaker.GenerateValidBalance();
         var offsetBalance = BalanceFaker.GenerateValidBalance();
@@ -66,8 +67,10 @@ public class BookEntryServiceUnitTest : BaseUnitTest
         bookEntryCreated.Errors.Should().BeEmpty();
         bookEntryCreated.Entry.Balance.Should().Be(entryBalance);
         bookEntryCreated.Entry.TransactionAmount.Value.Should().Be(createBookEntryCommand.Amount);
+        bookEntryCreated.Entry.Description.Should().Be(createBookEntryCommand.Description);
         bookEntryCreated.Offset.Balance.Should().Be(offsetBalance);
         bookEntryCreated.Offset.TransactionAmount.Value.Should().Be(createBookEntryCommand.Amount);
+        bookEntryCreated.Offset.Description.Should().Be(createBookEntryCommand.Description);
     }
 
     [Fact(DisplayName = "Ao criar um book entry inválido, não deve salvar o resultado")]
