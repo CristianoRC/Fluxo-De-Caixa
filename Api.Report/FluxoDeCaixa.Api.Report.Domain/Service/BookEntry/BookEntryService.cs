@@ -21,5 +21,6 @@ public class BookEntryService : IBookEntryService
 
         var transactions = new[] {createBookEntry.BookEntryData.Entry, createBookEntry.BookEntryData.Offset};
         await _repository.SaveTransaction(transactions);
+        await _idempotencyService.MarkAsProcessed(createBookEntry);
     }
 }

@@ -21,4 +21,9 @@ public class IdempotencyService : IIdempotencyService
 
         return await _repository.AlreadyProcess(idempotency.IdempotencyKey);
     }
+
+    public Task<bool> MarkAsProcessed(Idempotency idempotency)
+    {
+        throw new NotImplementedException();
+    }
 }

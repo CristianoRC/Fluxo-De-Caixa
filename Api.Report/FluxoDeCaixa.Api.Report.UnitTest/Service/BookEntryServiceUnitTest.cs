@@ -45,4 +45,22 @@ public class BookEntryServiceUnitTest
         var transactions = new[] {bookEntry.BookEntryData.Entry, bookEntry.BookEntryData.Offset};
         bookEntryRepository.Verify(x => x.SaveTransaction(transactions), Times.Once);
     }
+
+    [Fact(DisplayName = "Após salvar as transações com sucesso deve marcar como processada")]
+    public async Task MarkAsProcess()
+    {
+        //Arrange
+        var bookEntry = BookEntryFaker.GenerateValidBookEntry();
+        var idempotencyService = new Mock<IIdempotencyService>();
+        idempotencyService.Setup(x => x.MessageAlreadyProcessed(bookEntry))
+            .ReturnsAsync(false);
+        var bookEntryRepository = new Mock<IBookEntryRepository>();
+        var bookEntryService = new BookEntryService(idempotencyService.Object, bookEntryRepository.Object);
+
+        //Act
+        await bookEntryService.Create(bookEntry);
+
+        //Assert
+        idempotencyService.Verify(x => x.MarkAsProcessed(bookEntry), Times.Once);
+    }
 }
