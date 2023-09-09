@@ -29,6 +29,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\FluxoDeCaixa.Api.Report.Domain\FluxoDeCaixa.Api.Report.Domain.csproj" />
+      <ProjectReference Include="..\FluxoDeCaixa.Api.Report.Infra\FluxoDeCaixa.Api.Report.Infra.csproj" />
     </ItemGroup>
+
+
+
 
 </Project>
