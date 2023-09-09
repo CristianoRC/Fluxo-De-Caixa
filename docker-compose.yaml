@@ -21,7 +21,7 @@ services:
     image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: Super@Senha321
+      MONGO_INITDB_ROOT_PASSWORD: Super_Senha321
   
   postgres:
     image: postgres
@@ -57,6 +57,33 @@ services:
       ConnectionStrings__Redis: "redis:6379"
       ConnectionStrings__Sql: "Host=postgres;Database=fluxo-de-caixa;Username=postgres;Password=Super#Senha"
 
+  report-api:
+    build:
+      context: ./Api
+      dockerfile: dockerfile
+    container_name: customer-profile-api
+    ports:
+      - "8081:80"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongodb:
+        condition: service_started
+      redis:
+        condition: service_started
+      configure-rabbit:
+        condition: service_completed_successfully
+      api:
+        condition: service_started
+      azure-storage:
+        condition: service_started
+      gotenberg:
+        condition: service_started
+    environment:
+      rabbitMq: "amqp://root:SuperSenha123@rabbitmq:5672"
+      database: "fluxo-de-caixa"
+      mongodb: "mongodb://root:Super_Senha321@mongodb:27017"
+      blobStorage: "azure-storage"
 
   configure-rabbit:
     build:
