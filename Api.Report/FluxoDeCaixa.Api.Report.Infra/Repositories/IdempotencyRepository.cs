@@ -8,13 +8,13 @@ namespace FluxoDeCaixa.Api.Report.Infra.Repositories;
 
 public class IdempotencyRepository : IIdempotencyRepository
 {
-    private readonly IMongoCollection<Idempotency> _idempotencyCollection;
+    private readonly IMongoCollection<IdempotencyDbModel> _idempotencyCollection;
 
     public IdempotencyRepository(IMongoClient mongoClient, IConfiguration config)
     {
         var databaseName = config["database"];
         var database = mongoClient.GetDatabase(databaseName);
-        _idempotencyCollection = database.GetCollection<Idempotency>("Idempotency");
+        _idempotencyCollection = database.GetCollection<IdempotencyDbModel>("Idempotency");
     }
 
     public async Task<bool> AlreadyProcess(Guid key)
