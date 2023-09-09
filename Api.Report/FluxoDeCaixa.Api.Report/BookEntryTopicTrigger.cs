@@ -10,8 +10,8 @@ public static class BookEntryTopicTrigger
     public static async Task Run([RabbitMQTrigger("CreateCustomerTopicTrigger", ConnectionStringSetting = "rabbitMq")]
         string message, FunctionContext context)
     {
-        var bookEntryUseCase = context.InstanceServices.GetService<ICreateBookEntryUseCase>();
+        var bookEntryService = context.InstanceServices.GetService<IBookEntryService>();
         var createBookEntry = JsonConvert.DeserializeObject<CreateBookEntry>(message);
-        await bookEntryUseCase.Execute(createBookEntry);
+        await bookEntryService.Create(createBookEntry);
     }
 }
