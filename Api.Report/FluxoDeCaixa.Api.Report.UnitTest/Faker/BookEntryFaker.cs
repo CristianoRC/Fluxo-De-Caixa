@@ -31,7 +31,8 @@ public static class BookEntryFaker
             BalanceAfterTransaction = new Amount {Value = faker.Finance.Amount()},
             TransactionAmount = new Amount {Value = faker.Finance.Amount()},
             Type = faker.PickRandom(0, 1),
-            Balance = GenerateValidBalance(faker)
+            Balance = GenerateValidBalance(faker),
+            Description =  faker.Lorem.Word()
         };
     }
 

@@ -8,4 +8,5 @@ public record Transaction
     public Amount BalanceAfterTransaction { get; set; }
     public Balance Balance { get; set; }
     public DateTime CreatedAt { get; set; }
+    public string Description { get; set; }
 }
