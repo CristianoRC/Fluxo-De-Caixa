@@ -8,6 +8,8 @@ public static class Setup
     public static IServiceCollection AddDomain(this IServiceCollection service)
     {
         service.AddScoped<IBookEntryService, BookEntryService>();
+        service.AddScoped<IIdempotencyService, IdempotencyService>();
+
         return service;
     }
 }
