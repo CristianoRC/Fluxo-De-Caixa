@@ -25,10 +25,10 @@ public static class Setup
 
     private static void ConfigureBlobStorage(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddAzureClients(clientBuilder =>
+        /*services.AddAzureClients(clientBuilder =>
         {
             clientBuilder.AddBlobServiceClient(new Uri(configuration["blobStorage"]));
-        });
+        });*/
     }
 
     private static void ConfigureMongoDb(IServiceCollection services, IConfiguration configuration)

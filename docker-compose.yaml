@@ -11,6 +11,7 @@ services:
       RABBITMQ_DEFAULT_PASS: SuperSenha123
     ports:
       - "8080:15672"
+      - "5672:5672"
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
       interval: 5s
@@ -87,7 +88,6 @@ services:
       mongodb: "mongodb://root:Super_Senha321@mongodb:27017"
       blobStorage: "azure-storage"
       AzureWebJobsStorage: "DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://local.storage.emulator:10000/devstoreaccount1;QueueEndpoint=http://local.storage.emulator:10001/devstoreaccount1;"
-
 
   configure-rabbit:
     build:
