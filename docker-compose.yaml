@@ -22,7 +22,9 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: Super_Senha321
-  
+    ports:
+      - "27017:27017"
+
   postgres:
     image: postgres
     environment:
@@ -59,11 +61,11 @@ services:
 
   report-api:
     build:
-      context: ./Api
+      context: ./Api.Report
       dockerfile: dockerfile
     container_name: customer-profile-api-report
     ports:
-      - "8081:80"
+      - "8082:80"
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -84,6 +86,8 @@ services:
       database: "fluxo-de-caixa"
       mongodb: "mongodb://root:Super_Senha321@mongodb:27017"
       blobStorage: "azure-storage"
+      AzureWebJobsStorage: "DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://local.storage.emulator:10000/devstoreaccount1;QueueEndpoint=http://local.storage.emulator:10001/devstoreaccount1;"
+
 
   configure-rabbit:
     build:
