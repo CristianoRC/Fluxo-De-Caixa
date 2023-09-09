@@ -12,7 +12,7 @@ public static class BookEntryFaker
         {
             IdempotencyKey = Guid.NewGuid(),
             CorrelationId = Guid.NewGuid(),
-            BookEntryData = new BookEntryData()
+            Data = new BookEntryData()
             {
                 Id = Guid.NewGuid(),
                 CreatedAt = faker.Date.Past(),

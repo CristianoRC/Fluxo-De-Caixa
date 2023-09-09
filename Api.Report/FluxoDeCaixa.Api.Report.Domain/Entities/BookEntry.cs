@@ -4,7 +4,7 @@ public record BookEntry : Idempotency
 {
     public Guid IdempotencyKey { get; set; }
     public Guid CorrelationId { get; set; }
-    public BookEntryData BookEntryData { get; set; }
+    public BookEntryData Data { get; set; }
 }
 
 public record BookEntryData

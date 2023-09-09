@@ -20,7 +20,7 @@ public class IdempotencyRepository : IIdempotencyRepository
     public async Task<bool> AlreadyProcess(Guid key)
     {
         var quantity = await _idempotencyCollection.CountDocumentsAsync(x => x.IdempotencyKey == key);
-        return quantity > decimal.Zero;
+        return quantity > 0;
     }
 
     public async Task MarkAsProcess(Guid key)

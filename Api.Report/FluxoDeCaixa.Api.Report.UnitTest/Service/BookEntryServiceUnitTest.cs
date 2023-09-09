@@ -42,7 +42,7 @@ public class BookEntryServiceUnitTest
         await bookEntryService.Create(bookEntry);
 
         //Assert
-        var transactions = new[] {bookEntry.BookEntryData.Entry, bookEntry.BookEntryData.Offset};
+        var transactions = new[] {bookEntry.Data.Entry, bookEntry.Data.Offset};
         bookEntryRepository.Verify(x => x.SaveTransaction(transactions), Times.Once);
     }
 

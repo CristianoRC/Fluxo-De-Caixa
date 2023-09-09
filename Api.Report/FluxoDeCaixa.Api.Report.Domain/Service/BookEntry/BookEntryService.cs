@@ -19,7 +19,7 @@ public class BookEntryService : IBookEntryService
         if (alreadyProcess)
             return;
 
-        var transactions = new[] {createBookEntry.BookEntryData.Entry, createBookEntry.BookEntryData.Offset};
+        var transactions = new[] {createBookEntry.Data.Entry, createBookEntry.Data.Offset};
         await _repository.SaveTransaction(transactions);
         await _idempotencyService.MarkAsProcessed(createBookEntry);
     }
