@@ -8,13 +8,14 @@ public class Transaction : IEntity
     {
     }
 
-    public Transaction(TransactionType transactionType, TransactionAmount transactionAmount, Balance balance)
+    public Transaction(TransactionType transactionType, TransactionAmount transactionAmount, Balance balance, string description)
     {
         Id = Guid.NewGuid();
         Type = transactionType;
         TransactionAmount = transactionAmount;
         Balance = balance;
         CreatedAt = DateTimeOffset.UtcNow;
+        Description = description;
         UpdateBalanceAfterTransaction();
     }
 
@@ -24,6 +25,7 @@ public class Transaction : IEntity
     public BalanceAmount BalanceAfterTransaction { get; protected set; }
     public Balance Balance { get; protected set; }
     public DateTimeOffset CreatedAt { get; protected set; }
+    public string Description { get; set; }
     public bool IsValid => Balance.IsValid && TransactionAmount.IsValid;
 
     private void UpdateBalanceAfterTransaction()

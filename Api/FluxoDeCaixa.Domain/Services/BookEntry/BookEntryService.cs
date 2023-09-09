@@ -21,7 +21,7 @@ public class BookEntryService : IBookEntryService
         var offsetBalance = await _balanceRepository.Get(command.OffsetBalance);
         
         var transactionAmount = new TransactionAmount(command.Amount);
-        var bookEntry = new Aggregations.BookEntry(transactionAmount, entryBalance, offsetBalance, command.TransactionType);
+        var bookEntry = new Aggregations.BookEntry(transactionAmount, entryBalance, offsetBalance, command.TransactionType, command.Description);
         if (bookEntry.Errors.Any())
             return bookEntry;
 

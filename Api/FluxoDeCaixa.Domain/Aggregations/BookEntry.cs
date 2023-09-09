@@ -7,7 +7,7 @@ public class BookEntry : IAggregate
 {
     protected BookEntry(){ }
     
-    public BookEntry(TransactionAmount transactionAmount, Balance entryBalance, Balance offsetBalance, TransactionType entryTransactionType)
+    public BookEntry(TransactionAmount transactionAmount, Balance entryBalance, Balance offsetBalance, TransactionType entryTransactionType, string description)
     {
         ArgumentNullException.ThrowIfNull(transactionAmount);
 
@@ -16,8 +16,8 @@ public class BookEntry : IAggregate
         Errors = GetErrors(transactionAmount, entryBalance, offsetBalance);
         if (Errors.Any())
             return;
-        Entry = new Transaction(entryTransactionType, transactionAmount, entryBalance);
-        Offset = new Transaction(GetOffsetTransactionType(entryTransactionType), transactionAmount, offsetBalance);
+        Entry = new Transaction(entryTransactionType, transactionAmount, entryBalance, description);
+        Offset = new Transaction(GetOffsetTransactionType(entryTransactionType), transactionAmount, offsetBalance, description);
     }
 
     public Guid Id { get; protected set;}
@@ -25,7 +25,7 @@ public class BookEntry : IAggregate
     public Transaction Offset { get; protected set;}
     public IEnumerable<string> Errors { get; } = Enumerable.Empty<string>();
     public DateTimeOffset CreatedAt { get; protected set;}
-
+    
     private static TransactionType GetOffsetTransactionType(TransactionType entryTransactionType)
     {
         return entryTransactionType is TransactionType.Credit ? TransactionType.Debit : TransactionType.Credit;

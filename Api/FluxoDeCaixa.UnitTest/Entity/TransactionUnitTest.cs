@@ -13,9 +13,10 @@ public class TransactionUnitTest : BaseUnitTest
         var amount = new TransactionAmount(Faker.Finance.Amount(max: decimal.MinusOne));
         var transactionType = TransactionTypeFaker.GenerateRandomTransactionType();
         var balance = BalanceFaker.GenerateValidBalance();
+        var description = Faker.Lorem.Word();
 
         //Act
-        var transaction = new Transaction(transactionType, amount, balance);
+        var transaction = new Transaction(transactionType, amount, balance, description);
 
         //Assert
         transaction.IsValid.Should().BeFalse();
@@ -28,9 +29,10 @@ public class TransactionUnitTest : BaseUnitTest
         var amount = new TransactionAmount(Faker.Finance.Amount());
         var transactionType = TransactionTypeFaker.GenerateRandomTransactionType();
         var balance = new Balance(string.Empty);
+        var description = Faker.Lorem.Word();
 
         //Act
-        var transaction = new Transaction(transactionType, amount, balance);
+        var transaction = new Transaction(transactionType, amount, balance, description);
 
         //Assert
         transaction.IsValid.Should().BeFalse();
@@ -43,9 +45,10 @@ public class TransactionUnitTest : BaseUnitTest
         var amount = new TransactionAmount(Faker.Finance.Amount());
         var transactionType = TransactionTypeFaker.GenerateRandomTransactionType();
         var balance = BalanceFaker.GenerateValidBalance();
+        var description = Faker.Lorem.Word();
 
         //Act
-        var transaction = new Transaction(transactionType, amount, balance);
+        var transaction = new Transaction(transactionType, amount, balance, description);
 
         //Assert
         transaction.IsValid.Should().BeTrue();
@@ -62,29 +65,31 @@ public class TransactionUnitTest : BaseUnitTest
         //Arrange
         var balanceAmount = Faker.Finance.Amount(-99999);
         var transactionAmount = new TransactionAmount(Faker.Finance.Amount());
-        var transactionType = TransactionType.Credit;
+        const TransactionType transactionType = TransactionType.Credit;
         var balance = BalanceFaker.GenerateValidBalance(balanceAmount);
         var expectedBalanceAfterTransaction = balanceAmount + transactionAmount.Value;
-        
+        var description = Faker.Lorem.Word();
+
         //Act
-        var transaction = new Transaction(transactionType, transactionAmount, balance);
+        var transaction = new Transaction(transactionType, transactionAmount, balance, description);
 
         //Assert
         transaction.BalanceAfterTransaction.Value.Should().Be(expectedBalanceAfterTransaction);
     }
-    
+
     [Fact(DisplayName = "Ao criar uma transação de debito, o balance after transaction deve ter o valor atual do balance - transaction amount")]
     public void DebitBalanceAfterTransaction()
     {
         //Arrange
         var balanceAmount = Faker.Finance.Amount(-99999);
         var transactionAmount = new TransactionAmount(Faker.Finance.Amount());
-        var transactionType = TransactionType.Debit;
+        const TransactionType transactionType = TransactionType.Debit;
         var balance = BalanceFaker.GenerateValidBalance(balanceAmount);
         var expectedBalanceAfterTransaction = balanceAmount - transactionAmount.Value;
-        
+        var description = Faker.Lorem.Word();
+
         //Act
-        var transaction = new Transaction(transactionType, transactionAmount, balance);
+        var transaction = new Transaction(transactionType, transactionAmount, balance, description);
 
         //Assert
         transaction.BalanceAfterTransaction.Value.Should().Be(expectedBalanceAfterTransaction);
@@ -96,12 +101,13 @@ public class TransactionUnitTest : BaseUnitTest
         //Arrange
         var balanceAmount = Faker.Finance.Amount(-99999);
         var transactionAmount = new TransactionAmount(Faker.Finance.Amount());
-        var transactionType = TransactionType.Debit;
+        const TransactionType transactionType = TransactionType.Debit;
         var balance = BalanceFaker.GenerateValidBalance(balanceAmount);
         var expectedBalanceAfterTransaction = balanceAmount - transactionAmount.Value;
-        
+        var description = Faker.Lorem.Word();
+
         //Act
-        var transaction = new Transaction(transactionType, transactionAmount, balance);
+        var transaction = new Transaction(transactionType, transactionAmount, balance, description);
 
         //Assert
         transaction.Balance.Amount.Value.Should().Be(expectedBalanceAfterTransaction);
