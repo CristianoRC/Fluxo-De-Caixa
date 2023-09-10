@@ -1,4 +1,3 @@
-using FluxoDeCaixa.Api.Report.Domain.Entities;
 using FluxoDeCaixa.Api.Report.Domain.Repository;
 
 namespace FluxoDeCaixa.Api.Report.Domain.Service.Report;
@@ -15,8 +14,16 @@ public class ReportService : IReportService
     public async Task<byte[]> GenerateReport(ReportQuery reportQuery)
     {
         var transactions = await _repository.GetTransactions(reportQuery);
-        
-        //return await File.ReadAllBytesAsync(@"/Users/cristianorc/Desktop/report.pdf");
+        var reportBuilder = new ReportBuilder();
+        var reportHtml = reportBuilder
+            .InsertReportDate(reportQuery.Date)
+            .InsertBalanceName("Teste")
+            .InsertCreditAmount(1)
+            .InsertDebitAmount(2)
+            .InsertTotalAmount(3)
+            .InsertTransactions(transactions)
+            .Build();
+
         throw new NotImplementedException();
     }
 }
