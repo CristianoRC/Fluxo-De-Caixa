@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import dayjs from 'dayjs';
 import { FormControl, Button, Grid, Box } from '@mui/material';
 
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -16,7 +15,7 @@ const Report = () => {
   const [datePicker, setDatePicker] = useState();
 
   const generate = async () => {
-    const date = `${datePicker.get("D")}-${datePicker.get("M")}-${datePicker.get("y")}`
+    const date = `${datePicker.date()}-${datePicker.month()}-${datePicker.year()}`
     const url = `http://localhost:8082/api/report?date=${date}&balance=${balance}`;
     const response = await axios({
       url,
