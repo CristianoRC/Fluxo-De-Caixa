@@ -21,6 +21,12 @@ Para rodar os projetos é necessário  ter Docker instalado, e rodar o seguinte 
 
 #### Serviços necessários
 
+- PostgreSQL, na porta 5432
+- MongoDB, na porta 27017
+- Gotenberg, na porta 3000
+- Redis, na porta 6379
+
+Ajustar usuários e senhas de acordo com os valors do local.settings.json(report api) e appsettings.Development.json(api). 
 
 
 #### APP - React
