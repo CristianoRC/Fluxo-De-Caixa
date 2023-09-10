@@ -16,16 +16,16 @@ public class ReportService : IReportService
 
     public async Task<byte[]> GenerateReport(ReportQuery reportQuery)
     {
-        //TODO: Implementar logica de onde pegar esses dados
-        //var transactions = await _repository.GetTransactions(reportQuery);
+        var transactions = await _repository.GetTransactions(reportQuery);
+        var consolidatedStatement = new ConsolidatedStatement(transactions);
         var reportBuilder = new ReportBuilder();
         var reportHtml = reportBuilder
             .InsertReportDate(reportQuery.Date)
-            .InsertBalanceName("Teste")
-            .InsertCreditAmount(1)
-            .InsertDebitAmount(2)
-            .InsertTotalAmount(3)
-            .InsertTransactions(Enumerable.Empty<ITransactionReport>())
+            .InsertBalanceName(consolidatedStatement.BalanceName)
+            .InsertCreditAmount(consolidatedStatement.CreditAmount)
+            .InsertDebitAmount(consolidatedStatement.DebitAmount)
+            .InsertTotalAmount(consolidatedStatement.TotalAmount)
+            .InsertTransactions(consolidatedStatement.Transactions)
             .Build();
 
         return await _renderService.Render(reportHtml);
