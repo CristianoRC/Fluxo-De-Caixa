@@ -14,16 +14,19 @@ import {
   TextField,
 } from '@mui/material';
 
-// Components
 import AppBarComponent from '../../components/appBar';
 
 function CreateWallet() {
-  const navigate = useNavigate();
   const [walletName, setWalletName] = useState();
 
-  const createWalletAction = () => {
-    localStorage.setItem('walletName', walletName);
-    navigate('/report');
+  const createWalletAction = async() => {
+    //em um ambiente real teria que pegar as urls base de um env*
+    try {
+      await fetch("")  
+    } catch (error) {
+      
+    }
+    
   };
 
   return (
