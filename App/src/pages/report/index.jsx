@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { FormControl, Button, Grid, Box } from '@mui/material';
-
+import { FormControl, Grid, Box } from '@mui/material';
+import { LoadingButton } from '@mui/lab'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -13,16 +13,27 @@ import axios from 'axios';
 const Report = () => {
   const [balance, setBalance] = useState();
   const [datePicker, setDatePicker] = useState();
+  const [loading, setLoading] = useState();
 
   const generate = async () => {
-    const date = datePicker.format("DD-MM-YYYY");
-    const url = `http://localhost:8082/api/report?date=${date}&balance=${balance}`;
-    const response = await axios({
-      url,
-      method: 'GET',
-      responseType: 'blob',
-    })
-    download(response)
+    try {
+      setLoading(true)
+      const date = datePicker.format("DD-MM-YYYY");
+      const url = `http://localhost:8082/api/report?date=${date}&balance=${balance}`;
+      const response = await axios({
+        url,
+        method: 'GET',
+        responseType: 'blob',
+      })
+      download(response)
+
+    } catch (error) {
+      alert(error)
+    }
+    finally {
+      setLoading(false)
+    }
+
   };
 
   const download = (response) => {
@@ -72,13 +83,14 @@ const Report = () => {
                 </LocalizationProvider>
               </div>
             </div>
-            <Button
-              onClick={generate}
+            <LoadingButton
+              loading={loading}
+              loadingPosition="start"
               variant="contained"
               style={{ marginTop: 10 }}
-            >
-              Gerar
-            </Button>
+              onClick={generate}
+            >Gerar
+            </LoadingButton>
           </FormControl>
         </Grid>
       </Box>
