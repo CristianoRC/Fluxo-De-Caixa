@@ -5,7 +5,7 @@
 LAYOUT_LANDSCAPE()
 LAYOUT_WITH_LEGEND()
 
-TITLE Customer Profile Center - System Context
+TITLE Fluxo De Caixa - System Context
 
 Enterprise_Boundary(boundary-fluxo-de-caixa, "Fluxo de caixa") {
   System(fluxoDeCaixa, "Fluxo de Caixa", "Sistema para gerenciamento de fluxo de caixa")

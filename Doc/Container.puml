@@ -6,7 +6,7 @@
 LAYOUT_LANDSCAPE()
 LAYOUT_WITH_LEGEND()
 
-TITLE Customer Profile Center - Container
+TITLE Fluxo De Caixa - Container
 
 Enterprise_Boundary(boundaryEmpersa, "Empresa") {
   
