@@ -34,7 +34,6 @@ public class ReportQueryUnitTest : BaseUnitTest
         query.Errors.First().Should().Be("Erro ao converter a data do relatório");
     }
 
-
     [Theory(DisplayName = "Deve converter a data no fortamto pt-br com sucesso")]
     [InlineData("28/07/1998")]
     [InlineData("28-07-1998")]

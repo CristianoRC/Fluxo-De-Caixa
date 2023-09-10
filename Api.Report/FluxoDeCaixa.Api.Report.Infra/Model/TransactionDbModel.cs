@@ -2,7 +2,7 @@ using FluxoDeCaixa.Api.Report.Domain.Entities;
 
 namespace FluxoDeCaixa.Api.Report.Infra.Model;
 
-public class TransactionDbModel
+public class TransactionDbModel : ITransactionReport
 {
     public TransactionDbModel()
     {
