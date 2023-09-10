@@ -15,18 +15,20 @@ import {
 } from '@mui/material';
 
 import AppBarComponent from '../../components/appBar';
+import axios from 'axios';
 
 function CreateWallet() {
   const [walletName, setWalletName] = useState();
 
-  const createWalletAction = async() => {
+  const createWalletAction = async () => {
     //em um ambiente real teria que pegar as urls base de um env*
     try {
-      await fetch("")  
+      const body = { name: walletName };
+      await axios.post("http://localhost:8081/api/balance", body)
     } catch (error) {
-      
+      alert(error)
     }
-    
+
   };
 
   return (
