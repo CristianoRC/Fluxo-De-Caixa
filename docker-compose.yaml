@@ -97,7 +97,7 @@ services:
     depends_on:
       api:
         condition: service_started
-      api-report:
+      report-api:
         condition: service_started
 
   configure-rabbit:
