@@ -19,21 +19,3 @@ Foi feito o lock dos dois balances até fazer todo o fluxo e os cálculos, para 
 Podemos ter problemas na criação das transações, pois se tiver uma inserção em messa no mesmo balance, as requisições podem começar a dar timeout, se isso acontecer precisaremos criar um novo fluxo, onde na entrada apenas validamos se os balances existem e adicionamos em uma fila para a criação das transações no futuro.
 
 ---
-
-## Title
-
-### Status
-
-Aprovado
-
-### Context
-
-What is the issue that we're seeing that is motivating this decision or change?
-
-### Decision
-
-What is the change that we're proposing and/or doing?
-
-### Consequences
-
-What becomes easier or more difficult to do because of this change?
