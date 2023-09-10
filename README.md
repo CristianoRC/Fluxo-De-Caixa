@@ -12,7 +12,7 @@
 
 ## Como Rodar o Projeto
 
-
+Para rodar os projetos é necessário  ter Docker instalado, e rodar o seguinte comando no diretório principal: `docker-compose up`, e acessar o localhost na porta 80, onde você terá acesso ao web site: [http://localhost:80](http://localhost:80)
 
 ## Criando nova migração
 
