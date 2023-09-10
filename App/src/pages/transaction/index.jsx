@@ -25,7 +25,7 @@ function Transaction() {
   const [value, setValue] = useState('');
   const [description, setDescription] = useState('');
 
-  const create = () => {
+  const createTransaction = async() => {
     console.log({
       send: send,
       received: receive,
@@ -66,14 +66,14 @@ function Transaction() {
           <div style={{ marginTop: 30 }}>
             <FormControl>
               <NameBalanceInputField
-                labelProp="Carteira de partida"
+                labelProp="Carteira de origem"
                 setStateProp={setSend}
                 stateProp={send}
               />
             </FormControl>
             <FormControl style={{ marginLeft: 20 }}>
               <NameBalanceInputField
-                labelProp="Carteira de contrapartida"
+                labelProp="Carteira de destino"
                 setStateProp={setReceive}
                 stateProp={receive}
               />
@@ -122,7 +122,7 @@ function Transaction() {
                 style={{
                   marginTop: 40,
                 }}
-                onClick={create}
+                onClick={createTransaction}
                 variant="contained"
               >
                 Criar
