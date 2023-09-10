@@ -82,7 +82,7 @@ const Report = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={['DatePicker']}>
                     <DatePicker
-                      label="Basic date picker"
+                      label="Data do relatório"
                       disableFuture={true}
                       value={datePicker || null}
                       onChange={(newValue) => setDatePicker(newValue)}
