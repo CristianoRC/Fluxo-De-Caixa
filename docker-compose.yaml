@@ -40,7 +40,7 @@ services:
     build:
       context: ./Api
       dockerfile: dockerfile
-    container_name: customer-profile-api
+    container_name: flux-de-caixa-api
     ports:
       - "8081:80"
     depends_on:
@@ -61,7 +61,7 @@ services:
     build:
       context: ./Api.Report
       dockerfile: dockerfile
-    container_name: customer-profile-api-report
+    container_name: fluxo-de-caixa-api-report
     ports:
       - "8082:80"
     depends_on:
@@ -86,6 +86,19 @@ services:
       blobStorage: "azure-storage"
       AzureWebJobsStorage: "DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://local.storage.emulator:10000/devstoreaccount1;QueueEndpoint=http://local.storage.emulator:10001/devstoreaccount1;"
       gotenberg: http://gotenberg:3000
+
+  app:
+    build:
+      context: ./App
+      dockerfile: dockerfile
+    container_name: fluxo-de-caixa-app
+    ports:
+      - "80:80"
+    depends_on:
+      api:
+        condition: service_started
+      api-report:
+        condition: service_started
 
   configure-rabbit:
     build:
