@@ -1,5 +1,65 @@
 @startuml cloud
 
+!define AzurePuml https://raw.githubusercontent.com/plantuml-stdlib/Azure-PlantUML/release/2-2/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Compute/AzureFunction.puml
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/AzureC4Integration.puml
+!includeurl AzurePuml/Databases/AzureRedisCache.puml
+!includeurl AzurePuml/Databases/AzureCosmosDb.puml
+!includeurl AzurePuml/Databases/AzureDatabaseForPostgreSQL.puml
+!includeurl AzurePuml/Web/AzureWebApp.puml
+!includeurl AzurePuml/Web/AzureCDN.puml
+!includeurl AzurePuml/Web/AzureSearch.puml
+!includeurl AzurePuml/Storage/AzureBlobStorage.puml
+!includeurl AzurePuml/Web/AzureAPIManagement.puml
+!includeurl AzurePuml/Security/AzureKeyVault.puml
+!includeurl AzurePuml/Integration/AzureServiceBusTopic.puml
+!includeurl AzurePuml/Containers/AzureContainerApp.puml
+!includeurl AzurePuml/DevOps/AzureApplicationInsights.puml
+
 TITLE Fluxo de Caixa - Cloud - Azure
+
+actor "Pessoa" as personAlias
+AzureWebApp(app, "App - Static", "React, JS")
+AzureContainerApp(api, "Api", ".NET 7 C#")
+AzureContainerApp(bff, "BFF", ".NET 7 C#")
+AzureContainerApp(gotenberg, "gotenberg", "Transformação de HTML em PDF")
+
+AzureServiceBusTopic(topic, "BookEntry Criado", "")
+AzureCosmosDb(mongodb, "MongoDb", "", "")
+AzureRedisCache(redisCache, "Cache", "Controle de cache e lock")
+AzureDatabaseForPostgreSQL(sqlDb, "SQL", "Armazena transações")
+
+AzureFunction(functionRegistro, "Transactions", ".NET 7 C#", "")
+AzureFunction(functionRelatorio, "Report", "NET 7 C#", "")
+AzureBlobStorage(staticBlobStorage, "Armazenamento de arquivos", "Armazena relatórios")
+
+AzureAPIManagement(apiManagement, "Api Managemente", "Controle da entrada e segurança")
+AzureKeyVault(azureKeyVault, "Armazenamento de senhas", "")
+AzureApplicationInsights(applicationInsights, "Logs Tracing", "")
+
+personAlias --> app
+app --> apiManagement
+bff --> api
+bff --> functionRegistro
+bff --> functionRelatorio
+
+functionRelatorio --> staticBlobStorage
+functionRelatorio --> gotenberg
+functionRelatorio --> mongodb
+
+api --> sqlDb
+api --> redisCache
+api --> topic
+api --> azureKeyVault
+
+functionRegistro <-- topic
+functionRegistro --> mongodb
+functionRegistro --> azureKeyVault
+functionRelatorio --> azureKeyVault
+
+apiManagement --> bff
+apiManagement --> applicationInsights
 
 @enduml
