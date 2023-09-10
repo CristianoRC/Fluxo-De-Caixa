@@ -12,7 +12,7 @@ Enterprise_Boundary(boundaryEmpersa, "Empresa") {
   
     Container_Boundary(boundaryFluxoDeCaixa, "Fluxo de caixa") {
         Container(fluxoDeCaixaApi, "Fluxo de Caixa API", "ASP NET 7", "Sistema para gerenciamento de fluxo de caixa")
-        Container(fluxoDeCaixaApp, "Single-Page App", "JavaScript, Angular", "Permite usuários gerenciarem fluxo de caixa no browser")
+        Container(fluxoDeCaixaApp, "App", "JavaScript, React", "Permite usuários gerenciarem fluxo de caixa no browser")
         Container(fluxoDeCaixaReportApi, "Fluxo de Caixa - Relatório Fechamento", "ASP NET 7 / Azure Functions", "Sistema para gerar relatório de fechamento de fluxo de caixa")
         Container(fluxoDeCaixaBff, "Fluxo de Caixa BFF", "ASP NET 7", "Controla Auth e redireciona chamadas para os serviços de fluxo de caixa")
 
