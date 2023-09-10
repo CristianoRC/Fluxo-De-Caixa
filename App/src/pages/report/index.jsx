@@ -15,7 +15,7 @@ const Report = () => {
   const [datePicker, setDatePicker] = useState();
 
   const generate = async () => {
-    const date = `${datePicker.date()}-${datePicker.month()}-${datePicker.year()}`
+    const date = datePicker.format("DD-MM-YYYY");
     const url = `http://localhost:8082/api/report?date=${date}&balance=${balance}`;
     const response = await axios({
       url,
