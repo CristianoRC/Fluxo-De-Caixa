@@ -32,8 +32,6 @@ public static class GenerateReportHttpTrigger
         var response = request.CreateResponse(HttpStatusCode.OK);
         await response.WriteBytesAsync(report);
         response.Headers.Add("Content-Type", "application/pdf");
-        response.Headers.Add("Content-Disposition", $"filename='{query.BalanceId}.pdf'");
-
         return response;
     }
 
