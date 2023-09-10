@@ -15,6 +15,12 @@
 
 - [Azure](./Doc/Cloud.md)
 
+### ADR - Architectural Decision Records
+
+Registros das decisões tomadas em relação à arquitetura
+
+- [ADRs](./Doc/Adr.md)
+
 ## Como Rodar o Projeto
 
 ### Containers
