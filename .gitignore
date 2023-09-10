@@ -1,17 +1,21 @@
 # Created by https://www.toptal.com/developers/gitignore/api/csharp,dotnetcore,visualstudio,visualstudiocode,rider,macos,linux,angular,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=csharp,dotnetcore,visualstudio,visualstudiocode,rider,macos,linux,angular,node
 
-### Angular ###
-## Angular ##
-# compiled output
-dist/
-tmp/
-app/**/*.js
-app/**/*.js.map
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
 
-# dependencies
-node_modules/
-bower_components/
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch
 
 # IDEs and editors
 .idea/
