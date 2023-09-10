@@ -85,7 +85,6 @@ const Report = () => {
             </div>
             <LoadingButton
               loading={loading}
-              loadingPosition="start"
               variant="contained"
               style={{ marginTop: 10 }}
               onClick={generate}
