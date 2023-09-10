@@ -15,24 +15,41 @@ import {
 
 import AppBarComponent from '../../components/appBar';
 import NameBalanceInputField from '../../components/nameBalanceInputField';
+import axios from 'axios';
 
-const types = ['Crédito', 'Débito'];
+const types = [{ id: 0, name: 'Débito' }, { id: 1, name: 'Crédito' }];
 
 function Transaction() {
   const [send, setSend] = useState('');
   const [receive, setReceive] = useState('');
-  const [type, setType] = useState('');
+  const [type, setType] = useState(0);
   const [value, setValue] = useState('');
-  const [description, setDescription] = useState('');
 
-  const createTransaction = async() => {
-    console.log({
-      send: send,
-      received: receive,
-      type: type,
-      value: value,
-      description: description,
-    });
+  const [description, setDescription] = useState('');
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const createTransaction = async () => {
+    var data = {
+      entryBalance: send,
+      offsetBalance: receive,
+      amount: value,
+      transactionType: type,
+      description: description
+    }
+    try {
+      await axios.post("http://localhost:8081/api/bookentry", data);
+      showSuccess(true);
+    }
+    catch (e) {
+      if (error.response.status == 400)
+        setErrorMessage("Preencha as informações do da carteira!")
+      else
+        setErrorMessage("Ocorreu um erro, tente mais tarde");
+      setShowError(true)
+    }
+
   };
 
   return (
@@ -56,8 +73,8 @@ function Transaction() {
               input={<OutlinedInput label="Tipo de transação" />}
             >
               {types.map((type) => (
-                <MenuItem key={type} value={type}>
-                  {type}
+                <MenuItem key={type.id} value={type.id}>
+                  {type.name}
                 </MenuItem>
               ))}
             </Select>
@@ -131,6 +148,17 @@ function Transaction() {
           </Grid>
         </Grid>
       </Box>
+      <Snackbar open={showSuccess} autoHideDuration={5000} onClose={() => setShowSuccess(false)}>
+        <Alert onClose={() => setShowSuccess(false)} severity="success" sx={{ width: '100%' }}>
+          Transação criada com sucesso!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar open={showError} autoHideDuration={5000} onClose={() => setShowError(false)}>
+        <Alert onClose={() => setShowError(false)} severity="error" sx={{ width: '100%' }}>
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
