@@ -5,10 +5,12 @@ namespace FluxoDeCaixa.Api.Report.Domain.Service.Report;
 public class ReportService : IReportService
 {
     private readonly IBookEntryRepository _repository;
+    private readonly IPdfRenderService _renderService;
 
-    public ReportService(IBookEntryRepository repository)
+    public ReportService(IBookEntryRepository repository, IPdfRenderService renderService)
     {
         _repository = repository;
+        _renderService = renderService;
     }
 
     public async Task<byte[]> GenerateReport(ReportQuery reportQuery)
@@ -24,6 +26,6 @@ public class ReportService : IReportService
             .InsertTransactions(transactions)
             .Build();
 
-        throw new NotImplementedException();
+        return await _renderService.Render(reportHtml);
     }
 }

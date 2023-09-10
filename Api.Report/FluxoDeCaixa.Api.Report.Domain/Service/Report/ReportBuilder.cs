@@ -9,7 +9,7 @@ public class ReportBuilder
 
     public ReportBuilder()
     {
-        var fileHtml = File.ReadAllText("./report", Encoding.UTF8);
+        var fileHtml = File.ReadAllText("./report.html", Encoding.UTF8);
         _htmlContent.Append(fileHtml);
     }
 
@@ -47,7 +47,7 @@ public class ReportBuilder
 
     public ReportBuilder InsertTransactions(IEnumerable<ITransactionReport> transactions)
     {
-        _htmlContent.Replace("#TRANSACTIONS", GenerateTransactionsHtml(transactions));
+        _htmlContent.Replace("#TRANSACTION", GenerateTransactionsHtml(transactions));
         return this;
     }
 

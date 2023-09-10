@@ -1,4 +1,6 @@
 using FluxoDeCaixa.Api.Report.Domain.Repository;
+using FluxoDeCaixa.Api.Report.Domain.Service.Report;
+using FluxoDeCaixa.Api.Report.Infra.Http;
 using FluxoDeCaixa.Api.Report.Infra.Model;
 using FluxoDeCaixa.Api.Report.Infra.Repositories;
 using Microsoft.Extensions.Azure;
@@ -17,7 +19,8 @@ public static class Setup
     {
         service.AddTransient<IIdempotencyRepository, IdempotencyRepository>();
         service.AddTransient<IBookEntryRepository, BookEntryRepository>();
-        
+        service.AddTransient<IPdfRenderService, PdfRenderService>();
+
         ConfigureMongoDb(service, configuration);
         ConfigureBlobStorage(service, configuration);
         return service;
