@@ -38,6 +38,7 @@ public static class GenerateReportHttpTrigger
         var response = request.CreateResponse(HttpStatusCode.OK);
         await response.WriteBytesAsync(report);
         response.Headers.Add("Content-Type", "application/pdf");
+        response.Headers.Add("Access-Control-Allow-Origin", "*");
         return response;
     }
 
@@ -45,6 +46,7 @@ public static class GenerateReportHttpTrigger
     {
         var response = request.CreateResponse(HttpStatusCode.BadRequest);
         await response.WriteAsJsonAsync(query);
+        response.Headers.Add("Access-Control-Allow-Origin", "*");
         return response;
     }
 }

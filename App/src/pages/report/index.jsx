@@ -15,13 +15,27 @@ const Report = () => {
   const [balance, setBalance] = useState();
   const [datePicker, setDatePicker] = useState();
 
-  const Generate = async () => {
+  const generate = async () => {
     const date = `${datePicker.get("D")}-${datePicker.get("M")}-${datePicker.get("y")}`
-    console.log(date);
     const url = `http://localhost:8082/api/report?date=${date}&balance=${balance}`;
-    const response = await axios.get(url)
-    console.log(response);
+    const response = await axios({
+      url,
+      method: 'GET',
+      responseType: 'blob',
+    })
+    download(response)
   };
+
+  const download = (response) => {
+    const href = window.URL.createObjectURL(response.data);
+    const anchorElement = document.createElement('a');
+    anchorElement.href = href;
+    anchorElement.download = `${balance}.pdf`;
+    document.body.appendChild(anchorElement);
+    anchorElement.click();
+    document.body.removeChild(anchorElement);
+    window.URL.revokeObjectURL(href);
+  }
 
   return (
     <>
@@ -60,7 +74,7 @@ const Report = () => {
               </div>
             </div>
             <Button
-              onClick={Generate}
+              onClick={generate}
               variant="contained"
               style={{ marginTop: 10 }}
             >
