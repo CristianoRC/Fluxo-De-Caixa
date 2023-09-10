@@ -9,6 +9,7 @@
 
 - [System Context](./Doc/SystemContex.md)
 - [Container](./Doc/Container.md)
+- [Component](./Doc/Component.md)
 
 ## Como Rodar o Projeto
 
