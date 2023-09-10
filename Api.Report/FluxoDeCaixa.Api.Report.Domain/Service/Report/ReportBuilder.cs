@@ -56,11 +56,14 @@ public class ReportBuilder
         var stringBuilder = new StringBuilder();
         foreach (var transaction in transactions)
         {
+            var transactionClass = transaction.TypeId == (int) TransactionType.Credit ? "credit" : "debit";
             stringBuilder.Append(@$"
                 <tr class=""item"">
 				    <td>{transaction.Description}</td>
-				    <td>R$ {transaction.TransactionAmount}</td>
-			    </tr>");
+				    <td class=""{transactionClass}"">
+                        R$ {transaction.TransactionAmount}
+                    </td>
+                </tr>");
         }
 
         return stringBuilder.ToString();
