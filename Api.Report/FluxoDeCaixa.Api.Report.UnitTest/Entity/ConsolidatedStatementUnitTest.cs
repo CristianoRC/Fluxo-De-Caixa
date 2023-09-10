@@ -69,7 +69,7 @@ public class ConsolidatedStatementUnitTest : BaseUnitTest
         var creditTransactionAmount = Faker.Finance.Amount();
         var debitTransaction = new TransactionDbModel()
         {
-            TransactionAmount = debitTransactionAmount,
+            TransactionAmount = decimal.Negate(debitTransactionAmount),
             Id = Guid.NewGuid(),
             BalanceName = Faker.Lorem.Word(),
             TypeId = (int) TransactionType.Debit
@@ -116,7 +116,7 @@ public class ConsolidatedStatementUnitTest : BaseUnitTest
         //Assert
         consolidatedStatement.BalanceName.Should().Be(transaction.BalanceName);
     }
-
+    
     [Fact(DisplayName = "Balance Name deve ser stirng em branco caos não tenha nenhuma transação")]
     public void BalanceNameWithoutTransactions()
     {

@@ -59,7 +59,7 @@ public class ReportBuilder
             stringBuilder.Append(@$"
                 <tr class=""item"">
 				    <td>{transaction.Description}</td>
-				    <td>R${transaction.BalanceAfterTransaction}</td>
+				    <td>R$ {transaction.TransactionAmount}</td>
 			    </tr>");
         }
 

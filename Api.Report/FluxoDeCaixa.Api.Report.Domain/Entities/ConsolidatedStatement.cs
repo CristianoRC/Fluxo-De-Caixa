@@ -14,7 +14,7 @@ public class ConsolidatedStatement
 
     public decimal CreditAmount { get; }
     public decimal DebitAmount { get; }
-    public decimal TotalAmount => CreditAmount - DebitAmount;
+    public decimal TotalAmount => CreditAmount - Math.Abs(DebitAmount);
     public string BalanceName { get; } = string.Empty;
     public IEnumerable<ITransactionReport> Transactions { get; }
 }
