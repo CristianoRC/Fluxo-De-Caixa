@@ -7,20 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Azure.Storage.Blobs" Version="12.17.0" />
-      <PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.0" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
-      <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
+        <PackageReference Include="Azure.Storage.Blobs" Version="12.17.0"/>
+        <PackageReference Include="Gotenberg.Sharp.API.Client" Version="2.1.1" />
+        <PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.0"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+        <PackageReference Include="MongoDB.Driver" Version="2.21.0"/>
     </ItemGroup>
 
 
     <ItemGroup>
-      <ProjectReference Include="..\FluxoDeCaixa.Api.Report.Domain\FluxoDeCaixa.Api.Report.Domain.csproj" />
+        <ProjectReference Include="..\FluxoDeCaixa.Api.Report.Domain\FluxoDeCaixa.Api.Report.Domain.csproj"/>
     </ItemGroup>
-
-
-
 
 
 </Project>
