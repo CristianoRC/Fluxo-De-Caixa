@@ -13,7 +13,7 @@ services:
       - "8080:15672"
       - "5672:5672"
     healthcheck:
-      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      test: [ "CMD", "rabbitmq-diagnostics", "-q", "ping" ]
       interval: 5s
       timeout: 10s
       retries: 5
@@ -31,14 +31,14 @@ services:
     environment:
       POSTGRES_PASSWORD: Super#Senha
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
+      test: [ "CMD-SHELL", "pg_isready" ]
       interval: 10s
       timeout: 5s
       retries: 5
-  
+
   redis:
     image: redis
-  
+
   api:
     build:
       context: ./Api
@@ -108,10 +108,10 @@ services:
     image: gotenberg/gotenberg:7
     ports:
       - "3000:3000"
+
   azure-storage:
     image: "mcr.microsoft.com/azure-storage/azurite:latest"
     container_name: azure-storage
     ports:
-        - 10000:10000
-        - 10001:10001      
-
+      - 10000:10000
+      - 10001:10001
