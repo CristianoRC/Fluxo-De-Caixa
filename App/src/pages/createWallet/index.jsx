@@ -35,7 +35,6 @@ function CreateWallet() {
         setErrorMessage("Ocorreu um erro, tente mais tarde")
       setShowError(true);
     }
-
   };
 
   return (

@@ -38,7 +38,7 @@ const Report = () => {
               }}
             >
               <NameBalanceInputField
-                labelProp="Nome - Balance"
+                labelProp="Carteiras"
                 setStateProp={setNameBalance}
                 stateProp={nameBalance}
               />

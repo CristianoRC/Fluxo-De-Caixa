@@ -1,9 +1,18 @@
 import { Select, MenuItem, InputLabel, OutlinedInput } from '@mui/material';
 import PropTypes from 'prop-types';
-
-const names = ['Oliver Hansen', 'Van Henry', 'April Tucker'];
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const NameBalanceInputField = (props) => {
+  const [balances, setBalances] = useState([]);
+
+  const updateBalances = async () => {
+    var balances = await axios.get("http://localhost:8081/api/balance")
+    setBalances(balances.data);
+  }
+
+  useEffect(() => { updateBalances() }, [])
+
   return (
     <>
       <InputLabel>{props.labelProp}</InputLabel>
@@ -16,9 +25,9 @@ const NameBalanceInputField = (props) => {
         onChange={(event) => props.setStateProp(event.target.value)}
         input={<OutlinedInput label={props.labelProp} />}
       >
-        {names.map((name) => (
-          <MenuItem key={name} value={name}>
-            {name}
+        {balances.map((balance) => (
+          <MenuItem key={balance.id} value={balance.id}>
+            {balance.name}
           </MenuItem>
         ))}
       </Select>
