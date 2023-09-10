@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Snackbar, Alert } from '@mui/material';
+import { primary } from '../../constants/colors';
 
 import {
   Typography,
@@ -52,6 +53,7 @@ function CreateWallet() {
                 <div
                   style={{
                     height: 30,
+                    backgroundColor: primary,
                     marginBottom: 30,
                   }}
                 ></div>
