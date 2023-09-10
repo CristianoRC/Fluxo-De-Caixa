@@ -17,22 +17,21 @@ import AppBarComponent from '../../components/appBar';
 import axios from 'axios';
 
 function CreateWallet() {
-  const [walletName, setWalletName] = useState("");
+  const [walletName, setWalletName] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
   const createWalletAction = async () => {
     //em um ambiente real teria que pegar as urls base de um env*
     try {
       const body = { name: walletName };
-      await axios.post("http://localhost:8081/api/balance", body);
+      await axios.post('http://localhost:8081/api/balance', body);
       setShowSuccess(true);
     } catch (error) {
       if (error.response.status == 400)
-        setErrorMessage("Preencha as informações do da carteira!")
-      else
-        setErrorMessage("Ocorreu um erro, tente mais tarde")
+        setErrorMessage('Preencha as informações do da carteira!');
+      else setErrorMessage('Ocorreu um erro, tente mais tarde');
       setShowError(true);
     }
   };
@@ -48,20 +47,23 @@ function CreateWallet() {
           alignItems={'center'}
         >
           <Grid item xs={4}>
-            <Card>
-              <CardContent>
-                <div
-                  style={{
-                    height: 30,
-                    backgroundColor: primary,
-                    marginBottom: 30,
-                  }}
-                ></div>
-                <img src="./wallet.svg" alt="icon-transaction" width={200}
+            <CardContent>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  flexDirection: 'column',
+                }}
+              >
+                <img
+                  src="./wallet.svg"
+                  alt="icon-transaction"
+                  width={280}
                   style={{
                     marginBottom: '50px',
-                    marginTop: "25px"
-                  }} />
+                    marginTop: '25px',
+                  }}
+                />
                 <Typography variant="h5" component="div">
                   Criar Carteira
                 </Typography>
@@ -75,22 +77,44 @@ function CreateWallet() {
                   variant="outlined"
                   onChange={(event) => setWalletName(event.target.value)}
                 />
-              </CardContent>
-              <CardActions>
-                <Button onClick={createWalletAction}>Criar</Button>
-              </CardActions>
-            </Card>
+              </div>
+            </CardContent>
+            <CardActions style={{ justifyContent: 'center' }}>
+              <Button
+                style={{ width: 300, marginTop: 20 }}
+                variant="contained"
+                onClick={createWalletAction}
+              >
+                Criar
+              </Button>
+            </CardActions>
           </Grid>
         </Grid>
       </Box>
-      <Snackbar open={showSuccess} autoHideDuration={5000} onClose={() => setShowSuccess(false)}>
-        <Alert onClose={() => setShowSuccess(false)} severity="success" sx={{ width: '100%' }}>
+      <Snackbar
+        open={showSuccess}
+        autoHideDuration={5000}
+        onClose={() => setShowSuccess(false)}
+      >
+        <Alert
+          onClose={() => setShowSuccess(false)}
+          severity="success"
+          sx={{ width: '100%' }}
+        >
           Carteira criada com sucesso!
         </Alert>
       </Snackbar>
 
-      <Snackbar open={showError} autoHideDuration={5000} onClose={() => setShowError(false)}>
-        <Alert onClose={() => setShowError(false)} severity="error" sx={{ width: '100%' }}>
+      <Snackbar
+        open={showError}
+        autoHideDuration={5000}
+        onClose={() => setShowError(false)}
+      >
+        <Alert
+          onClose={() => setShowError(false)}
+          severity="error"
+          sx={{ width: '100%' }}
+        >
           {errorMessage}
         </Alert>
       </Snackbar>
