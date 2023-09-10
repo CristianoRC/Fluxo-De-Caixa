@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {Snackbar, Alert, Box, Grid } from '@mui/material'
+import { Snackbar, Alert, Box, Grid } from '@mui/material'
 
 import {
   TextField,
@@ -36,18 +36,18 @@ function Transaction() {
       transactionType: type,
       description: description
     }
+
     try {
       await axios.post("http://localhost:8081/api/bookentry", data);
-      showSuccess(true);
+      setShowSuccess(true);
     }
-    catch (e) {
+    catch (error) {
       if (error.response.status == 400)
-        setErrorMessage("Preencha as informações do da carteira!")
+        setErrorMessage(error.response.data.error)
       else
         setErrorMessage("Ocorreu um erro, tente mais tarde");
       setShowError(true)
     }
-
   };
 
   return (
@@ -137,7 +137,7 @@ function Transaction() {
                 style={{
                   marginTop: 40,
                 }}
-                onClick={createTransaction}
+                onClick={async () => { await createTransaction() }}
                 variant="contained"
               >
                 Criar
@@ -146,6 +146,7 @@ function Transaction() {
           </Grid>
         </Grid>
       </Box>
+
       <Snackbar open={showSuccess} autoHideDuration={5000} onClose={() => setShowSuccess(false)}>
         <Alert onClose={() => setShowSuccess(false)} severity="success" sx={{ width: '100%' }}>
           Transação criada com sucesso!
