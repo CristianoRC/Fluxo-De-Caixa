@@ -23,12 +23,30 @@ public static class Setup
         service.AddTransient<IBookEntryRepository, BookEntryRepository>();
         service.AddTransient<IPdfRenderService, PdfRenderService>();
 
-        service.AddOptions<GotenbergSharpClientOptions>("gotenberg");
-        service.AddGotenbergSharpClient();
 
+        ConfigureGotenbergClient(service, configuration);
         ConfigureMongoDb(service, configuration);
         ConfigureBlobStorage(service, configuration);
         return service;
+    }
+
+    private static void ConfigureGotenbergClient(IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddOptions<GotenbergSharpClientOptions>()
+            .Configure(x =>
+            {
+                var url = configuration["gotenberg"];
+                x.ServiceUrl = new Uri(url);
+                x.HealthCheckUrl = new Uri($"{url}/health");
+                x.RetryPolicy = new RetryOptions()
+                {
+                    Enabled = true,
+                    RetryCount = 5,
+                    BackoffPower = 1.5,
+                    LoggingEnabled = true
+                };
+            });
+        services.AddGotenbergSharpClient();
     }
 
     private static void ConfigureBlobStorage(IServiceCollection services, IConfiguration configuration)
@@ -41,7 +59,7 @@ public static class Setup
 
     private static void ConfigureMongoDb(IServiceCollection services, IConfiguration configuration)
     {
-        var client = new MongoClient(configuration["mongoDb"]);
+        var client = new MongoClient(configuration["mongodb"]);
         services.AddSingleton<IMongoClient>(client);
 
         var objectDiscriminatorConvention = BsonSerializer.LookupDiscriminatorConvention(typeof(object));

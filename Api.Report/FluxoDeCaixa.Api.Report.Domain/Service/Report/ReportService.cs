@@ -1,3 +1,4 @@
+using FluxoDeCaixa.Api.Report.Domain.Entities;
 using FluxoDeCaixa.Api.Report.Domain.Repository;
 
 namespace FluxoDeCaixa.Api.Report.Domain.Service.Report;
@@ -16,7 +17,7 @@ public class ReportService : IReportService
     public async Task<byte[]> GenerateReport(ReportQuery reportQuery)
     {
         //TODO: Implementar logica de onde pegar esses dados
-        var transactions = await _repository.GetTransactions(reportQuery);
+        //var transactions = await _repository.GetTransactions(reportQuery);
         var reportBuilder = new ReportBuilder();
         var reportHtml = reportBuilder
             .InsertReportDate(reportQuery.Date)
@@ -24,7 +25,7 @@ public class ReportService : IReportService
             .InsertCreditAmount(1)
             .InsertDebitAmount(2)
             .InsertTotalAmount(3)
-            .InsertTransactions(transactions)
+            .InsertTransactions(Enumerable.Empty<ITransactionReport>())
             .Build();
 
         return await _renderService.Render(reportHtml);

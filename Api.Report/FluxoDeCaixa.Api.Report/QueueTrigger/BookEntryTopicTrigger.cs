@@ -9,6 +9,7 @@ namespace FluxoDeCaixa.Api.Report.QueueTrigger;
 
 public static class BookEntryTopicTrigger
 {
+    /*
     [Function("BookEntryTopicTrigger")]
     public static async Task Run(
         [RabbitMQTrigger("BookEntryTopicTrigger", ConnectionStringSetting = "rabbitMq")] string message,
@@ -26,5 +27,5 @@ public static class BookEntryTopicTrigger
             logger.LogError("Erro ao salvar o book entry. Message: {Message}", message);
             throw;
         }
-    }
+    }*/
 }
