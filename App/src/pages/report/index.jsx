@@ -5,6 +5,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Snackbar, Alert } from "@mui/material"
 
 import AppBarComponent from '../../components/appBar';
 import BalanceInputField from '../../components/nameBalanceInputField/index';
@@ -14,6 +15,8 @@ const Report = () => {
   const [balance, setBalance] = useState();
   const [datePicker, setDatePicker] = useState();
   const [loading, setLoading] = useState();
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const generate = async () => {
     try {
@@ -28,7 +31,12 @@ const Report = () => {
       download(response)
 
     } catch (error) {
-      alert(error)
+
+      if (error?.response?.status == 400)
+        setErrorMessage(error.response.data.error)
+      else
+        setErrorMessage('Ocorreu um erro, preencha todos campos ou tente mais tarde');
+      setShowError(true);
     }
     finally {
       setLoading(false)
@@ -93,6 +101,11 @@ const Report = () => {
           </FormControl>
         </Grid>
       </Box>
+      <Snackbar open={showError} autoHideDuration={5000} onClose={() => setShowError(false)}>
+        <Alert onClose={() => setShowError(false)} severity='error' sx={{ width: '100%' }}>
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </>
   );
 };
