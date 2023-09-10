@@ -17,8 +17,8 @@ Enterprise_Boundary(boundaryEmpersa, "Empresa") {
         Container(fluxoDeCaixaBff, "Fluxo de Caixa BFF", "ASP NET 7", "Controla Auth e redireciona chamadas para os serviços de fluxo de caixa")
 
         ContainerDb(redis, "In-memory Database", "Redis", "Armazena cache e controla lock distribuído")
-        ContainerDb(mongodb, "Database", "Mongo DB", "Armazena dados de fluxo de caixa")
-        ContainerDb(sqlServer, "Database", "SQL Server", "Armazena dados de fluxo de caixa para relatórios")
+        ContainerDb(mongodb, "Database", "Mongo DB", "Armazena dados de fluxo de caixa para relatórios")
+        ContainerDb(postgres, "Database", "PostgreSQL", "Armazena dados de fluxo de caixa")
         ContainerQueue(transactionQueue, "Fila - RabbitMQ", "Todas as transações finalizadas")
     }
     
@@ -31,14 +31,14 @@ Container_Ext(mailSystem, "Serviço de E-mail", "", "Sistema de envio de e-mail"
 Person(pessoa, "Usuário do sistema", "Gerencia fluxo de caixa")
 
 'API
-Rel(fluxoDeCaixaApi, mongodb, "Gerencia os dados no", "TCP")
+Rel(fluxoDeCaixaApi, postgres, "Gerencia os dados no", "TCP")
 Rel_U(fluxoDeCaixaApi, transactionQueue, "Enfileira todas as transações criadas", "TCP")
 Rel(fluxoDeCaixaApi, redis, "Controla lock distribuído no", "TCP")
 
 'Report API
 Rel(fluxoDeCaixaReportApi, mailSystem, "Envia e-mails", "SMTP")
 Rel_D(fluxoDeCaixaReportApi, transactionQueue, "Le as mensagens da fila", "TCP")
-Rel(fluxoDeCaixaReportApi, sqlServer, "Armazena dados para relatórios no", "TCP")
+Rel(fluxoDeCaixaReportApi, mongodb, "Armazena dados para relatórios no", "TCP")
 Rel(fluxoDeCaixaReportApi, blobStorage, "Armazena relatórios no", "TCP")
 Rel(fluxoDeCaixaReportApi, gotenberg, "Gera arquivos PDF usando", "HTTP/JSON")
 
