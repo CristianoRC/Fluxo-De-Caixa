@@ -11,7 +11,6 @@ services:
       RABBITMQ_DEFAULT_PASS: SuperSenha123
     ports:
       - "8080:15672"
-      - "5672:5672"
     healthcheck:
       test: [ "CMD", "rabbitmq-diagnostics", "-q", "ping" ]
       interval: 5s
@@ -23,8 +22,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: Super_Senha321
-    ports:
-      - "27017:27017"
 
   postgres:
     image: postgres
@@ -89,7 +86,6 @@ services:
       blobStorage: "azure-storage"
       AzureWebJobsStorage: "DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://local.storage.emulator:10000/devstoreaccount1;QueueEndpoint=http://local.storage.emulator:10001/devstoreaccount1;"
       gotenberg: http://gotenberg:3000
-      Host__CORS: "*"
 
   configure-rabbit:
     build:
@@ -107,8 +103,6 @@ services:
 
   gotenberg:
     image: gotenberg/gotenberg:7
-    ports:
-      - "3000:3000"
 
   azure-storage:
     image: "mcr.microsoft.com/azure-storage/azurite:latest"
