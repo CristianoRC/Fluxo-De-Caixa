@@ -16,15 +16,21 @@ public static class GenerateReportHttpTrigger
         FunctionContext executionContext)
     {
         var service = executionContext.InstanceServices.GetRequiredService<IReportService>();
-        var query = HttpUtility.ParseQueryString(req.Url.Query);
-        var date = query["date"];
-        var balance = query["balance"];
-        var reportQuery = new ReportQuery(date, balance);
+        
+        var reportQuery = GenerateReportQuery(req);
         if (reportQuery.IsValid is false)
             return await GenerateInvalidQueryResponse(req, reportQuery);
 
         var report = await service.GenerateReport(reportQuery);
         return await GenerateReportResponse(req, reportQuery, report);
+    }
+
+    private static ReportQuery GenerateReportQuery(HttpRequestData request)
+    {
+        var query = HttpUtility.ParseQueryString(request.Url.Query);
+        var date = query["date"];
+        var balance = query["balance"];
+        return new ReportQuery(date, balance);
     }
 
     private static async Task<HttpResponseData> GenerateReportResponse(HttpRequestData request, ReportQuery query, byte[] report)
