@@ -57,6 +57,11 @@ function Transaction() {
           justifyContent={'center'}
           alignItems={'center'}
         >
+          <img src="./transaction.svg" alt="icon-transaction" width={200}
+            style={{
+              marginBottom: '50px',
+              marginTop: "25px"
+            }} />
           <FormControl>
             <InputLabel>Tipo de transação</InputLabel>
             <Select

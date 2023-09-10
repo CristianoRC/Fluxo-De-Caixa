@@ -65,6 +65,7 @@ const Report = () => {
           justifyContent={'center'}
           alignItems={'center'}
         >
+          <img src="./report.svg" alt="icon-report" width={400} paddingRight={500} />
           <FormControl sx={{ m: 1, witdh: '100%' }}>
             <div
               style={{

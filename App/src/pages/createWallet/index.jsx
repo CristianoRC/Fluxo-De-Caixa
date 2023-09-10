@@ -57,6 +57,11 @@ function CreateWallet() {
                     marginBottom: 30,
                   }}
                 ></div>
+                <img src="./wallet.svg" alt="icon-transaction" width={200}
+                  style={{
+                    marginBottom: '50px',
+                    marginTop: "25px"
+                  }} />
                 <Typography variant="h5" component="div">
                   Criar Carteira
                 </Typography>
