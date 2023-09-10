@@ -24,7 +24,7 @@ actor "Pessoa" as personAlias
 AzureWebApp(app, "App - Static", "React, JS")
 AzureContainerApp(api, "Api", ".NET 7 C#")
 AzureContainerApp(bff, "BFF", ".NET 7 C#")
-AzureContainerApp(gotenberg, "gotenberg", "Transformação de HTML em PDF")
+AzureContainerApp(gotenberg, "Gotenberg", "Transformação de HTML em PDF")
 
 AzureServiceBusTopic(topic, "BookEntry Criado", "")
 AzureCosmosDb(mongodb, "MongoDb", "", "")
