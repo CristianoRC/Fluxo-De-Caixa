@@ -12,7 +12,28 @@
 
 ## Como Rodar o Projeto
 
+### Containers
+
 Para rodar os projetos é necessário  ter Docker instalado, e rodar o seguinte comando no diretório principal: `docker-compose up`, e acessar o localhost na porta 80, onde você terá acesso ao web site: [http://localhost:80](http://localhost:80)
+
+### Localmente
+
+
+#### Serviços necessários
+
+
+
+#### APP - React
+Para configurar o projeto de web app é necessário ter node instalado, e rodar os seguintes comandos no diretório principal: `npm i` `npm run start`
+
+#### API
+Necessário ter o .NET 7 instalado. Rode o seguinte comando dentro do diretório _Api_: `dotnet run`
+
+
+#### API Report
+
+Necessário ter o .NET 7 instalado e as [ferramentas para Azure functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=macos%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-csharp).
+Para execuatr a function, rode o seguite comando no diretório _Api.Report/FluxoDeCaixa.Api.Report_ : `func start`
 
 ## Criando nova migração
 
