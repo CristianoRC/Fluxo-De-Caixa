@@ -26,7 +26,7 @@ function Transaction() {
   const [description, setDescription] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
   const createTransaction = async () => {
     var data = {
@@ -38,14 +38,14 @@ function Transaction() {
     }
 
     try {
-      await axios.post("http://localhost:8081/api/bookentry", data);
+      await axios.post('http://localhost:8081/api/bookentry', data);
       setShowSuccess(true);
     }
     catch (error) {
       if (error.response.status == 400)
         setErrorMessage(error.response.data.error)
       else
-        setErrorMessage("Ocorreu um erro, tente mais tarde");
+        setErrorMessage('Ocorreu um erro, tente mais tarde');
       setShowError(true)
     }
   };
@@ -68,7 +68,7 @@ function Transaction() {
               }}
               value={type}
               onChange={(event) => setType(event.target.value)}
-              input={<OutlinedInput label="Tipo de transação" />}
+              input={<OutlinedInput label='Tipo de transação' />}
             >
               {types.map((type) => (
                 <MenuItem key={type.id} value={type.id}>
@@ -81,14 +81,14 @@ function Transaction() {
           <div style={{ marginTop: 30 }}>
             <FormControl>
               <NameBalanceInputField
-                labelProp="Carteira de origem"
+                labelProp='Carteira de origem'
                 setStateProp={setSend}
                 stateProp={send}
               />
             </FormControl>
             <FormControl style={{ marginLeft: 20 }}>
               <NameBalanceInputField
-                labelProp="Carteira de destino"
+                labelProp='Carteira de destino'
                 setStateProp={setReceive}
                 stateProp={receive}
               />
@@ -102,16 +102,16 @@ function Transaction() {
               alignItems: 'center',
             }}
           >
-            <FormControl style={{ marginTop: 30 }} variant="outlined">
+            <FormControl style={{ marginTop: 30 }} variant='outlined'>
               <TextField
                 onChange={(event) => setValue(event.target.value)}
                 value={value}
                 style={{
                   width: 620,
                 }}
-                id="outlined-number"
-                label="Valor"
-                type="number"
+                id='outlined-number'
+                label='Valor'
+                type='number'
                 InputLabelProps={{ shrink: true, }}
                 InputProps={{ endAdornment: 'R$', }}
               />
@@ -120,8 +120,8 @@ function Transaction() {
             <FormControl style={{ width: 620, marginTop: 30 }}>
               <TextField
                 fullWidth
-                id="filled-textarea"
-                label="Descrição"
+                id='filled-textarea'
+                label='Descrição'
                 multiline
                 rows={2}
                 onChange={(event) => setDescription(event.target.value)}
@@ -138,7 +138,7 @@ function Transaction() {
                   marginTop: 40,
                 }}
                 onClick={async () => { await createTransaction() }}
-                variant="contained"
+                variant='contained'
               >
                 Criar
               </Button>
@@ -148,13 +148,13 @@ function Transaction() {
       </Box>
 
       <Snackbar open={showSuccess} autoHideDuration={5000} onClose={() => setShowSuccess(false)}>
-        <Alert onClose={() => setShowSuccess(false)} severity="success" sx={{ width: '100%' }}>
+        <Alert onClose={() => setShowSuccess(false)} severity='success' sx={{ width: '100%' }}>
           Transação criada com sucesso!
         </Alert>
       </Snackbar>
 
       <Snackbar open={showError} autoHideDuration={5000} onClose={() => setShowError(false)}>
-        <Alert onClose={() => setShowError(false)} severity="error" sx={{ width: '100%' }}>
+        <Alert onClose={() => setShowError(false)} severity='error' sx={{ width: '100%' }}>
           {errorMessage}
         </Alert>
       </Snackbar>
