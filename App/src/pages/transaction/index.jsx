@@ -13,12 +13,10 @@ import {
   Select,
 } from '@mui/material';
 
-// Components
 import AppBarComponent from '../../components/appBar';
 import NameBalanceInputField from '../../components/nameBalanceInputField';
 
-// Menu Itens
-const types = ['Credit', 'Debit'];
+const types = ['Crédito', 'Débito'];
 
 function Transaction() {
   const [send, setSend] = useState('');
@@ -28,7 +26,6 @@ function Transaction() {
   const [description, setDescription] = useState('');
 
   const create = () => {
-    alert('Criado');
     console.log({
       send: send,
       received: receive,
@@ -48,16 +45,15 @@ function Transaction() {
           justifyContent={'center'}
           alignItems={'center'}
         >
-          {/* ---------------------TOP---------------------*/}
           <FormControl>
-            <InputLabel>Transaction Type</InputLabel>
+            <InputLabel>Tipo de transação</InputLabel>
             <Select
               style={{
                 width: 620,
               }}
               value={type}
               onChange={(event) => setType(event.target.value)}
-              input={<OutlinedInput label="Transaction Type" />}
+              input={<OutlinedInput label="Tipo de transação" />}
             >
               {types.map((type) => (
                 <MenuItem key={type} value={type}>
@@ -67,25 +63,23 @@ function Transaction() {
             </Select>
           </FormControl>
 
-          {/* ---------------------Mid---------------------*/}
           <div style={{ marginTop: 30 }}>
             <FormControl>
               <NameBalanceInputField
-                labelProp="Send"
+                labelProp="Carteira de partida"
                 setStateProp={setSend}
                 stateProp={send}
               />
             </FormControl>
             <FormControl style={{ marginLeft: 20 }}>
               <NameBalanceInputField
-                labelProp="Receive"
+                labelProp="Carteira de contrapartida"
                 setStateProp={setReceive}
                 stateProp={receive}
               />
             </FormControl>
           </div>
 
-          {/* ---------------------Bottom---------------------*/}
           <div
             style={{
               display: 'flex',
@@ -98,17 +92,13 @@ function Transaction() {
                 onChange={(event) => setValue(event.target.value)}
                 value={value}
                 style={{
-                  width: 360,
+                  width: 620,
                 }}
                 id="outlined-number"
-                label="Value"
+                label="Valor"
                 type="number"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                InputProps={{
-                  endAdornment: 'R$',
-                }}
+                InputLabelProps={{ shrink: true, }}
+                InputProps={{ endAdornment: 'R$', }}
               />
             </FormControl>
 
@@ -116,7 +106,7 @@ function Transaction() {
               <TextField
                 fullWidth
                 id="filled-textarea"
-                label="Description"
+                label="Descrição"
                 multiline
                 rows={2}
                 onChange={(event) => setDescription(event.target.value)}
@@ -124,7 +114,6 @@ function Transaction() {
             </FormControl>
           </div>
 
-          {/* ---------------------Action---------------------*/}
 
           <Grid container justifyContent={'center'}>
             <Grid item xs={2}>
@@ -136,7 +125,7 @@ function Transaction() {
                 onClick={create}
                 variant="contained"
               >
-                Gerar
+                Criar
               </Button>
             </Grid>
           </Grid>
