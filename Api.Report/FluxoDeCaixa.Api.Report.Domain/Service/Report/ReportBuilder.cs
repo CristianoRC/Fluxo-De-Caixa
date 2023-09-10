@@ -61,7 +61,7 @@ public class ReportBuilder
                 <tr class=""item"">
 				    <td>{transaction.Description}</td>
 				    <td class=""{transactionClass}"">
-                        <strong>R$ {transaction.TransactionAmount}</strong>
+                        R$ {transaction.TransactionAmount}
                     </td>
                 </tr>");
         }
