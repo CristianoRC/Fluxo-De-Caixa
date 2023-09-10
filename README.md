@@ -11,6 +11,10 @@
 - [Container](./Doc/Container.md)
 - [Component](./Doc/Component.md)
 
+### Cloud Diagram
+
+- [Azure](./Doc/Cloud.md)
+
 ## Como Rodar o Projeto
 
 ### Containers

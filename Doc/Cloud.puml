@@ -1,0 +1,5 @@
+@startuml cloud
+
+TITLE Fluxo de Caixa - Cloud - Azure
+
+@enduml
