@@ -26,7 +26,6 @@ public static class Setup
 
         ConfigureGotenbergClient(service, configuration);
         ConfigureMongoDb(service, configuration);
-        ConfigureBlobStorage(service, configuration);
         return service;
     }
 
@@ -48,15 +47,7 @@ public static class Setup
             });
         services.AddGotenbergSharpClient();
     }
-
-    private static void ConfigureBlobStorage(IServiceCollection services, IConfiguration configuration)
-    {
-        /*services.AddAzureClients(clientBuilder =>
-        {
-            clientBuilder.AddBlobServiceClient(new Uri(configuration["blobStorage"]));
-        });*/
-    }
-
+    
     private static void ConfigureMongoDb(IServiceCollection services, IConfiguration configuration)
     {
         var client = new MongoClient(configuration["mongodb"]);
