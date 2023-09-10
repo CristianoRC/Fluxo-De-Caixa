@@ -23,6 +23,6 @@ public class ReportQuery
 
     public DateOnly Date { get; }
     public Guid BalanceId { get; set; }
-
+    public bool IsValid => _errors.Any() is false;
     public IEnumerable<string> Errors => _errors;
 }
