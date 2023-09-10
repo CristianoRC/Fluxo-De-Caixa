@@ -1,6 +1,5 @@
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-
+import { Snackbar, Alert } from '@mui/material';
 import { primary } from '../../constants/colors';
 
 import {
@@ -18,15 +17,23 @@ import AppBarComponent from '../../components/appBar';
 import axios from 'axios';
 
 function CreateWallet() {
-  const [walletName, setWalletName] = useState();
+  const [walletName, setWalletName] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const createWalletAction = async () => {
     //em um ambiente real teria que pegar as urls base de um env*
     try {
       const body = { name: walletName };
-      await axios.post("http://localhost:8081/api/balance", body)
+      await axios.post("http://localhost:8081/api/balance", body);
+      setShowSuccess(true);
     } catch (error) {
-      alert(error)
+      if (error.response.status == 400)
+        setErrorMessage("Preencha as informações do da carteira!")
+      else
+        setErrorMessage("Ocorreu um erro, tente mais tarde")
+      setShowError(true);
     }
 
   };
@@ -72,6 +79,17 @@ function CreateWallet() {
           </Grid>
         </Grid>
       </Box>
+      <Snackbar open={showSuccess} autoHideDuration={5000} onClose={() => setShowSuccess(false)}>
+        <Alert onClose={() => setShowSuccess(false)} severity="success" sx={{ width: '100%' }}>
+          Carteira criada com sucesso!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar open={showError} autoHideDuration={5000} onClose={() => setShowError(false)}>
+        <Alert onClose={() => setShowError(false)} severity="error" sx={{ width: '100%' }}>
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
