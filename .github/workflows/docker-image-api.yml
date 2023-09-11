@@ -1,0 +1,24 @@
+name: Build - API
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  build-api:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build the Docker image
+      run: docker build ./Api --file ./Api/dockerfile --tag cristianorc/fluxo-de-caixa-api:${{github.ref_name}}
+      
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
+    - name: Push Docker image to Registry
+      run: docker push cristianorc/fluxo-de-caixa:${{github.ref_name}}
