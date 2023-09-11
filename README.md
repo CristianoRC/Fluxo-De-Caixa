@@ -34,7 +34,6 @@ Para rodar os projetos é necessário  ter Docker instalado, e rodar o seguinte 
 
 ## Localmente
 
-
 ### Serviços necessários
 
 - PostgreSQL, na porta 5432
@@ -44,19 +43,16 @@ Para rodar os projetos é necessário  ter Docker instalado, e rodar o seguinte 
 
 Ajustar usuários e senhas de acordo com os valores do local.settings.json(report api) e appsettings.Development.json(api). 
 
-
 ### APP - React
 Para configurar o projeto de web app é necessário ter node instalado, e rodar os seguintes comandos no diretório principal: `npm i` `npm run start`
 
 ### API
 Necessário ter o .NET 7 instalado. Restaure os pacotes e rode o seguinte comando dentro do diretório _Api_: `dotnet run`
 
-
 ### API Report
 
 Necessário ter o .NET 7 instalado e as [ferramentas para Azure functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=macos%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-csharp).
 Para executar a function, restaure os pacites rode o seguite comando no diretório _Api.Report/FluxoDeCaixa.Api.Report_ : `func start`
-
 
 # CI/CD
 
@@ -71,3 +67,7 @@ Foi feita a configuração de GitHub Actions para geração e upload das imagens
 Visual Studio: `Add-Migration {Nome} -Context FluxoDeCaixaDataContext -StartupProject FluxoDeCaixa.Api -Project FluxoDeCaixa.Infra -OutputDir Migrations`
 
 Dotnet cli: `dotnet ef migrations add {Nome} --context FluxoDeCaixaDataContext --startup-project FluxoDeCaixa.Api --project FluxoDeCaixa.Infra --output-dir Migrations`
+
+# Como funciona o projeto
+
+Separei em um outro arquivo, uma documentação de como usar a aplicação, para mais detalhes acesse a[documentação de uso](./Doc/ComoUsar.md)
