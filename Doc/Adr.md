@@ -14,8 +14,6 @@ Foi feito o lock dos dois balances até fazer todo o fluxo e os cálculos, para 
 
 Podemos ter problemas na criação das transações, pois se tiver uma inserção em massa no mesmo balance, as requisições podem começar a dar timeout, se isso acontecer precisaremos criar um novo fluxo, onde na entrada apenas validamos se os balances existem e adicionamos em uma fila para a criação das transações no futuro.
 
----
-
 ## Cache nos relatórios
 
 ### Context
@@ -28,8 +26,6 @@ Não foi adicionado cache no fluxo por prioridade e tempo disponível
 ### Consequences
 
 Teremos mais gastos com processamento, mas o ideal no futuro é criar um cache nem que seja para os dias que já passaram, e com o tempo fazer alguma estratégia para cache e invalidação dos relatórios do dia atual.
-
----
 
 
 ## Relatórios grandes ou em grandes quantidades
