@@ -25,6 +25,9 @@ Registros das decisões tomadas em relação à arquitetura
 
 - [ADRs](./Doc/Adr.md)
 
+# Como funciona o projeto
+
+Separei em um outro arquivo, uma documentação de como usar a aplicação, para mais detalhes acesse a [documentação de uso](./Doc/ComoUsar.md)
 
 # Como Rodar o Projeto
 
@@ -67,7 +70,3 @@ Foi feita a configuração de GitHub Actions para geração e upload das imagens
 Visual Studio: `Add-Migration {Nome} -Context FluxoDeCaixaDataContext -StartupProject FluxoDeCaixa.Api -Project FluxoDeCaixa.Infra -OutputDir Migrations`
 
 Dotnet cli: `dotnet ef migrations add {Nome} --context FluxoDeCaixaDataContext --startup-project FluxoDeCaixa.Api --project FluxoDeCaixa.Infra --output-dir Migrations`
-
-# Como funciona o projeto
-
-Separei em um outro arquivo, uma documentação de como usar a aplicação, para mais detalhes acesse a[documentação de uso](./Doc/ComoUsar.md)
