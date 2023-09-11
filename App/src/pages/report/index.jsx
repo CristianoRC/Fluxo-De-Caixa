@@ -74,7 +74,7 @@ const Report = () => {
               }}
             >
               <BalanceInputField
-                labelProp="Carteiras"
+                labelProp="Selecione a carteira"
                 setStateProp={setBalance}
                 stateProp={balance}
               />
