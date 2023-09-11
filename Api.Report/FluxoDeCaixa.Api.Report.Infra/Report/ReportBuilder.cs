@@ -29,20 +29,20 @@ public class ReportBuilder : IReportBuilder
 
     public IReportBuilder InsertDebitAmount(decimal amount)
     {
-        _htmlContent.Replace("#DEBIT", $"R$ {amount}");
+        _htmlContent.Replace("#DEBIT", $"R$ {amount:0.00}");
         return this;
     }
 
     public IReportBuilder InsertCreditAmount(decimal amount)
     {
-        _htmlContent.Replace("#CREDIT", $"R$ {amount}");
+        _htmlContent.Replace("#CREDIT", $"R$ {amount:0.00}");
         return this;
     }
 
 
     public IReportBuilder InsertTotalAmount(decimal amount)
     {
-        _htmlContent.Replace("#AMOUNT", $"R$ {amount}");
+        _htmlContent.Replace("#AMOUNT", $"R$ {amount:0.00}");
         return this;
     }
 
@@ -62,7 +62,7 @@ public class ReportBuilder : IReportBuilder
                 <tr class=""item"">
 				    <td>{transaction.Description}</td>
 				    <td class=""{transactionClass}"">
-                        R$ {transaction.TransactionAmount}
+                        R$ {transaction.TransactionAmount:0.00}
                     </td>
                 </tr>");
         }
