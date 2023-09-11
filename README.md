@@ -60,6 +60,10 @@ Para executar a function, restaure os pacites rode o seguite comando no diretór
 
 Foi feita a configuração de GitHub Actions para geração e upload das imagens docker do APP e da API para o DockerHub sempre que uma release for criada, a tag desta release será usada como tag na imagem do container.
 
+- [API Docker Image](https://hub.docker.com/r/cristianorc/fluxo-de-caixa-api)
+- [API - Report Docker Image](https://hub.docker.com/r/cristianorc/fluxo-de-caixa-api-report)
+- [APP Docker Image](https://hub.docker.com/r/cristianorc/fluxo-de-caixa-app)
+
 # Criando nova migração
 
 Visual Studio: `Add-Migration {Nome} -Context FluxoDeCaixaDataContext -StartupProject FluxoDeCaixa.Api -Project FluxoDeCaixa.Infra -OutputDir Migrations`
