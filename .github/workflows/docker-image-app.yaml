@@ -1,4 +1,4 @@
-name: Build - API - Report
+name: Build - APP
 
 on:
   release:
@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: Build the Docker image
-      run: docker build ./Api.Report --file ./Api.Report/dockerfile --tag cristianorc/fluxo-de-caixa-api-report:${{github.ref_name}}
+      run: docker build ./App --file ./App/dockerfile --tag cristianorc/fluxo-de-caixa-app:${{github.ref_name}}
       
     - name: Login to Docker Hub
       uses: docker/login-action@v2
@@ -21,4 +21,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           
     - name: Push Docker image to Registry
-      run: docker push cristianorc/fluxo-de-caixa-api-report:${{github.ref_name}}
+      run: docker push cristianorc/fluxo-de-caixa-app:${{github.ref_name}}
