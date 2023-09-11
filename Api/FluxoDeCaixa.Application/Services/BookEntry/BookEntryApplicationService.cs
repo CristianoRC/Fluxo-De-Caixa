@@ -41,7 +41,7 @@ public class BookEntryApplicationService : IBookEntryApplicationService
         await lockOffset.DisposeAsync();
         
         if (bookEntry.Errors.Any() is false)
-            _notificationService.NewBookEntryCreates(bookEntry, command.CorrelationId);
+            _notificationService.BookEntryCreated(bookEntry, command.CorrelationId);
         
         return bookEntry;
     }

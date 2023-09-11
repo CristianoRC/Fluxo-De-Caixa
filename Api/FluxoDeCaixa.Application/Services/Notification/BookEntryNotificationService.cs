@@ -12,7 +12,7 @@ public class BookEntryNotificationService : IBookEntryNotificationService
         _sendMessageService = sendMessageService;
     }
 
-    public void NewBookEntryCreates(Domain.Aggregations.BookEntry bookEntry, Guid commandCorrelationId)
+    public void BookEntryCreated(Domain.Aggregations.BookEntry bookEntry, Guid commandCorrelationId)
     {
         var message = new IdempotentEvent<Domain.Aggregations.BookEntry>(commandCorrelationId, bookEntry);
         _sendMessageService.Send(message, "book-entry", string.Empty);
