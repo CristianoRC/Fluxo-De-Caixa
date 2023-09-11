@@ -35,7 +35,7 @@ AzureFunction(functionRegistro, "Transactions", ".NET 7 C#", "")
 AzureFunction(functionRelatorio, "Report", "NET 7 C#", "")
 AzureBlobStorage(staticBlobStorage, "Armazenamento de arquivos", "Armazena relatórios")
 
-AzureAPIManagement(apiManagement, "Api Managemente", "Controle da entrada e segurança")
+AzureAPIManagement(apiManagement, "Api Management", "Controle da entrada e segurança")
 AzureKeyVault(azureKeyVault, "Armazenamento de chaves e segredos", "")
 AzureApplicationInsights(applicationInsights, "Logs Tracing", "")
 
