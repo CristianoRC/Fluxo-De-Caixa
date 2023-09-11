@@ -43,7 +43,7 @@ function Transaction() {
     }
     catch (error) {
       if (error.response.status == 400)
-        setErrorMessage(error.response.data.error);
+        setErrorMessage(error.response.data.errors.join(' '));
       else
         setErrorMessage('Ocorreu um erro, tente mais tarde');
       setShowError(true)

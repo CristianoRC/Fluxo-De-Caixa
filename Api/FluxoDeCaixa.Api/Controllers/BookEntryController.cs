@@ -28,7 +28,7 @@ public class BookEntryController : Controller
         }
         catch (ArgumentException e)
         {
-            return BadRequest(new {Error = e.Message});
+            return BadRequest(new {Errors = new[] {e.Message}});
         }
         catch (Exception e)
         {

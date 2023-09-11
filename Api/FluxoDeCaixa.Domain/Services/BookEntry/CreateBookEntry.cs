@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using FluxoDeCaixa.Domain.ValueObjects;
 
 namespace FluxoDeCaixa.Domain.Services.BookEntry;
