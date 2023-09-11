@@ -1,11 +1,10 @@
 using FluxoDeCaixa.Api.Report.Domain.Repository;
 using FluxoDeCaixa.Api.Report.Domain.Service.Report;
 using FluxoDeCaixa.Api.Report.Infra.Http;
-using FluxoDeCaixa.Api.Report.Infra.Model;
+using FluxoDeCaixa.Api.Report.Infra.Report;
 using FluxoDeCaixa.Api.Report.Infra.Repositories;
 using Gotenberg.Sharp.API.Client.Domain.Settings;
 using Gotenberg.Sharp.API.Client.Extensions;
-using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
@@ -22,7 +21,7 @@ public static class Setup
         service.AddTransient<IIdempotencyRepository, IdempotencyRepository>();
         service.AddTransient<IBookEntryRepository, BookEntryRepository>();
         service.AddTransient<IPdfRenderService, PdfRenderService>();
-
+        service.AddScoped<IReportBuilder, ReportBuilder>();
 
         ConfigureGotenbergClient(service, configuration);
         ConfigureMongoDb(service, configuration);

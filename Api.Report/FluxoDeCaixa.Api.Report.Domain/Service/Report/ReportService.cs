@@ -7,19 +7,20 @@ public class ReportService : IReportService
 {
     private readonly IBookEntryRepository _repository;
     private readonly IPdfRenderService _renderService;
+    private readonly IReportBuilder _reportBuilder;
 
-    public ReportService(IBookEntryRepository repository, IPdfRenderService renderService)
+    public ReportService(IBookEntryRepository repository, IPdfRenderService renderService, IReportBuilder reportBuilder)
     {
         _repository = repository;
         _renderService = renderService;
+        _reportBuilder = reportBuilder;
     }
 
     public async Task<byte[]> GenerateReport(ReportQuery reportQuery)
     {
         var transactions = await _repository.GetTransactions(reportQuery);
         var consolidatedStatement = new ConsolidatedStatement(transactions);
-        var reportBuilder = new ReportBuilder();
-        var reportHtml = reportBuilder
+        var reportHtml = _reportBuilder
             .InsertReportDate(reportQuery.Date)
             .InsertBalanceName(consolidatedStatement.BalanceName)
             .InsertCreditAmount(consolidatedStatement.CreditAmount)

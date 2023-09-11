@@ -1,9 +1,10 @@
 using System.Text;
 using FluxoDeCaixa.Api.Report.Domain.Entities;
+using FluxoDeCaixa.Api.Report.Domain.Service.Report;
 
-namespace FluxoDeCaixa.Api.Report.Domain.Service.Report;
+namespace FluxoDeCaixa.Api.Report.Infra.Report;
 
-public class ReportBuilder
+public class ReportBuilder : IReportBuilder
 {
     private readonly StringBuilder _htmlContent = new();
 
@@ -13,39 +14,39 @@ public class ReportBuilder
         _htmlContent.Append(fileHtml);
     }
 
-    public ReportBuilder InsertReportDate(DateOnly reportDate)
+    public IReportBuilder InsertReportDate(DateOnly reportDate)
     {
         _htmlContent.Replace("#DATA", reportDate.ToLongDateString());
         return this;
     }
 
 
-    public ReportBuilder InsertBalanceName(string balance)
+    public IReportBuilder InsertBalanceName(string balance)
     {
         _htmlContent.Replace("#BALANCE", balance);
         return this;
     }
 
-    public ReportBuilder InsertDebitAmount(decimal amount)
+    public IReportBuilder InsertDebitAmount(decimal amount)
     {
         _htmlContent.Replace("#DEBIT", $"R$ {amount}");
         return this;
     }
 
-    public ReportBuilder InsertCreditAmount(decimal amount)
+    public IReportBuilder InsertCreditAmount(decimal amount)
     {
         _htmlContent.Replace("#CREDIT", $"R$ {amount}");
         return this;
     }
 
 
-    public ReportBuilder InsertTotalAmount(decimal amount)
+    public IReportBuilder InsertTotalAmount(decimal amount)
     {
         _htmlContent.Replace("#AMOUNT", $"R$ {amount}");
         return this;
     }
 
-    public ReportBuilder InsertTransactions(IEnumerable<ITransactionReport> transactions)
+    public IReportBuilder InsertTransactions(IEnumerable<ITransactionReport> transactions)
     {
         _htmlContent.Replace("#TRANSACTION", GenerateTransactionsHtml(transactions));
         return this;
