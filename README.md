@@ -23,6 +23,8 @@ Registros das decisões tomadas em relação à arquitetura
 
 - [ADRs](./Doc/Adr.md)
 
+---
+
 ## Como Rodar o Projeto
 
 ### Containers
@@ -53,6 +55,15 @@ Necessário ter o .NET 7 instalado. Restaure os pacotes e rode o seguinte comand
 
 Necessário ter o .NET 7 instalado e as [ferramentas para Azure functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=macos%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-csharp).
 Para executar a function, restaure os pacites rode o seguite comando no diretório _Api.Report/FluxoDeCaixa.Api.Report_ : `func start`
+
+
+---
+
+## CI/CD
+
+Foi feita a configuração de GitHub Actions para geração e upload das imagens docker do APP e da API para o DockerHub sempre que uma release for criada, a tag desta release será usada como tag na imagem do container.
+
+---
 
 ## Criando nova migração
 
