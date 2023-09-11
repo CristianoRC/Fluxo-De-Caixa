@@ -2,6 +2,6 @@ namespace FluxoDeCaixa.Infra.MessageBus.Configuration;
 
 public interface ISendMessageService
 {
-    public void SendMessage(object message, string exchange, string routingKey);
-    public void SendMessage(object message, string queue);
+    public void Send(object message, string exchange, string routingKey);
+    public void Send(object message, string queue);
 }

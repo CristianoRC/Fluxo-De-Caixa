@@ -13,7 +13,7 @@ public class SendMessageService : ISendMessageService
         _rabbitMqConnection = rabbitMqConnection;
     }
 
-    public void SendMessage(object message, string exchange, string routingKey)
+    public void Send(object message, string exchange, string routingKey)
     {
         var jsonMessage = JsonSerializer.Serialize(message);
         var body = Encoding.UTF8.GetBytes(jsonMessage);
@@ -21,7 +21,7 @@ public class SendMessageService : ISendMessageService
         channel.BasicPublish(exchange, routingKey, null, body);
     }
 
-    public void SendMessage(object message, string queue)
+    public void Send(object message, string queue)
     {
         var jsonMessage = JsonSerializer.Serialize(message);
         var body = Encoding.UTF8.GetBytes(jsonMessage);
