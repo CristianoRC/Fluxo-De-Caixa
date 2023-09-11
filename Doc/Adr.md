@@ -12,7 +12,7 @@ Foi feito o lock dos dois balances até fazer todo o fluxo e os cálculos, para 
 
 ### Consequences
 
-Podemos ter problemas na criação das transações, pois se tiver uma inserção em messa no mesmo balance, as requisições podem começar a dar timeout, se isso acontecer precisaremos criar um novo fluxo, onde na entrada apenas validamos se os balances existem e adicionamos em uma fila para a criação das transações no futuro.
+Podemos ter problemas na criação das transações, pois se tiver uma inserção em massa no mesmo balance, as requisições podem começar a dar timeout, se isso acontecer precisaremos criar um novo fluxo, onde na entrada apenas validamos se os balances existem e adicionamos em uma fila para a criação das transações no futuro.
 
 ---
 
