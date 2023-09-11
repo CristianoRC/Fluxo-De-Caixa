@@ -2,7 +2,9 @@
 
 <img src="./images/money.svg" width="250px"/>
 
-
+![workflow-api](https://github.com/CristianoRC/Fluxo-De-Caixa/actions/workflows/docker-image-api.yaml/badge.svg)
+![workflow-api-report](https://github.com/CristianoRC/Fluxo-De-Caixa/actions/workflows/docker-image-api-report.yaml/badge.svg)
+![workflow-app](https://github.com/CristianoRC/Fluxo-De-Caixa/actions/workflows/docker-image-app.yaml/badge.svg)
 # Documentação
 
 ## Diagramas - C4 Model
@@ -62,7 +64,7 @@ Foi feita a configuração de GitHub Actions para geração e upload das imagens
 
 - [API Docker Image](https://hub.docker.com/r/cristianorc/fluxo-de-caixa-api)
 - [API - Report Docker Image](https://hub.docker.com/r/cristianorc/fluxo-de-caixa-api-report)
-- [APP Docker Image](https://hub.docker.com/r/cristianorc/fluxo-de-caixa-app)
+- [APP Docker Image](https://hub.docker.com/r/cristianorc/fluxo-de-caixa-app)![workflow-api](https://github.com/CristianoRC/Fluxo-De-Caixa/actions/workflows/docker-image-api-report.yml/badge.svg)
 
 # Criando nova migração
 
