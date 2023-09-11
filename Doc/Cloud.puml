@@ -36,7 +36,7 @@ AzureFunction(functionRelatorio, "Report", "NET 7 C#", "")
 AzureBlobStorage(staticBlobStorage, "Armazenamento de arquivos", "Armazena relatórios")
 
 AzureAPIManagement(apiManagement, "Api Managemente", "Controle da entrada e segurança")
-AzureKeyVault(azureKeyVault, "Armazenamento de senhas", "")
+AzureKeyVault(azureKeyVault, "Armazenamento de chaves e segredos", "")
 AzureApplicationInsights(applicationInsights, "Logs Tracing", "")
 
 personAlias --> app
