@@ -21,7 +21,7 @@ function Transaction() {
   const [send, setSend] = useState('');
   const [receive, setReceive] = useState('');
   const [type, setType] = useState(0);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(0);
 
   const [description, setDescription] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
