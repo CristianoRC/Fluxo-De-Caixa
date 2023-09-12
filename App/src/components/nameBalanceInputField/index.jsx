@@ -7,7 +7,7 @@ const NameBalanceInputField = (props) => {
   const [balances, setBalances] = useState([]);
 
   const updateBalances = async () => {
-    var balances = await axios.get("http://localhost:8081/api/balance")
+    const balances = await axios.get("http://localhost:8081/api/balance")
     setBalances(balances.data);
   }
 

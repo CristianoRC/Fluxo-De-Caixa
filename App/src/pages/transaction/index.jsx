@@ -28,13 +28,40 @@ function Transaction() {
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const validateRequestData = (data) => {
+    let isInvalid = false;
+    const errors = []
+
+    if (data.entryBalance === '' || data.offsetBalance == '') {
+      isInvalid = true;
+      errors.push("Selecione as duas carteiras")
+    }
+
+    if (data.amount === '') {
+      isInvalid = true;
+      errors.push("Preencha s valor da transação")
+    }
+
+    return {
+      isInvalid,
+      errors
+    }
+  }
+
   const createTransaction = async () => {
-    var data = {
+    const data = {
       entryBalance: send,
       offsetBalance: receive,
       amount: value,
       transactionType: type,
       description: description
+    }
+    const validationResult = validateRequestData(data);
+
+    if (validationResult.isInvalid) {
+      setErrorMessage(validationResult.errors.join(' - '));
+      setShowError(true)
+      return;
     }
 
     try {
