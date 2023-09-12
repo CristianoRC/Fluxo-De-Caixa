@@ -1,4 +1,4 @@
-namespace FluxoDeCaixa.Application.Services.BookEntry;
+namespace FluxoDeCaixa.Application.Services.Notification;
 
 public interface IBookEntryNotificationService
 {

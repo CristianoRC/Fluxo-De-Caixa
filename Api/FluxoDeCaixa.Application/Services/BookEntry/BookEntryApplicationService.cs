@@ -1,4 +1,5 @@
 using FluxoDeCaixa.Application.Exceptions;
+using FluxoDeCaixa.Application.Services.Notification;
 using FluxoDeCaixa.Domain.Services.BookEntry;
 using RedLockNet;
 

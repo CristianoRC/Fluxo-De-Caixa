@@ -1,4 +1,3 @@
-using FluxoDeCaixa.Application.Services.BookEntry;
 using FluxoDeCaixa.Infra.MessageBus.Configuration;
 
 namespace FluxoDeCaixa.Application.Services.Notification;
