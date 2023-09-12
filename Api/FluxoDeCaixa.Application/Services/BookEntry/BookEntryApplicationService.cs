@@ -20,9 +20,9 @@ public class BookEntryApplicationService : IBookEntryApplicationService
 
     public async Task<Domain.Aggregations.BookEntry> Create(CreateBookEntry command)
     {
+        ArgumentNullException.ThrowIfNull(command);
         await _bookEntryLock.Acquire(command);
         var bookEntry = await _bookEntryService.Create(command);
-
         if (bookEntry.Errors.Any() is false)
             _notificationService.BookEntryCreated(bookEntry, command.CorrelationId);
 
