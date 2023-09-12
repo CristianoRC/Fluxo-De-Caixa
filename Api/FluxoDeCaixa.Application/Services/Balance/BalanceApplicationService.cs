@@ -13,7 +13,10 @@ public class BalanceApplicationService : IBalanceApplicationService
 
     public async Task<Domain.Entities.Balance> Create(CreateBalanceCommand createBalanceCommand)
     {
-        return await _balanceRepository.Create(new Domain.Entities.Balance(createBalanceCommand.Name));
+        var balance = new Domain.Entities.Balance(createBalanceCommand.Name);
+        if (balance.IsValid)
+            await _balanceRepository.Create(balance);
+        return balance;
     }
 
     public async Task<IEnumerable<Domain.Entities.Balance>> Get()
