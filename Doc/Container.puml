@@ -19,7 +19,8 @@ Enterprise_Boundary(boundaryEmpersa, "Empresa") {
         ContainerDb(redis, "In-memory Database", "Redis", "Armazena cache e controla lock distribuído")
         ContainerDb(mongodb, "Database", "Mongo DB", "Armazena dados de fluxo de caixa para relatórios")
         ContainerDb(postgres, "Database", "PostgreSQL", "Armazena dados de fluxo de caixa")
-        ContainerQueue(transactionQueue, "Fila - RabbitMQ", "Todas as transações finalizadas")
+        ContainerQueue(transactionQueue, "book-entry", "Topic - RabbitMQ", "Tópico dos bookentries criados")
+        ContainerQueue(transacionDlq, "book-entry-fail", "DLQ - RabbitMQ", "Dead Letter queue das transações com problemas ao processar")
     }
     
     Container(authApi, "Auth API", "ASP NET 7", "Controla Auth e redireciona chamadas para os serviços de fluxo de caixa")
@@ -38,6 +39,7 @@ Rel(fluxoDeCaixaApi, redis, "Controla lock distribuído no", "TCP")
 'Report API
 Rel(fluxoDeCaixaReportApi, mailSystem, "Envia e-mails", "SMTP")
 Rel_D(fluxoDeCaixaReportApi, transactionQueue, "Le as mensagens da fila", "TCP")
+Rel(fluxoDeCaixaReportApi, transacionDlq, "Adiciona mensagens com erro no processamento na", "TCP")
 Rel(fluxoDeCaixaReportApi, mongodb, "Armazena dados para relatórios no", "TCP")
 Rel(fluxoDeCaixaReportApi, blobStorage, "Armazena relatórios no", "TCP")
 Rel(fluxoDeCaixaReportApi, gotenberg, "Gera arquivos PDF usando", "HTTP/JSON")
