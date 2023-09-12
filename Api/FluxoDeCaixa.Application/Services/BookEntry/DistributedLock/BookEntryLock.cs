@@ -12,10 +12,7 @@ public class BookEntryLock : IBookEntryLock
     {
         _distributedLockFactory = distributedLockFactory;
     }
-
-    public IRedLock? EntryLock { get; set; }
-    public IRedLock? OffsetLock { get; set; }
-
+    
     public async Task Acquire(CreateBookEntry command)
     {
         var expiry = TimeSpan.FromSeconds(60);
@@ -37,14 +34,5 @@ public class BookEntryLock : IBookEntryLock
             await lockEntry.DisposeAsync();
             throw new LockNotAcquiredException("Não foi possível obter o lock do offset balance");
         }
-    }
-
-    public async Task Release(CreateBookEntry command)
-    {
-        if (EntryLock?.IsAcquired ?? false)
-            await EntryLock.DisposeAsync();
-
-        if (OffsetLock?.IsAcquired ?? false)
-            await OffsetLock.DisposeAsync();
     }
 }

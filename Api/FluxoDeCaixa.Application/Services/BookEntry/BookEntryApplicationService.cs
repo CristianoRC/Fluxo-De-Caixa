@@ -22,7 +22,6 @@ public class BookEntryApplicationService : IBookEntryApplicationService
     {
         await _bookEntryLock.Acquire(command);
         var bookEntry = await _bookEntryService.Create(command);
-        await _bookEntryLock.Release(command);
 
         if (bookEntry.Errors.Any() is false)
             _notificationService.BookEntryCreated(bookEntry, command.CorrelationId);
