@@ -1,8 +1,6 @@
-using FluxoDeCaixa.Application.Exceptions;
 using FluxoDeCaixa.Application.Services.BookEntry.DistributedLock;
 using FluxoDeCaixa.Application.Services.Notification;
 using FluxoDeCaixa.Domain.Services.BookEntry;
-using RedLockNet;
 
 namespace FluxoDeCaixa.Application.Services.BookEntry;
 
