@@ -64,9 +64,3 @@ Foi feita a configuração de GitHub Actions para geração e upload das imagens
 - [API Docker Image](https://hub.docker.com/r/cristianorc/fluxo-de-caixa-api)
 - [API - Report Docker Image](https://hub.docker.com/r/cristianorc/fluxo-de-caixa-api-report)
 - [APP Docker Image](https://hub.docker.com/r/cristianorc/fluxo-de-caixa-app)
-
-# Criando nova migração
-
-Visual Studio: `Add-Migration {Nome} -Context FluxoDeCaixaDataContext -StartupProject FluxoDeCaixa.Api -Project FluxoDeCaixa.Infra -OutputDir Migrations`
-
-Dotnet cli: `dotnet ef migrations add {Nome} --context FluxoDeCaixaDataContext --startup-project FluxoDeCaixa.Api --project FluxoDeCaixa.Infra --output-dir Migrations`
