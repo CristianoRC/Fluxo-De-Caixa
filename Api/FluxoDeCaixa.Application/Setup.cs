@@ -1,5 +1,6 @@
 using FluxoDeCaixa.Application.Services.Balance;
 using FluxoDeCaixa.Application.Services.BookEntry;
+using FluxoDeCaixa.Application.Services.BookEntry.DistributedLock;
 using FluxoDeCaixa.Application.Services.Notification;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +18,8 @@ public static class Setup
         service.AddScoped<IBookEntryApplicationService, BookEntryApplicationService>();
         service.AddScoped<IBalanceApplicationService, BalanceApplicationService>();
         service.AddScoped<IBookEntryNotificationService, BookEntryNotificationService>();
-        
+        service.AddTransient<IBookEntryLock, BookEntryLock>();
+
         var endPoints = new List<RedLockMultiplexer>
         {
             ConnectionMultiplexer.Connect(config.GetConnectionString("Redis"))
