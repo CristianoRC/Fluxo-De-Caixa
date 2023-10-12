@@ -5,7 +5,11 @@
 ![workflow-api](https://github.com/CristianoRC/Fluxo-De-Caixa/actions/workflows/docker-image-api.yaml/badge.svg)
 ![workflow-api-report](https://github.com/CristianoRC/Fluxo-De-Caixa/actions/workflows/docker-image-api-report.yaml/badge.svg)
 ![workflow-app](https://github.com/CristianoRC/Fluxo-De-Caixa/actions/workflows/docker-image-app.yaml/badge.svg)
+
 # Documentação
+
+Sistema criado para estudos, com base em um sistema de Fluxo de Caixa, onde é possível criar carteiras, fazer transações entre elas e gerar relatórios de fechamento diário.
+Separei em um outro arquivo, uma documentação de como usar a aplicação, para mais detalhes acesse a [documentação de uso](./Doc/ComoUsar.md)
 
 ## Diagramas - C4 Model
 
@@ -24,10 +28,6 @@
 Registros das decisões tomadas em relação à arquitetura
 
 - [ADRs](./Doc/Adr.md)
-
-# Como funciona o projeto
-
-Separei em um outro arquivo, uma documentação de como usar a aplicação, para mais detalhes acesse a [documentação de uso](./Doc/ComoUsar.md)
 
 # Como Rodar o Projeto
 
