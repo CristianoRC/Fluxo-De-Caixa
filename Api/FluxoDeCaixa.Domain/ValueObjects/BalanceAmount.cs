@@ -1,12 +1,6 @@
 namespace FluxoDeCaixa.Domain.ValueObjects;
 
-public record BalanceAmount : IValueObject
+public readonly record struct BalanceAmount(decimal Value) : IValueObject
 {
-    public BalanceAmount(decimal value)
-    {
-        Value = value;
-    }
-
-    public decimal Value { get; } = decimal.Zero;
     public bool IsValid => true;
 }
