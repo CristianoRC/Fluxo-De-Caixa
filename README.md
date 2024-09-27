@@ -14,21 +14,21 @@ Separei em um outro arquivo, uma documentação de como usar a aplicação, para
 
 ## Diagramas - C4 Model
 
-- [System Context](./Doc/SystemContex.md)
-- [Container](./Doc/Container.md)
-- [Component](./Doc/Component.md)
-- [Code](./Doc/Code.md)
+- [System Context](./Doc/C4Model/SystemContex.md)
+- [Container](./Doc/C4Model/Container.md)
+- [Component](./Doc/C4Model/Component.md)
+- [Code](./Doc/C4Model/Code.md)
 
 
 ## Cloud Diagram
 
-- [Azure](./Doc/Cloud.md)
+- [Azure](./Doc/Cloud/Readme.md)
 
 ## ADR - Architectural Decision Records
 
 Registros das decisões tomadas em relação à arquitetura
 
-- [ADRs](./Doc/Adr.md)
+- [ADRs](./Doc/Adr)
 
 # Como Rodar o Projeto
 
