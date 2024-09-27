@@ -2,4 +2,4 @@
 
 ## ER - Banco de dados - SQL - API
 
-![er-diagram](./Images/er.png)
+![er-diagram](../Images/er.png)
