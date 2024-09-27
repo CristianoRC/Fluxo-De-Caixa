@@ -1,0 +1,40 @@
+@startuml component
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LANDSCAPE()
+LAYOUT_WITH_LEGEND()
+
+TITLE Fluxo de Caixa - Component - Gerar Relatório
+
+Boundary(boundary, "Geração de relatório") {
+    Component(fluxoDeCaixaApp, "App", "JavaScript, React", "Permite usuários gerenciarem fluxo de caixa no browser")
+    Component(fluxoDeCaixaReportApi, "Fluxo de Caixa - Relatório Function", "ASP NET 7 / Azure Functions", "Recebe chamadas HTTP para gerar arquivos de relatórios")
+
+    Component(reportService, "Report Service", "", "Controla fluxo de envio do relatório")
+    Component(reportCacheService, "Report Cache Service", "", "Verifica se existe um relatório válido já gerado")
+    Component(fileEncryptService, "Encrypt Files Service", "", "Responsável por criptografia dos relatórios gerados")
+    Component(reportRepository, "Report Repository", "", "Responsável por gerenciar os dados dos relatórios")
+    ComponentDb(mongodb, "Database", "Mongo DB", "Armazena dados de fluxo de caixa para relatórios")
+}
+
+Component_Ext(blobStorage, "Blob Sotrage", "", "Armazena arquivos dos relatórios")
+Component_Ext(maisService, "Serviço de E-mail", "", "Sistema de envio de e-mail")
+Person(pessoa, "Usuário do sistema", "Gerencia fluxo de caixa")
+
+Rel(fluxoDeCaixaApp, fluxoDeCaixaReportApi, "Faz chamada para", "[HTTP/JSON]")
+Rel(fluxoDeCaixaReportApi, reportService, "Usa", "")
+
+Rel(reportService, reportCacheService, "Verifica se é ncessário processar no", "")
+Rel(reportService, fileEncryptService, "Faz criptografia dos relatórios no", "")
+Rel(reportService, blobStorage, "Gerencia relatórios gerados no", "")
+Rel(reportService, maisService, "Envia email usado", "")
+Rel(reportService, reportRepository, "Busca dados no", "")
+
+Rel(reportRepository, mongodb, "Usa o", "")
+
+
+Rel(maisService, pessoa, "Envia emai com o relatório para", "")
+
+@enduml
