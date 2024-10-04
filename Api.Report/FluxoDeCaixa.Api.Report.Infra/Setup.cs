@@ -16,18 +16,36 @@ namespace FluxoDeCaixa.Api.Report.Infra;
 
 public static class Setup
 {
-    public static IServiceCollection AddInfra(this IServiceCollection service, IConfiguration configuration)
+    public static IServiceCollection AddInfra(this IServiceCollection service, IConfiguration configuration, bool isDevEnvironment)
     {
         service.AddTransient<IIdempotencyRepository, IdempotencyRepository>();
         service.AddTransient<IBookEntryRepository, BookEntryRepository>();
         service.AddTransient<IPdfRenderService, PdfRenderService>();
         service.AddScoped<IReportBuilder, ReportBuilder>();
-
+        
+        ConfigureCache(service, isDevEnvironment, configuration);
         ConfigureGotenbergClient(service, configuration);
         ConfigureMongoDb(service, configuration);
         return service;
     }
 
+    
+    private static void ConfigureCache(IServiceCollection services, bool isDevEnvironment, IConfiguration config)
+    {
+        if (isDevEnvironment)
+        {
+            services.AddMemoryCache();
+            services.AddDistributedMemoryCache();
+        }
+        else
+        {
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = config["RedisConnectionString"];
+            });
+        }
+    }
+    
     private static void ConfigureGotenbergClient(IServiceCollection services, IConfiguration configuration)
     {
         services.AddOptions<GotenbergSharpClientOptions>()
@@ -46,7 +64,7 @@ public static class Setup
             });
         services.AddGotenbergSharpClient();
     }
-    
+
     private static void ConfigureMongoDb(IServiceCollection services, IConfiguration configuration)
     {
         var client = new MongoClient(configuration["mongodb"]);
