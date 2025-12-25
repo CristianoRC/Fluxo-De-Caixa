@@ -16,10 +16,11 @@ public class FluxoDeCaixaDataContext : DbContext
 
     public DbSet<Balance> Balances { get; set; }
     public DbSet<BookEntry> BookEntries { get; set; }
+    public DbSet<Transaction> Transactions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql();
+        optionsBuilder.UseSqlServer();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

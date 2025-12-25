@@ -17,7 +17,7 @@ public static class Setup
         service.AddScoped<IBalanceRepository, BalanceRepository>();
 
         service.AddDbContext<FluxoDeCaixaDataContext>(options =>
-            options.UseNpgsql(config.GetConnectionString("Sql")));
+            options.UseSqlServer(config.GetConnectionString("Sql")));
         
         return service;
     }
