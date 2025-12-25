@@ -16,9 +16,8 @@ public class ConnectionRabbitMq
         var factory = new ConnectionFactory
         {
             Uri = new Uri(_connectionString),
-            ClientProvidedName = "FluxoDeCaixa",
-            DispatchConsumersAsync = true
+            ClientProvidedName = "FluxoDeCaixa"
         };
-        return factory.CreateConnection();
+        return factory.CreateConnectionAsync().GetAwaiter().GetResult();
     }
 }

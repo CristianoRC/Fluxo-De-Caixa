@@ -9,8 +9,8 @@ C4Container
     Enterprise_Boundary(boundaryEmpresa, "Empresa") {
         Container_Boundary(boundaryFluxoDeCaixa, "Fluxo de caixa") {
             Container(fluxoDeCaixaApp, "App", "JavaScript, React", "Permite usuários gerenciarem fluxo de caixa no browser")
-            Container(fluxoDeCaixaBff, "Fluxo de Caixa BFF", "ASP NET 7", "Controla Auth e redireciona chamadas para os serviços de fluxo de caixa")
-            Container(fluxoDeCaixaApi, "Fluxo de Caixa API", "ASP NET 7", "Sistema para gerenciamento de fluxo de caixa")
+            Container(fluxoDeCaixaBff, "Fluxo de Caixa BFF", "ASP NET 10", "Controla Auth e redireciona chamadas para os serviços de fluxo de caixa")
+            Container(fluxoDeCaixaApi, "Fluxo de Caixa API", "ASP NET 10", "Sistema para gerenciamento de fluxo de caixa")
             Container(fluxoDeCaixaReportApi, "Fluxo de Caixa - Relatório Fechamento", "ASP NET 7 / Azure Functions", "Sistema para gerar relatório de fechamento de fluxo de caixa")
 
             ContainerDb(sqlserver, "Database", "SQL Server 2025", "Armazena dados de fluxo de caixa com SQL Ledger para transações")
@@ -21,7 +21,7 @@ C4Container
             ContainerQueue(transacionDlq, "book-entry-fail", "DLQ - RabbitMQ", "Dead Letter queue das transações com problemas ao processar")
         }
 
-        Container(authApi, "Auth API", "ASP NET 7", "Controla Auth e redireciona chamadas para os serviços de fluxo de caixa")
+        Container(authApi, "Auth API", "ASP NET 10", "Controla Auth e redireciona chamadas para os serviços de fluxo de caixa")
     }
 
     Container_Ext(gotenberg, "gotenberg", "Go Lang", "Sistema de renderização de HTML em PDF")

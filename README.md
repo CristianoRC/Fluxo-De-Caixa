@@ -51,7 +51,7 @@ Ajustar usuários e senhas de acordo com os valores do local.settings.json(repor
 Para configurar o projeto de web app é necessário ter node instalado, e rodar os seguintes comandos no diretório principal: `npm i` `npm run start`
 
 ### API
-Necessário ter o .NET 7 instalado. Restaure os pacotes e rode o seguinte comando dentro do diretório _Api_: `dotnet run`
+Necessário ter o .NET 10 instalado. Restaure os pacotes e rode o seguinte comando dentro do diretório _Api_: `dotnet run`
 
 ### API Report
 

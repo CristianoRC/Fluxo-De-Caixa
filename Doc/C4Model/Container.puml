@@ -11,10 +11,10 @@ TITLE Fluxo De Caixa - Container
 Enterprise_Boundary(boundaryEmpersa, "Empresa") {
   
     Container_Boundary(boundaryFluxoDeCaixa, "Fluxo de caixa") {
-        Container(fluxoDeCaixaApi, "Fluxo de Caixa API", "ASP NET 7", "Sistema para gerenciamento de fluxo de caixa")
+        Container(fluxoDeCaixaApi, "Fluxo de Caixa API", "ASP NET 10", "Sistema para gerenciamento de fluxo de caixa")
         Container(fluxoDeCaixaApp, "App", "JavaScript, React", "Permite usuários gerenciarem fluxo de caixa no browser")
         Container(fluxoDeCaixaReportApi, "Fluxo de Caixa - Relatório Fechamento", "ASP NET 7 / Azure Functions", "Sistema para gerar relatório de fechamento de fluxo de caixa")
-        Container(fluxoDeCaixaBff, "Fluxo de Caixa BFF", "ASP NET 7", "Controla Auth e redireciona chamadas para os serviços de fluxo de caixa")
+        Container(fluxoDeCaixaBff, "Fluxo de Caixa BFF", "ASP NET 10", "Controla Auth e redireciona chamadas para os serviços de fluxo de caixa")
 
         ContainerDb(redis, "In-memory Database", "Redis", "Armazena cache e controla lock distribuído")
         ContainerDb(mongodb, "Database", "Mongo DB", "Armazena dados de fluxo de caixa para relatórios")
@@ -23,7 +23,7 @@ Enterprise_Boundary(boundaryEmpersa, "Empresa") {
         ContainerQueue(transacionDlq, "book-entry-fail", "DLQ - RabbitMQ", "Dead Letter queue das transações com problemas ao processar")
     }
     
-    Container(authApi, "Auth API", "ASP NET 7", "Controla Auth e redireciona chamadas para os serviços de fluxo de caixa")
+    Container(authApi, "Auth API", "ASP NET 10", "Controla Auth e redireciona chamadas para os serviços de fluxo de caixa")
 }
 
 Container_Ext(gotenberg, "gotenberg", "Go Lang", "Sistema de renderização de HTML em PDF")

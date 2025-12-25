@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 COPY FluxoDeCaixa.Api/*.csproj FluxoDeCaixa.Api/
 COPY FluxoDeCaixa.Application/*.csproj FluxoDeCaixa.Application/
@@ -8,7 +8,7 @@ RUN dotnet restore ./FluxoDeCaixa.Api/FluxoDeCaixa.Api.csproj
 COPY ./ ./
 RUN dotnet publish ./FluxoDeCaixa.Api/FluxoDeCaixa.Api.csproj -c Release -o /app
 
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
 EXPOSE 80
 EXPOSE 443
 WORKDIR /app

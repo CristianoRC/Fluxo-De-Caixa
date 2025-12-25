@@ -17,16 +17,16 @@ public class SendMessageService : ISendMessageService
     {
         var jsonMessage = JsonSerializer.Serialize(message);
         var body = Encoding.UTF8.GetBytes(jsonMessage);
-        using var channel = _rabbitMqConnection.CreateModel();
-        channel.BasicPublish(exchange, routingKey, null, body);
+        using var channel = _rabbitMqConnection.CreateChannelAsync().GetAwaiter().GetResult();
+        channel.BasicPublishAsync(exchange, routingKey, body).GetAwaiter().GetResult();
     }
 
     public void Send(object message, string queue)
     {
         var jsonMessage = JsonSerializer.Serialize(message);
         var body = Encoding.UTF8.GetBytes(jsonMessage);
-        using var channel = _rabbitMqConnection.CreateModel();
+        using var channel = _rabbitMqConnection.CreateChannelAsync().GetAwaiter().GetResult();
 
-        channel.BasicPublish(string.Empty, queue, null, body);
+        channel.BasicPublishAsync(string.Empty, queue, body).GetAwaiter().GetResult();
     }
 }
