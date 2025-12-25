@@ -23,15 +23,21 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: Super_Senha321
 
-  postgres:
-    image: postgres
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: sqlserver
     environment:
-      POSTGRES_PASSWORD: Super#Senha
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Super@Senha123"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready" ]
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P Super@Senha123 -C -Q 'SELECT 1' || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 30s
 
   redis:
     image: redis
@@ -46,7 +52,7 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
-      postgres:
+      sqlserver:
         condition: service_healthy
       redis:
         condition: service_started
@@ -55,7 +61,7 @@ services:
     environment:
       ConnectionStrings__RabbitMQ: "amqp://root:SuperSenha123@rabbitmq:5672"
       ConnectionStrings__Redis: "redis:6379"
-      ConnectionStrings__Sql: "Host=postgres;Database=fluxo-de-caixa;Username=postgres;Password=Super#Senha"
+      ConnectionStrings__Sql: "Server=sqlserver,1433;Database=fluxo-de-caixa;User Id=sa;Password=Super@Senha123;TrustServerCertificate=True;"
 
   report-api:
     build:
