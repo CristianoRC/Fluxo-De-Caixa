@@ -13,7 +13,7 @@ C4Container
             Container(fluxoDeCaixaApi, "Fluxo de Caixa API", "ASP NET 7", "Sistema para gerenciamento de fluxo de caixa")
             Container(fluxoDeCaixaReportApi, "Fluxo de Caixa - Relatório Fechamento", "ASP NET 7 / Azure Functions", "Sistema para gerar relatório de fechamento de fluxo de caixa")
 
-            ContainerDb(postgres, "Database", "PostgreSQL", "Armazena dados de fluxo de caixa")
+            ContainerDb(sqlserver, "Database", "SQL Server 2025", "Armazena dados de fluxo de caixa com SQL Ledger para transações")
             ContainerDb(mongodb, "Database", "Mongo DB", "Armazena dados de fluxo de caixa para relatórios")
             ContainerDb(redis, "In-memory Database", "Redis", "Armazena cache e controla lock distribuído")
 
@@ -37,7 +37,7 @@ C4Container
     Rel(fluxoDeCaixaBff, fluxoDeCaixaReportApi, "Faz chamadas para", "HTTP/JSON")
     Rel(fluxoDeCaixaBff, authApi, "Faz chamadas para buscar chave de validação do token no", "HTTP")
 
-    Rel(fluxoDeCaixaApi, postgres, "Gerencia os dados no", "TCP")
+    Rel(fluxoDeCaixaApi, sqlserver, "Gerencia os dados no", "TCP")
     Rel(fluxoDeCaixaApi, transactionQueue, "Enfileira todas as transações criadas", "TCP")
     Rel(fluxoDeCaixaApi, redis, "Controla lock distribuído no", "TCP")
 

@@ -7,7 +7,7 @@
 !includeurl AzurePuml/AzureC4Integration.puml
 !includeurl AzurePuml/Databases/AzureRedisCache.puml
 !includeurl AzurePuml/Databases/AzureCosmosDb.puml
-!includeurl AzurePuml/Databases/AzureDatabaseForPostgreSQL.puml
+!includeurl AzurePuml/Databases/AzureSqlDatabase.puml
 !includeurl AzurePuml/Web/AzureWebApp.puml
 !includeurl AzurePuml/Web/AzureCDN.puml
 !includeurl AzurePuml/Web/AzureSearch.puml
@@ -29,7 +29,7 @@ AzureContainerApp(gotenberg, "Gotenberg", "Transformação de HTML em PDF")
 AzureServiceBusTopic(topic, "BookEntry Criado", "")
 AzureCosmosDb(mongodb, "MongoDb", "", "")
 AzureRedisCache(redisCache, "Cache", "Controle de cache e lock")
-AzureDatabaseForPostgreSQL(sqlDb, "SQL", "Armazena transações")
+AzureSqlDatabase(sqlDb, "SQL Server 2025", "Armazena transações com SQL Ledger")
 
 AzureFunction(functionRegistro, "Transactions", ".NET 7 C#", "")
 AzureFunction(functionRelatorio, "Report", "NET 7 C#", "")
