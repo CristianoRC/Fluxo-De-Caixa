@@ -24,6 +24,7 @@ services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2025-latest
     container_name: sqlserver
+    platform: linux/amd64
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "Super@Senha123"
