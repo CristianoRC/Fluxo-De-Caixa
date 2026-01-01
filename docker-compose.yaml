@@ -20,6 +20,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: Super_Senha321
+    ports:
+      - "27017:27017"
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
