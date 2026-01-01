@@ -22,12 +22,11 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: Super_Senha321
 
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2025-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver
-    platform: linux/amd64
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "Super@Senha123"
+      SA_PASSWORD: "Super@Senha123"
     ports:
       - "1433:1433"
     healthcheck:
