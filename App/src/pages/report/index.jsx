@@ -6,10 +6,14 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Snackbar, Alert } from "@mui/material"
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 
 import AppBarComponent from '../../components/appBar';
 import BalanceInputField from '../../components/nameBalanceInputField/index';
 import axios from 'axios';
+
+dayjs.extend(utc);
 
 const Report = () => {
   const [balance, setBalance] = useState();
@@ -21,7 +25,7 @@ const Report = () => {
   const generate = async () => {
     try {
       setLoading(true)
-      const date = datePicker.format("DD-MM-YYYY");
+      const date = datePicker.utc().format("DD-MM-YYYY");
       const url = `http://localhost:8082/api/report?date=${date}&balance=${balance}`;
       const response = await axios({
         url,
@@ -83,8 +87,7 @@ const Report = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={['DatePicker']}>
                     <DatePicker
-                      label="Data do relatório"
-                      disableFuture={true}
+                      label="Data do relatório (UTC)"
                       value={datePicker || null}
                       onChange={(newValue) => setDatePicker(newValue)}
                     />
