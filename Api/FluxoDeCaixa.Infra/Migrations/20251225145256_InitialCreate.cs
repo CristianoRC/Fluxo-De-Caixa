@@ -30,6 +30,7 @@ namespace FluxoDeCaixa.Infra.Migrations
             // não suporta nativamente a sintaxe WITH (LEDGER = ON (APPEND_ONLY = ON))
             // Ledger Tables garantem auditoria automática e histórico imutável de transações
             // APPEND_ONLY permite apenas INSERT (não permite UPDATE/DELETE)
+            // IMPORTANTE: Ledger tables NÃO podem ter FK com CASCADE - deve usar NO ACTION
             migrationBuilder.Sql(@"
                 CREATE TABLE [Transactions] (
                     [Id] uniqueidentifier NOT NULL,
@@ -41,7 +42,7 @@ namespace FluxoDeCaixa.Infra.Migrations
                     [Description] nvarchar(max) NOT NULL,
                     CONSTRAINT [PK_Transactions] PRIMARY KEY ([Id]),
                     CONSTRAINT [FK_Transactions_Balances_BalanceId] FOREIGN KEY ([BalanceId])
-                        REFERENCES [Balances] ([Id]) ON DELETE CASCADE
+                        REFERENCES [Balances] ([Id]) ON DELETE NO ACTION
                 )
                 WITH (LEDGER = ON (APPEND_ONLY = ON));
             ");
@@ -51,7 +52,7 @@ namespace FluxoDeCaixa.Infra.Migrations
             // não suporta nativamente a sintaxe WITH (LEDGER = ON (APPEND_ONLY = ON))
             // Ledger Tables garantem auditoria automática e histórico imutável de lançamentos contábeis
             // APPEND_ONLY permite apenas INSERT (não permite UPDATE/DELETE)
-            // ON DELETE NO ACTION na segunda FK para evitar múltiplos cascade paths
+            // IMPORTANTE: Ledger tables NÃO podem ter FK com CASCADE - todas devem usar NO ACTION
             migrationBuilder.Sql(@"
                 CREATE TABLE [BookEntries] (
                     [Id] uniqueidentifier NOT NULL,
@@ -60,7 +61,7 @@ namespace FluxoDeCaixa.Infra.Migrations
                     [CreatedAt] datetimeoffset NOT NULL,
                     CONSTRAINT [PK_BookEntries] PRIMARY KEY ([Id]),
                     CONSTRAINT [FK_BookEntries_Transactions_EntryId] FOREIGN KEY ([EntryId])
-                        REFERENCES [Transactions] ([Id]) ON DELETE CASCADE,
+                        REFERENCES [Transactions] ([Id]) ON DELETE NO ACTION,
                     CONSTRAINT [FK_BookEntries_Transactions_OffsetId] FOREIGN KEY ([OffsetId])
                         REFERENCES [Transactions] ([Id]) ON DELETE NO ACTION
                 )

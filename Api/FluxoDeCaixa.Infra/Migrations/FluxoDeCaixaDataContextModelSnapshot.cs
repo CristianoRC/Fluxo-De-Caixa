@@ -105,13 +105,13 @@ namespace FluxoDeCaixa.Infra.Migrations
                     b.HasOne("FluxoDeCaixa.Domain.Entities.Transaction", "Entry")
                         .WithMany()
                         .HasForeignKey("EntryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FluxoDeCaixa.Domain.Entities.Transaction", "Offset")
                         .WithMany()
                         .HasForeignKey("OffsetId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Entry");
@@ -124,7 +124,7 @@ namespace FluxoDeCaixa.Infra.Migrations
                     b.HasOne("FluxoDeCaixa.Domain.Entities.Balance", "Balance")
                         .WithMany()
                         .HasForeignKey("BalanceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Balance");
