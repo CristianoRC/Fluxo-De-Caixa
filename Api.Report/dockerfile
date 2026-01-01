@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 COPY FluxoDeCaixa.Api.Report/*.csproj FluxoDeCaixa.Api.Report/
 COPY FluxoDeCaixa.Api.Report.Domain/*.csproj FluxoDeCaixa.Api.Report.Domain/
@@ -7,7 +7,7 @@ RUN dotnet restore ./FluxoDeCaixa.Api.Report/FluxoDeCaixa.Api.Report.csproj
 COPY ./ ./
 RUN dotnet publish "./FluxoDeCaixa.Api.Report/FluxoDeCaixa.Api.Report.csproj" -c Release -o /app/
 
-FROM mcr.microsoft.com/azure-functions/dotnet-isolated:4-dotnet-isolated7.0
+FROM --platform=linux/amd64 mcr.microsoft.com/azure-functions/dotnet-isolated:4-dotnet-isolated10.0
 WORKDIR /home/site/wwwroot
 ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
     AzureFunctionsJobHost__Logging__Console__IsEnabled=true
