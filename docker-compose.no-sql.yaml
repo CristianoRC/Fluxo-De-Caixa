@@ -1,0 +1,113 @@
+services:
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    ports:
+      - "8080:15672"
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "-q", "ping" ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+  mongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    ports:
+      - "27017:27017"
+
+  redis:
+    image: redis
+
+  api:
+    build:
+      context: ./Api
+      dockerfile: dockerfile
+    container_name: flux-de-caixa-api
+    ports:
+      - "8081:8080"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      configure-rabbit:
+        condition: service_completed_successfully
+    environment:
+      ConnectionStrings__RabbitMQ: ${RABBITMQ_CONNECTION_STRING}
+      ConnectionStrings__Redis: ${REDIS_CONNECTION_STRING}
+      ConnectionStrings__Sql: ${SQL_SERVER_CONNECTION_STRING}
+
+  report-api:
+    build:
+      context: ./Api.Report
+      dockerfile: dockerfile
+    container_name: fluxo-de-caixa-api-report
+    ports:
+      - "8082:80"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongodb:
+        condition: service_started
+      redis:
+        condition: service_started
+      configure-rabbit:
+        condition: service_completed_successfully
+      api:
+        condition: service_started
+      azure-storage:
+        condition: service_started
+      gotenberg:
+        condition: service_started
+    environment:
+      rabbitMq: ${RABBITMQ_CONNECTION_STRING}
+      database: ${MONGO_DATABASE}
+      mongodb: ${MONGODB_CONNECTION_STRING}
+      blobStorage: azure-storage
+      AzureWebJobsStorage: ${AZURE_STORAGE_CONNECTION_STRING}
+      gotenberg: http://gotenberg:3000
+
+  app:
+    build:
+      context: ./App
+      dockerfile: dockerfile
+    container_name: fluxo-de-caixa-app
+    ports:
+      - "80:80"
+    depends_on:
+      api:
+        condition: service_started
+      report-api:
+        condition: service_started
+
+  configure-rabbit:
+    build:
+      context: ./Configuration
+      dockerfile: dockerfile
+    container_name: configure-rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      user: ${RABBITMQ_USER}
+      password: ${RABBITMQ_PASSWORD}
+      host: rabbitmq
+      port: 5672
+
+  gotenberg:
+    image: gotenberg/gotenberg:7
+
+  azure-storage:
+    image: "mcr.microsoft.com/azure-storage/azurite:latest"
+    container_name: azure-storage
+    ports:
+      - 10000:10000
+      - 10001:10001
