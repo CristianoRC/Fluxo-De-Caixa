@@ -38,4 +38,19 @@ public class BalanceController : Controller
         var balances = await _service.Get();
         return Ok(balances);
     }
+
+    [HttpGet("{id}/statement")]
+    public async Task<IActionResult> GetStatement(Guid id)
+    {
+        try
+        {
+            var statement = await _service.GetStatement(id);
+            return Ok(statement);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Erro ao buscar extrato do balance {BalanceId}", id);
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+    }
 }

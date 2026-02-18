@@ -23,4 +23,23 @@ public class BalanceApplicationService : IBalanceApplicationService
     {
         return await _balanceRepository.Get();
     }
+
+    public async Task<IEnumerable<TransactionStatementItem>> GetStatement(Guid balanceId)
+    {
+        var bookEntries = await _balanceRepository.GetBookEntries(balanceId);
+        return bookEntries.Select(be =>
+        {
+            var isEntry = be.Entry.Balance.Id == balanceId;
+            var transaction = isEntry ? be.Entry : be.Offset;
+            var counterpart = isEntry ? be.Offset : be.Entry;
+            return new TransactionStatementItem(
+                transaction.Id,
+                (int)transaction.Type,
+                transaction.TransactionAmount.Value,
+                transaction.BalanceAfterTransaction.Value,
+                transaction.CreatedAt,
+                counterpart.Balance.Name
+            );
+        });
+    }
 }

@@ -137,6 +137,22 @@ create_transaction "$EMPRESA_XYZ" "$FORNECEDOR" 800.00 0 "Estoque mensal"
 create_transaction "$FORNECEDOR" "$CRISTIANO" 45.00 1 "Desconto por volume"
 
 # =============================================================================
+# Transações adicionais - Cristiano
+# =============================================================================
+
+echo -e "\n${BLUE}  → Transações adicionais: Cristiano${NC}"
+create_transaction "$CRISTIANO" "$USUARIO_ABC" 320.00 1 "Venda de notebook usado"
+create_transaction "$CRISTIANO" "$EMPRESA_XYZ" 1200.00 1 "Projeto freelance frontend"
+create_transaction "$CRISTIANO" "$FORNECEDOR" 89.90 0 "Compra de periféricos"
+create_transaction "$EMPRESA_XYZ" "$CRISTIANO" 600.00 1 "Bônus por entrega antecipada"
+create_transaction "$CRISTIANO" "$USUARIO_ABC" 55.00 0 "Assinatura de software"
+create_transaction "$CRISTIANO" "$FORNECEDOR" 340.00 0 "Licença anual de ferramentas"
+create_transaction "$USUARIO_ABC" "$CRISTIANO" 180.00 1 "Pagamento de mentoria"
+create_transaction "$CRISTIANO" "$EMPRESA_XYZ" 750.00 1 "Consultoria técnica Q2"
+create_transaction "$FORNECEDOR" "$CRISTIANO" 62.50 1 "Crédito de devolução"
+create_transaction "$CRISTIANO" "$USUARIO_ABC" 410.00 0 "Empréstimo pessoal"
+
+# =============================================================================
 # Resumo Final
 # =============================================================================
 
@@ -150,4 +166,4 @@ curl -s "$API_URL/api/balance" | jq -r '.[] | "  \(.name): R$ \(.amount.value)"'
 echo ""
 echo -e "${GREEN}✅ Massa de dados gerada com sucesso!${NC}"
 echo -e "${GREEN}   - 4 Balances criados${NC}"
-echo -e "${GREEN}   - 15 Transações criadas${NC}"
+echo -e "${GREEN}   - 25 Transações criadas${NC}"

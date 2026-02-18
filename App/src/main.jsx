@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CreateWallet from './pages/createWallet';
 import Report from './pages/report';
 import Transaction from './pages/transaction';
+import Statement from './pages/statement';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: '/transaction',
     element: <Transaction />,
+  },
+  {
+    path: '/statement',
+    element: <Statement />,
   },
 ]);
 

@@ -9,7 +9,7 @@ import {
   AppBar,
 } from '@mui/material';
 
-const pages = ['wallet', 'report', 'transaction'];
+const pages = ['wallet', 'transaction', 'statement', 'report'];
 
 function AppBarComponent() {
   const navigate = useNavigate();
