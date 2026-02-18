@@ -1,3 +1,4 @@
+using FluxoDeCaixa.Domain.Aggregations;
 using FluxoDeCaixa.Domain.Entities;
 using FluxoDeCaixa.Domain.Repositories;
 using FluxoDeCaixa.Infra.Configuration;
@@ -29,5 +30,16 @@ public class BalanceRepository : IBalanceRepository
         await _dataContext.Balances.AddAsync(balance);
         await _dataContext.SaveChangesAsync();
         return balance;
+    }
+
+    public async Task<IEnumerable<BookEntry>> GetBookEntries(Guid balanceId)
+    {
+        return await _dataContext.BookEntries
+            .AsNoTracking()
+            .Include(be => be.Entry).ThenInclude(t => t.Balance)
+            .Include(be => be.Offset).ThenInclude(t => t.Balance)
+            .Where(be => be.Entry.Balance.Id == balanceId || be.Offset.Balance.Id == balanceId)
+            .OrderByDescending(be => be.CreatedAt)
+            .ToListAsync();
     }
 }
