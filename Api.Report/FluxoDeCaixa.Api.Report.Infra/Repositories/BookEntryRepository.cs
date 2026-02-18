@@ -26,8 +26,8 @@ public class BookEntryRepository : IBookEntryRepository
 
     public async Task<IEnumerable<ITransactionReport>> GetTransactions(ReportQuery reportQuery)
     {
-        var startDate = reportQuery.Date.ToDateTime(new TimeOnly(0, 0));
-        var endDate = reportQuery.Date.ToDateTime(new TimeOnly(23, 59, 59));
+        var startDate = reportQuery.Date.ToDateTime(new TimeOnly(0, 0), DateTimeKind.Utc);
+        var endDate = reportQuery.Date.ToDateTime(new TimeOnly(23, 59, 59), DateTimeKind.Utc);
         var transactions = await _transactionCollection
             .FindAsync(x => x.BalanceId == reportQuery.BalanceId
                             && x.CreatedAt >= startDate

@@ -17,7 +17,7 @@ public class TransactionDbModel : ITransactionReport
         BalanceAfterTransaction = transaction.BalanceAfterTransaction.Value;
         BalanceName = transaction.Balance.Name;
         BalanceId = transaction.Balance.Id;
-        CreatedAt = transaction.CreatedAt;
+        CreatedAt = DateTime.SpecifyKind(transaction.CreatedAt, DateTimeKind.Utc);
         TypeId = transaction.Type;
     }
 

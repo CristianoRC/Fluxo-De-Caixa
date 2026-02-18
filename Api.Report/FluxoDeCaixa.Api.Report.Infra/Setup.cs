@@ -49,11 +49,13 @@ public static class Setup
     
     private static void ConfigureMongoDb(IServiceCollection services, IConfiguration configuration)
     {
-        var client = new MongoClient(configuration["mongodb"]);
-        services.AddSingleton<IMongoClient>(client);
-
+        BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
+        
         var objectDiscriminatorConvention = BsonSerializer.LookupDiscriminatorConvention(typeof(object));
         var objectSerializer = new ObjectSerializer(objectDiscriminatorConvention, GuidRepresentation.Standard);
         BsonSerializer.RegisterSerializer(objectSerializer);
+        
+        var client = new MongoClient(configuration["mongodb"]);
+        services.AddSingleton<IMongoClient>(client);
     }
 }
