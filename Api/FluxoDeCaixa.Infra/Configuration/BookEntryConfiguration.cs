@@ -10,7 +10,7 @@ public class BookEntryConfiguration : IEntityTypeConfiguration<BookEntry>
     {
         builder.HasKey(x => x.Id);
         builder.Property(x => x.CreatedAt);
-        builder.HasOne(x => x.Entry);
-        builder.HasOne(x => x.Offset);
+        builder.HasOne(x => x.Entry).WithMany().OnDelete(DeleteBehavior.NoAction);
+        builder.HasOne(x => x.Offset).WithMany().OnDelete(DeleteBehavior.NoAction);
     }
 }
